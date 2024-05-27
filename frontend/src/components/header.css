@@ -1,0 +1,40 @@
+.header{
+    width: 100%;
+    height: 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 20px;
+    z-index: 10;
+    transition: all ease-in-out 0.2s;
+}
+
+.header-no-fixed{
+    position: absolute;
+    background-color: transparent;
+}
+
+.header-fixed-top{
+    position: fixed;
+    background-color: var(--color-primero);
+    backdrop-filter: blur(6px);
+    box-shadow: 0px 3px 15px var(--color-sombra-osc);
+}
+
+
+
+.logo {
+    display: flex; 
+    align-items: center;
+}
+  
+.logo h2 {
+    margin-left: 10px; 
+    color: #eaeaea;
+}
+
+.logo img {
+    height: 48px;
+    width: auto;
+    display: flex;
+}
