@@ -1,0 +1,15 @@
+.hero-image-container{
+    width: 100%;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: calc(100vh - 70px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-image-container h2{
+    color: #ffffff;
+}
