@@ -24,6 +24,7 @@ code {
   --color-fondo-alt: rgba();
 
   --color-fuente: rgb(88, 88, 88);
+  --color-fuente-op: rgba(88, 88, 88, 0.75);
   --color-fuente-alt: rgb(255,255,255);
 
   --color-sombra: rgb(212, 212, 212);
