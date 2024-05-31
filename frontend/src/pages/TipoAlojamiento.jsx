@@ -1,12 +1,16 @@
 import { AddTipoAlojamiento } from "../Forms/AddTipoAlojamientoForm"
-import { Hero } from "../components/Hero"
+import { ListaTipoAlojamientos } from "../components/ListaTipoAlojamientos"
 
 export const TipoAlojamiento = () => {
     return (
         <div className="inicio-section">
-            <Hero title={'Tipos de alojamiento'} urlImage={'https://cdn.pixabay.com/photo/2021/06/01/06/24/old-town-6300696_1280.jpg'}></Hero>
-            <h2>Ingrese los datos del tipo de alojamiento a agregar:</h2>
+            <div className="empty-div"></div>
+            <h2>Administración</h2>
+            <hr />
+            <h3>Ingrese los datos del tipo de alojamiento a agregar:</h3>
             <AddTipoAlojamiento></AddTipoAlojamiento>
+            <h3>Todos los tipos de alojamientos</h3>
+            <ListaTipoAlojamientos></ListaTipoAlojamientos>
         </div>
     )
 }

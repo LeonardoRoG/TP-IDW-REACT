@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import './form.css';
 
 export const AddTipoAlojamiento = () => {
 
     const [descripcion, setDescripcion] = useState({});
+    const form = useRef();
 
     const enviarDatos = async (e) => {
         // Este método previene que se recargue la página
@@ -23,10 +24,10 @@ export const AddTipoAlojamiento = () => {
             });
             const jsonData = await response.json();
             if (response.ok) {
-                alert('Creado correctamente');
                 console.log(jsonData);
+                form.current.reset();
             } else {
-                alert('Error')
+                console.log('Error');
             }
         } catch (error) {
             console.error(error);
@@ -35,13 +36,13 @@ export const AddTipoAlojamiento = () => {
 
     return (
         <section className="section-flex">
-            <form onSubmit={enviarDatos} className="flex-container-center">
+            <form ref={form} onSubmit={enviarDatos} className="flex-container-center">
                 <div className="form-field">
                     <label htmlFor="descripcion" className="form-label">Descripción:</label>
                     <input type="text" id='descripcion' name='descripcion' onChange={e => setDescripcion(e.target.value)} className="form-input" placeholder=''/>
                 </div>
                 <div className='form-field'>
-                    <button type='submit' className='boton-primario'><i className="fa-solid fa-arrow-right buscar-icon"></i>Agregar</button>
+                    <button type='submit' className='boton-primario'><i className="fa-solid fa-arrow-right ff-icon"></i>Agregar</button>
                 </div>
             </form>
         </section>

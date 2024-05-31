@@ -1,0 +1,76 @@
+table{
+    margin: 20px;
+    border-collapse: collapse;
+    width: calc(100% - 20px);
+    max-width: 750px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 8px var(--color-sombra);
+}
+
+table th,
+table td{
+    padding: 6px 12px;
+    border: none;
+}
+
+.columna-botones{
+    display: flex;
+    justify-content: center;
+}
+
+tr{
+    transition: all 0.3s ease-in-out;
+    border-bottom: 1px solid rgb(231, 231, 231);
+}
+
+tbody tr:last-child{
+    border-bottom: none;
+}
+
+tbody tr:hover{
+    background-color: rgb(231, 231, 231);
+}
+
+.boton-edit{
+    padding: 12px 20px;
+    border: none;
+    background-color: darkorange;
+    border-radius: 4px;
+    margin: 4px;
+    color: var(--color-fuente-alt);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    flex-grow: 1;
+    text-decoration: none;
+    font-size: 14px;
+    text-align: center;
+}
+
+.boton-edit:hover{
+    background-color: rgba(255, 140, 0, 0.75);
+}
+
+.boton-delete{
+    padding: 12px 20px;
+    border: none;
+    background-color: crimson;
+    border-radius: 4px;
+    margin: 4px;
+    color: var(--color-fuente-alt);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    flex-grow: 1;
+}
+
+.boton-delete:hover{
+    background-color: rgba(220, 20, 60, 0.75);
+}
+
+.flex-container{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 20px;
+}
