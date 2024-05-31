@@ -34,7 +34,7 @@ export const Nav = () => {
                 <li><NavLink to="/">INICIO</NavLink></li>
                 <li><Link to="/nosotros">NOSOTROS</Link></li>
                 <li><Link to="/contacto">CONTACTO</Link></li>
-                <li><Link to="/tipoAlojamiento">ALOJAMIENTOS</Link></li>
+                <li><Link to="/tipoAlojamiento">ADMIN</Link></li>
             </ul>
         </nav>;
     } else {
@@ -44,7 +44,7 @@ export const Nav = () => {
                 <li><Link to="/">INICIO</Link></li>
                 <li><Link to="/nosotros">NOSOTROS</Link></li>
                 <li><Link to="/contacto">CONTACTO</Link></li>
-                <li><Link to="/tipoAlojamiento">ALOJAMIENTOS</Link></li>
+                <li><Link to="/tipoAlojamiento">ADMIN</Link></li>
             </ul>
         </nav>
         <i className={`${isOpen ? 'fa-solid fa-xmark menu-icon' : 'fa-solid fa-bars menu-icon' }`} onClick={toggleMenu}></i>
