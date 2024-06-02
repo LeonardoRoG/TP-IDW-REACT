@@ -5,18 +5,20 @@ import { Link } from 'react-router-dom';
 export const ListaTipoAlojamientos = () => {
 
     const [data, setData] = useState([]);
+    const fetchData = async () => {
+        try {
+            const response = await fetch('http://localhost:3001/tiposAlojamiento/getTiposAlojamiento');
+            const jsonData = await response.json();
+            setData(jsonData);
+            console.log(jsonData);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch('http://localhost:3001/tiposAlojamiento/getTiposAlojamiento');
-                const jsonData = await response.json();
-                setData(jsonData);
-            } catch (error) {
-                console.error(error);
-            }
-        };
         fetchData();
-    }, [data]);
+    }, []);
 
     const eliminar = async (idTipo) =>{
         try {
@@ -26,6 +28,7 @@ export const ListaTipoAlojamientos = () => {
             });
             if (response.ok) {
                 console.log('Eliminado');
+                fetchData();
             } else {
                 console.log('No se pudo eliminar.');
             }
