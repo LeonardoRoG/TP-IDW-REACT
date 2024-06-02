@@ -5,6 +5,7 @@ import { Inicio } from './pages/Inicio';
 import { TipoAlojamiento } from './pages/TipoAlojamiento';
 import { EditTipoAlojamiento } from './pages/EditTipoAlojamiento';
 import { AddTipoAlojamiento } from './pages/AddTipoAlojamiento';
+import { Footer } from './components/Footer';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path='/tipoAlojamiento/:id/edit' element={<EditTipoAlojamiento/>}></Route>
         </Routes>
       </Router>
+      <Footer></Footer>
     </>
   );
 }
