@@ -22,14 +22,14 @@ export const BusquedaForm = () => {
                 <form method="post" onSubmit={buscar} className="form-buscador">
                     <div className="form-field">
                         <label htmlFor="destino" className="form-label">Destino:</label>
-                        <input required type="text" id="destino" value={destino} onChange={e => setDestino(e.target.value)} className="form-input" placeholder=""/>
+                        <input required type="text" id="destino" name="destino" value={destino} onChange={e => setDestino(e.target.value)} className="form-input" placeholder=""/>
                     </div>
                     <div className="form-field">
                         <label htmlFor="personas" className="form-label">Núm. Personas</label>
                         <input type="number" id='personas' name="personas" value={personas} onChange={e => setPersonas(e.target.value)} className="form-input" placeholder=""/>
                     </div>
                     <div className="form-field">
-                        <button type="submit" className="boton-primario"><i className="fa-solid fa-magnifying-glass ff-icon"></i> BUSCAR</button>
+                        <button type="submit" className="boton-primario"><i className="fa-solid fa-magnifying-glass ff-icon"></i> Buscar</button>
                     </div>
                 </form>
             </div>
