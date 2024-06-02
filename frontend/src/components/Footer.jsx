@@ -18,10 +18,10 @@ export const Footer = () => {
         </div>
         <div className='secciones-container'>
           <ul className='list'>
-            <li><a href=''>Inicio</a></li>
-            <li><a href=''>Sobre Nosotros</a></li>
-            <li><a href=''>Contacto</a></li>
-            <li><a href=''>Admin</a></li>
+            <li><a href='/'>Inicio</a></li>
+            <li><a href='/nosotros'>Sobre Nosotros</a></li>
+            <li><a href="/contacto">Contacto</a></li>
+            <li><a href='/tipoAlojamiento'>Admin</a></li>
           </ul>
           
         </div>
