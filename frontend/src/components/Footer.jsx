@@ -3,19 +3,37 @@ import './footer.css';
 
 export const Footer = () => {
   return (
-    <div className='container-footer'>
-        <footer className="footer">
-        <h2 className="texto-redsocial">CONTÁCTANOS!</h2>
-        <div className="redsocial-container">
+    <div className='footer-container'>
+      <footer>
+        <div className='contacto-container'>
+          <ul>
+            <h4>CONTACTO</h4>
+            <a href="https://www.gmail.com/" className="fa fa-envelope"></a>
+            <li>NaturAlma@gmail.com</li>
+            <a href="https://web.whatsapp.com/" className="fa-solid fa-phone"></a>
+            <li>123456789</li>
+            <a href="https://www.google.com/maps/" className="fa-solid fa-location-dot"></a>
+            <li>Monseñor Tavella 1424</li>
+          </ul>
+        </div>
+        <div className='secciones-container'>
+          <ul className='list'>
+            <li><a href=''>Inicio</a></li>
+            <li><a href=''>Sobre Nosotros</a></li>
+            <li><a href=''>Contacto</a></li>
+            <li><a href=''>Admin</a></li>
+          </ul>
+          
+        </div>
+        <div className='redes-container'> 
+            <h4>NUESTRAS REDES</h4>
             <a href="https://www.facebook.com/" className="fa fa-facebook"></a>
             <a href="https://www.instagram.com/" className="fa fa-instagram"></a>
-            <a href="https://www.gmail.com/" className="fa fa-envelope"></a>
             <a href="https://www.twitter.com/" className="fa-brands fa-x-twitter"></a>
-        </div>   
-        <div className="texto-footer2">
-            <a href="nosotros.html"><u>INFORMACIÓN ACERCA DE NOSOTROS</u></a>
         </div>
-    </footer>
+      </footer>
+
     </div>
   )
 }
+

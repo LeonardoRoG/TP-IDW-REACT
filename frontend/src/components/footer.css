@@ -1,41 +1,97 @@
-.footer{
-    height: 200px;
-    background-color:var(--color-primero);
-}
-
-.texto-redsocial{
-    text-align: center;
-    padding: 10px;
-    color: #fff;
-}
-
-.redsocial-container {
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    padding: 20px;
-}
-    
-
-.redsocial-container a {
-    text-decoration: none;
-    font-size: 35px;
-    width: 150px;
-    height: 50px;
-    color: #FFF;
-    margin-right: 10px;
-    text-align: center;
-}
-
-
-.redsocial-container a:hover{
-    transform: scale(1.1);
-    color:#ff952bef ;
-}
-
-.texto-footer2 a{
+.footer-container {
+    height: 250px;
+    background-color: var(--color-primero);
     display: flex;
     justify-content: center;
-    color: #FFF;
-    text-decoration: none;
+    align-items: center;
 }
+  
+footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center; /* Cambia a 'center' para alinear verticalmente */
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+  }
+  
+  .contacto-container,
+  .secciones-container,
+  .redes-container {
+    flex: 1;
+    min-width: 190px; /* Asegura que las secciones tengan un tamaño mínimo */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .contacto-container ul,
+  .secciones-container ul,
+  .redes-container ul {
+    list-style: none;
+    padding: 15px;
+    margin: 0;
+  }
+  
+  .secciones-container ul {
+    padding: 7px;
+  }
+  
+  .redes-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .redes-container .icons {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Espacio entre los íconos */
+  }
+  
+  .redes-container a {
+    margin: 5px 0;
+  }
+  
+  .fa {
+    margin-right: 5px;
+  }
+  
+  .list li {
+    padding: 10px;
+  }
+  
+ 
+
+  .contacto-container a{
+    transition-duration: 0.5s;
+    color: black;
+    font-size: 30px;
+    text-decoration: none;
+  }
+  .list a{
+    transition-duration: 0.5s;
+    color: black;
+    text-decoration: none;
+
+  }
+  .redes-container a{
+    transition-duration: 0.5s;
+    color: black;
+    font-size: 30px;
+    text-decoration: none;
+    padding: 5px;
+  }
+
+  .contacto-container a:hover, 
+  .redes-container a:hover{
+    color: aquamarine;
+    font-size: 35px;
+    transition-duration: 0.3s;
+  }
+  .list a:hover{
+    color: aquamarine;
+    font-size: 20px;
+    transition-duration: 0.3s;
+  }
