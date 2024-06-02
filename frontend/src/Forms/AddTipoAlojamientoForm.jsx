@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import './form.css';
 
-export const AddTipoAlojamiento = () => {
+export const AddTipoAlojamientoForm = () => {
 
     const [descripcion, setDescripcion] = useState({});
     const form = useRef();
@@ -39,7 +39,7 @@ export const AddTipoAlojamiento = () => {
             <form ref={form} onSubmit={enviarDatos} className="flex-container-center">
                 <div className="form-field">
                     <label htmlFor="descripcion" className="form-label">Descripción:</label>
-                    <input type="text" id='descripcion' name='descripcion' onChange={e => setDescripcion(e.target.value)} className="form-input" placeholder=''/>
+                    <input required type="text" id='descripcion' name='descripcion' onChange={e => setDescripcion(e.target.value)} className="form-input" placeholder=''/>
                 </div>
                 <div className='form-field'>
                     <button type='submit' className='boton-primario'><i className="fa-solid fa-arrow-right ff-icon"></i>Agregar</button>
