@@ -3,6 +3,8 @@ main p{
     max-width: 900px;
 }
 
-/* .main-nosotros{
-
-} */
+.main-nosotros{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
