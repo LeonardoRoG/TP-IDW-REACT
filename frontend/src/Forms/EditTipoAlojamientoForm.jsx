@@ -23,7 +23,7 @@ export const EditTipoAlojamientoForm = () => {
             }
         };
         fetchData();
-    });
+    }, []);
 
     const actualizarDatos = async (e) => {
         // Este método previene que se recargue la página

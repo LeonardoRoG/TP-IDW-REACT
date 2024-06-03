@@ -10,7 +10,7 @@ export const TipoAlojamiento = () => {
             <hr />
             <h3>Tipos de alojamientos</h3>
             <div className="flex-inline">
-                <Link to={`/tipoAlojamiento/agregar`} className="boton-primario"><i class="fa-solid fa-plus ff-icon"></i> Agregar nuevo</Link>
+                <Link to={`/tipoAlojamiento/agregar`} className="boton-primario"><i className="fa-solid fa-plus ff-icon"></i> Agregar nuevo</Link>
             </div>
             <h3>Todos los tipos de alojamientos</h3>
             <ListaTipoAlojamientos></ListaTipoAlojamientos>
