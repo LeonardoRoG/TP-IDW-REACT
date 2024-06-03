@@ -6,6 +6,7 @@ import { TipoAlojamiento } from './pages/TipoAlojamiento';
 import { EditTipoAlojamiento } from './pages/EditTipoAlojamiento';
 import { AddTipoAlojamiento } from './pages/AddTipoAlojamiento';
 import { Footer } from './components/Footer';
+import { Nosotros } from './pages/Nosotros';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Header></Header>
         <Routes>
           <Route path='/' element={<Inicio/>}></Route>
+          <Route path='/nosotros' element={<Nosotros></Nosotros>}></Route>
           {/* Acá hay que agregar las otras rutas */}
           <Route path='/tipoAlojamiento' element={<TipoAlojamiento/>}></Route>
           <Route path='/tipoAlojamiento/agregar' element={<AddTipoAlojamiento/>}></Route>
