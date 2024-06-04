@@ -7,7 +7,7 @@ import { EditTipoAlojamiento } from './pages/EditTipoAlojamiento';
 import { AddTipoAlojamiento } from './pages/AddTipoAlojamiento';
 import { Footer } from './components/Footer';
 import { Nosotros } from './pages/Nosotros';
-import { Contacto } from './components/Contacto';
+import { Contacto } from './pages/Contacto';
 
 function App() {
   return (

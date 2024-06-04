@@ -1,18 +1,15 @@
 import React from 'react';
 import './contacto.css';
+import { Hero } from "../components/Hero";
 
 export const Contacto = () => {
   return (
     <main>
       <div className="contenedor">
-        <img 
-          src="https://cdn.pixabay.com/photo/2018/03/14/18/05/alpine-hut-3225908_1280.jpg" 
-          alt="Imagen"
-        />
-        <div className="texto-superpuesto">CONTACTANOS!</div>
+      <Hero title={''} urlImage={"https://cdn.pixabay.com/photo/2018/03/14/18/05/alpine-hut-3225908_1280.jpg" }></Hero>
       </div>
       
-      <h2>Formulario de Contacto</h2>
+      <h2 className='titulo-form'>Formulario de Contacto</h2>
       
       <div className="container1">
         <section className="section1">

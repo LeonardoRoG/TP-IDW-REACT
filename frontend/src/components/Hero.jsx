@@ -12,3 +12,4 @@ export const Hero = ({title, urlImage}) => {
         </section>
     )
 }
+
