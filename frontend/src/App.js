@@ -7,6 +7,7 @@ import { EditTipoAlojamiento } from './pages/EditTipoAlojamiento';
 import { AddTipoAlojamiento } from './pages/AddTipoAlojamiento';
 import { Footer } from './components/Footer';
 import { Nosotros } from './pages/Nosotros';
+import { Contacto } from './components/Contacto';
 
 function App() {
   return (
@@ -16,12 +17,14 @@ function App() {
         <Routes>
           <Route path='/' element={<Inicio/>}></Route>
           <Route path='/nosotros' element={<Nosotros></Nosotros>}></Route>
+          <Route path='/contacto' element={<Contacto></Contacto>}></Route>
           {/* Acá hay que agregar las otras rutas */}
           <Route path='/tipoAlojamiento' element={<TipoAlojamiento/>}></Route>
           <Route path='/tipoAlojamiento/agregar' element={<AddTipoAlojamiento/>}></Route>
           <Route path='/tipoAlojamiento/:id/edit' element={<EditTipoAlojamiento/>}></Route>
         </Routes>
       </Router>
+      
       <Footer></Footer>
     </>
   );
