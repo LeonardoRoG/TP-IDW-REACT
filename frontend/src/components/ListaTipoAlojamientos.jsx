@@ -41,8 +41,20 @@ export const ListaTipoAlojamientos = () => {
         }
     };
 
-    return(
-        <div className="flex-container">
+    const [idElegido, setIdElegido] = useState('');
+    function handleEliminarButton(idTipoAlojamiento){
+        setShowModal(true);
+        setIdElegido(idTipoAlojamiento);
+    };
+
+    if (data.length === 0) {
+        return (
+        <div className='flex-container'>
+            No hay datos.
+        </div>);
+    } else {
+        return(
+            <div className="flex-container">
             <table>
                 <thead>
                     <tr>
@@ -58,14 +70,14 @@ export const ListaTipoAlojamientos = () => {
                             <td>{item.Descripcion}</td>
                             <td className="columna-botones">
                                 <Link to={`/tipoAlojamiento/${item.idTipoAlojamiento}/edit`} className="boton-edit"><i className="fa-solid fa-pen-to-square ff-icon"></i> Editar</Link>
-                                <button className="boton-delete" onClick={() => setShowModal(true)}><i className="fa-solid fa-trash ff-icon"></i> Eliminar</button>
-                                <Modal show={showModal} onDelete={() => eliminar(item.idTipoAlojamiento)} onClose={() => setShowModal(false)}></Modal>
+                                <button className="boton-delete" onClick={() => handleEliminarButton(item.idTipoAlojamiento)}><i className="fa-solid fa-trash ff-icon"></i> Eliminar</button>
                             </td>
                         </tr>
                     )}
                 </tbody>
             </table>
+            <Modal show={showModal} onDelete={() => eliminar(idElegido)} onClose={() => setShowModal(false)}></Modal>
         </div>
-    )
-
-}
+        );
+    };
+};
