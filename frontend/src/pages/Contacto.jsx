@@ -32,19 +32,19 @@ export const Contacto = () => {
                     <form onSubmit={contactar} ref={form}>
                         <div className="form-field">
                             <label htmlFor="nombre" className="form-label">Nombre:</label>
-                            <input required type="text" id="nombre" name="nombre" value={nombre} onChange={e => setNombre(e.target.value)} className="form-input" placeholder=""/>
+                            <input required type="text" id="nombre" name="nombre" onChange={e => setNombre(e.target.value)} className="form-input" placeholder=""/>
                         </div>
                         <div className="form-field">
                             <label htmlFor="email" className="form-label">Email:</label>
-                            <input required type="email" id="email" name="email" value={email} onChange={e => setEmail(e.target.value)} className="form-input" placeholder=""/>
+                            <input required type="email" id="email" name="email" onChange={e => setEmail(e.target.value)} className="form-input" placeholder=""/>
                         </div>
                         <div className="form-field">
                             <label htmlFor="telefono" className="form-label">Núm. telefono:</label>
-                            <input type="number" id='telefono' name="telefono" value={telefono} onChange={e => setTelefono(e.target.value)} className="form-input" placeholder=""/>
+                            <input type="number" id='telefono' name="telefono" onChange={e => setTelefono(e.target.value)} className="form-input" placeholder=""/>
                         </div>
                         <div className="form-field">
                             <label htmlFor="mensaje" className="form-label">Mensaje:</label>
-                            <textarea required type="text" id="mensaje" name="mensaje" value={mensaje} onChange={e => setMensaje(e.target.value)} className="form-input textarea" placeholder=""/>
+                            <textarea required type="text" id="mensaje" name="mensaje" rows="4" onChange={e => setMensaje(e.target.value)} className="form-input textarea" placeholder=""/>
                         </div>
                         <div className="form-field">
                             <button type="submit" className="boton-primario"><i className="fa-solid fa-magnifying-glass ff-icon"></i> Enviar</button>
