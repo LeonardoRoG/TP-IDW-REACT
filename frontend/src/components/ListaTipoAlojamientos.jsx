@@ -59,6 +59,7 @@ export const ListaTipoAlojamientos = () => {
                 <thead>
                     <tr>
                         <th>Nro.</th>
+                        <th>ID</th>
                         <th>Descripción</th>
                         <th>Acciones</th>
                     </tr>
@@ -67,6 +68,7 @@ export const ListaTipoAlojamientos = () => {
                     {data.map((item, index) => 
                         <tr key={item.idTipoAlojamiento}>
                             <td>{index + 1}</td>
+                            <td>{item.idTipoAlojamiento}</td>
                             <td>{item.Descripcion}</td>
                             <td className="columna-botones">
                                 <Link to={`/tipoAlojamiento/${item.idTipoAlojamiento}/edit`} className="boton-edit"><i className="fa-solid fa-pen-to-square ff-icon"></i> Editar</Link>
@@ -76,7 +78,7 @@ export const ListaTipoAlojamientos = () => {
                     )}
                 </tbody>
             </table>
-            <Modal show={showModal} onDelete={() => eliminar(idElegido)} onClose={() => setShowModal(false)}></Modal>
+            <Modal action={'delete'} message={'¿Está seguro que desea eliminar?'} show={showModal} onDelete={() => eliminar(idElegido)} onClose={() => setShowModal(false)}></Modal>
         </div>
         );
     };

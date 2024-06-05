@@ -1,10 +1,13 @@
 import { useRef, useState } from 'react';
 import './form.css';
+import { Modal } from '../components/Modal';
 
 export const AddTipoAlojamientoForm = () => {
 
     const [descripcion, setDescripcion] = useState({});
     const form = useRef();
+
+    const [showModal, setShowModal] = useState(false);
 
     const enviarDatos = async (e) => {
         // Este método previene que se recargue la página
@@ -26,6 +29,7 @@ export const AddTipoAlojamientoForm = () => {
             if (response.ok) {
                 console.log(jsonData);
                 form.current.reset();
+                setShowModal(true);
             } else {
                 console.log('Error');
             }
@@ -44,6 +48,7 @@ export const AddTipoAlojamientoForm = () => {
                 <div className='form-field'>
                     <button type='submit' className='boton-primario'><i className="fa-solid fa-arrow-right ff-icon"></i>Agregar</button>
                 </div>
+                <Modal message={'Agregado con éxito'} show={showModal} onClose={() => setShowModal(false)}></Modal>
             </form>
         </section>
     )

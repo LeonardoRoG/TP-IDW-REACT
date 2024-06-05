@@ -21,6 +21,7 @@
     border-radius: 16px;
     box-shadow: 5px 5px 15px var(--color-sombra);
     transition: all 200ms ease-out;
+    gap: 1rem;
 }
 
 .card-link{
@@ -82,5 +83,5 @@ hr{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    padding: 20px;
+    padding: 1rem 0.5rem;
 }

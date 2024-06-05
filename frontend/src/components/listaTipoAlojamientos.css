@@ -1,10 +1,9 @@
 table{
-    margin: 20px;
     border-collapse: collapse;
     width: calc(100% - 20px);
-    max-width: 750px;
     border-radius: 8px;
     box-shadow: 2px 2px 8px var(--color-sombra);
+    margin-bottom: 1rem;
 }
 
 table th,
@@ -41,7 +40,6 @@ tbody tr:hover{
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
-    flex-grow: 1;
     text-decoration: none;
     font-size: 14px;
     text-align: center;
@@ -61,7 +59,6 @@ tbody tr:hover{
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
-    flex-grow: 1;
 }
 
 .boton-delete:hover{

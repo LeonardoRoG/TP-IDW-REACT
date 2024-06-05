@@ -1,6 +1,7 @@
 import { React, useEffect, useState } from 'react';
 import './form.css';
 import { useNavigate, useParams } from 'react-router-dom';
+import { Modal } from '../components/Modal';
 
 export const EditTipoAlojamientoForm = () => {
 
@@ -9,6 +10,7 @@ export const EditTipoAlojamientoForm = () => {
     const [data, setData] = useState([]);
     // navigate es para el botón de volver atrás
     const navigate = useNavigate();
+    const [showModal, setShowModal] = useState(false);
 
     // Con este método obtenemos los datos del tipo de alojamiento que vamos a actualizar
     useEffect(() => {
@@ -45,7 +47,7 @@ export const EditTipoAlojamientoForm = () => {
             const jsonData = await response.json();
             if (response.ok) {
                 console.log(jsonData);
-                navigate(-1);
+                setShowModal(true);
             } else {
                 console.log('Error');
             }
@@ -64,6 +66,7 @@ export const EditTipoAlojamientoForm = () => {
                 <div className='form-field'>
                     <button type='submit' className='boton-edit'><i className="fa-solid fa-arrow-right ff-icon"></i>Editar</button>
                 </div>
+                <Modal message={'Modificado con éxito'} show={showModal} onClose={() => navigate(-1)}></Modal>
             </form>
         </section>
     )
