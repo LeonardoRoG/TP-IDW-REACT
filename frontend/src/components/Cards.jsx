@@ -29,7 +29,7 @@ export const Cards = () => {
         <div className='card-header'>
             <div className="card-imagen" style={{backgroundImage: `url("${producto.urlImagen}")`}}>
                 <div className='card-medio' style={{backgroundColor:getRandomColor()}}>
-                    {capitalize(producto.tipoAlojamiento)}
+                    <p>{capitalize(producto.tipoAlojamiento)}</p>
                 </div>
             </div>
         </div>
