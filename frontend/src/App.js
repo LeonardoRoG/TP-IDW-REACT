@@ -23,9 +23,8 @@ function App() {
           <Route path='/tipoAlojamiento/agregar' element={<AddTipoAlojamiento/>}></Route>
           <Route path='/tipoAlojamiento/:id/edit' element={<EditTipoAlojamiento/>}></Route>
         </Routes>
+        <Footer></Footer>
       </Router>
-      
-      <Footer></Footer>
     </>
   );
 }
