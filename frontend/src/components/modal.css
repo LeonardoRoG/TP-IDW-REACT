@@ -1,0 +1,16 @@
+.modal{
+    width: 330px;
+    background-color: rgb(255, 255, 255);
+    padding: 16px;
+    border-radius: 8px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 16px;
+    box-shadow: 2px 2px 8px var(--color-sombra-osc);
+}

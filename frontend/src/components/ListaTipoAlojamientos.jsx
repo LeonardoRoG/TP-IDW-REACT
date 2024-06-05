@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './listaTipoAlojamientos.css';
 import { Link } from 'react-router-dom';
+import { Modal } from './Modal';
 
 export const ListaTipoAlojamientos = () => {
 
@@ -20,6 +21,8 @@ export const ListaTipoAlojamientos = () => {
         fetchData();
     }, []);
 
+    const [showModal, setShowModal] = useState(false);
+
     const eliminar = async (idTipo) =>{
         try {
             const response = await fetch(`http://localhost:3001/tiposAlojamiento/deleteTipoAlojamiento/${idTipo}`,{
@@ -28,6 +31,7 @@ export const ListaTipoAlojamientos = () => {
             });
             if (response.ok) {
                 console.log('Eliminado');
+                setShowModal(false);
                 fetchData();
             } else {
                 console.log('No se pudo eliminar.');
@@ -54,7 +58,8 @@ export const ListaTipoAlojamientos = () => {
                             <td>{item.Descripcion}</td>
                             <td className="columna-botones">
                                 <Link to={`/tipoAlojamiento/${item.idTipoAlojamiento}/edit`} className="boton-edit"><i className="fa-solid fa-pen-to-square ff-icon"></i> Editar</Link>
-                                <button className="boton-delete" onClick={() => eliminar(item.idTipoAlojamiento)}><i className="fa-solid fa-trash ff-icon"></i> Eliminar</button>
+                                <button className="boton-delete" onClick={() => setShowModal(true)}><i className="fa-solid fa-trash ff-icon"></i> Eliminar</button>
+                                <Modal show={showModal} onDelete={() => eliminar(item.idTipoAlojamiento)} onClose={() => setShowModal(false)}></Modal>
                             </td>
                         </tr>
                     )}
