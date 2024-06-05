@@ -6,7 +6,7 @@ export const Contacto = () => {
   return (
     <main>
       <div className="contenedor">
-      <Hero title={''} urlImage={"https://cdn.pixabay.com/photo/2018/03/14/18/05/alpine-hut-3225908_1280.jpg" }></Hero>
+      <Hero title={'¡Contactanos!'} urlImage={"https://cdn.pixabay.com/photo/2018/03/14/18/05/alpine-hut-3225908_1280.jpg" }></Hero>
       </div>
       
       <h2 className='titulo-form'>Formulario de Contacto</h2>

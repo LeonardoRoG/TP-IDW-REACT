@@ -7,7 +7,7 @@ export const Hero = ({title, urlImage}) => {
     return (
         <section className="hero-image-container" style={{backgroundImage: `url("${urlImage}")`}}>
             <div className="hero-image-text">
-                <h2>{title}</h2>
+                <h1>{title}</h1>
             </div>
         </section>
     )
