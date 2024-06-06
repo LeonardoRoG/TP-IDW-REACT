@@ -1,6 +1,10 @@
 .card-header{
+    height: 280px;
+    transition: all 0.2s ease-out;
+}
+
+.card-item:hover .card-header{
     height: 215px;
-    
 }
 
 .card-content{
@@ -22,6 +26,7 @@
     box-shadow: 5px 5px 15px var(--color-sombra);
     transition: all 200ms ease-out;
     gap: 1rem;
+    overflow: hidden;
 }
 
 .card-link{

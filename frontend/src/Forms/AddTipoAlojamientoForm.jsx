@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import './form.css';
 import { Modal } from '../components/Modal';
+import { Link, useNavigate } from 'react-router-dom';
 
 export const AddTipoAlojamientoForm = () => {
 
@@ -38,19 +39,32 @@ export const AddTipoAlojamientoForm = () => {
         }
     };
 
+    const navigate = useNavigate();
+
+    const volver = () => {
+        navigate(-1);
+    }
+
     return (
+        <>
+        <div className="flex-left">
+            <h3>Ingrese los datos del tipo de alojamiento a agregar</h3>
+        </div>
         <section className="section-flex">
             <form ref={form} onSubmit={enviarDatos} className="flex-container-center">
                 <div className="form-field">
                     <label htmlFor="descripcion" className="form-label">Descripción:</label>
                     <input required type="text" id='descripcion' name='descripcion' onChange={e => setDescripcion(e.target.value)} className="form-input" placeholder=''/>
                 </div>
-                <div className='form-field'>
-                    <button type='submit' className='boton-primario'><i className="fa-solid fa-arrow-right ff-icon"></i>Agregar</button>
+                <div className='columna-botones'>
+                    <button type='submit' className='boton-primario grow'><i className="fa-solid fa-plus ff-icon"></i>Agregar</button>
+                    <Link onClick={volver} className="boton-delete"><i className="fa-solid fa-xmark ff-icon"></i> Cancelar</Link>
                 </div>
                 <Modal message={'Agregado con éxito'} show={showModal} onClose={() => setShowModal(false)}></Modal>
             </form>
         </section>
+        </>
+
     )
     
 }

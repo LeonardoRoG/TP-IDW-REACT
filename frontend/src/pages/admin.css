@@ -1,0 +1,37 @@
+.nav-menu-admin{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(240, 240, 240);
+    border-bottom: 1px solid var(--color-sombra);
+    transition: all 0.2s ease-in-out;
+}
+
+.nav-menu-admin ul {
+    list-style: none;
+    text-align: center;
+}
+  
+.nav-menu-admin ul li {
+    display: inline-block;
+}
+  
+.nav-menu-admin ul li a {
+    display: block;
+    padding: 15px;
+    text-decoration: none;
+    color: var(--color-fuente);
+    font-weight: 400;
+    text-transform: uppercase;
+    margin: 0 10px;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease-in-out;
+}
+
+.nav-menu-admin ul li a:hover{
+    color: var(--color-primero);
+    border-bottom: 2px solid var(--color-primero);
+}
+
+.admin-container{
+    min-height: 35vh;
+}

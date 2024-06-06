@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from 'react';
 import './form.css';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Modal } from '../components/Modal';
 
 export const EditTipoAlojamientoForm = () => {
@@ -56,19 +56,30 @@ export const EditTipoAlojamientoForm = () => {
         }
     };
 
+    const volver = () => {
+        navigate(-1);
+    }
+
     return (
-        <section className="section-flex">
-            <form onSubmit={actualizarDatos} className="flex-container-center">
-                <div className="form-field">
-                    <label htmlFor="descripcion" className="form-label">Descripción:</label>
-                    <input required type="text" id='descripcion' name='descripcion' defaultValue={data.Descripcion} onChange={e => setDescripcion(e.target.value)} className="form-input" placeholder=''/>
-                </div>
-                <div className='form-field'>
-                    <button type='submit' className='boton-edit'><i className="fa-solid fa-arrow-right ff-icon"></i>Editar</button>
-                </div>
-                <Modal message={'Modificado con éxito'} show={showModal} onClose={() => navigate(-1)}></Modal>
-            </form>
+        <section>
+            <div className='flex-left'>
+                <h3>Ingrese los nuevos valores del tipo de alojamiento:</h3>
+            </div>
+            <div className="section-flex">
+                <form onSubmit={actualizarDatos} className="flex-container-center">
+                    <div className="form-field">
+                        <label htmlFor="descripcion" className="form-label">Descripción:</label>
+                        <input required type="text" id='descripcion' name='descripcion' defaultValue={data.Descripcion} onChange={e => setDescripcion(e.target.value)} className="form-input" placeholder=''/>
+                    </div>
+                    <div className='columna-botones'>
+                        <button type='submit' className='boton-edit grow'><i className="fa-solid fa-pen-to-square ff-icon"></i>Editar</button>
+                        <Link onClick={volver} className="boton-delete"><i className="fa-solid fa-xmark ff-icon"></i>Cancelar</Link>
+                    </div>
+                    <Modal message={'Modificado con éxito'} show={showModal} onClose={() => navigate(-1)}></Modal>
+                </form>
+            </div>
         </section>
+
     )
     
 }
