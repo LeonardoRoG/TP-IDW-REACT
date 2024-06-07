@@ -53,7 +53,6 @@ export const Cards = () => {
         </div>
         <div className='card-footer'>
             <p>Precio: {producto.precio.toLocaleString('es-AR', { style: 'currency', currency: 'ARS' })}</p>
-            <p>Disponible</p>
         </div>
         <hr></hr>
         <div className="card-footer">

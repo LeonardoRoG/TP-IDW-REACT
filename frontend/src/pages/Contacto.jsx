@@ -31,7 +31,7 @@ export const Contacto = () => {
             <h2 className='titulo-form'>Formulario de Contacto</h2>
             
             <main className="section-flex-contacto">
-                <section className="flex-container-center">
+                <section className="flex-container-center limit">
                     <form onSubmit={contactar} ref={form}>
                         <div className="form-field">
                             <label htmlFor="nombre" className="form-label">Nombre:</label>
