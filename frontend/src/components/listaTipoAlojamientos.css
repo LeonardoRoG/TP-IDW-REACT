@@ -4,11 +4,20 @@ table{
     border-radius: 8px;
     box-shadow: 2px 2px 8px var(--color-sombra);
     margin-bottom: 1rem;
+    white-space: nowrap;
+}
+
+.flex-container-table{
+    display: flex;
+    justify-content: start;
+    flex-wrap: nowrap;
+    padding: 0.5rem 1rem ;
+    overflow-x: auto;
 }
 
 table th,
 table td{
-    padding: 4px 12px;
+    padding: 4px 8px;
     border: none;
     text-align: start;
 }

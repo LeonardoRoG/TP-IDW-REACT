@@ -24,7 +24,7 @@ export const ListaTipoAlojamientos = ({data, obtenerDatos, eliminar}) => {
         </div>);
     } else {
         return(
-            <div className="flex-container">
+            <div className="flex-container-table">
             <table>
                 <thead>
                     <tr>
