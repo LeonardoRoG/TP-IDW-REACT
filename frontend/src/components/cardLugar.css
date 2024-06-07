@@ -1,0 +1,39 @@
+.card-lugar{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 556px;
+    height: 270px;
+    border-radius: 16px;
+    box-shadow: 5px 5px 15px var(--color-sombra-osc);
+    transition: all 0.3s ease-out;
+    margin: 8px;
+}
+
+.card-lugar-title > h2{
+    color: white;
+    font-size: 3rem;
+    text-shadow: 0px 0px 8px black;
+}
+
+.card-lugar-subtitle > h4{
+    color: white;
+    font-size: 1.5rem;
+    text-shadow: 0px 0px 8px black;
+}
+
+.card-lugar:hover{
+    transform: scale(103%);
+}
+
+.card-over{
+    /* box-shadow: inset 0px 0px 20px black; */
+    height: 100%;
+    width: 100%;
+    border-radius: 16px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 1rem;
+}

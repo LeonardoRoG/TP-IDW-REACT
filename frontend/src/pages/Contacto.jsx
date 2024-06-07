@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import './contacto.css';
 import { Hero } from "../components/Hero";
+import { Modal } from '../components/Modal';
 
 export const Contacto = () => {
 
@@ -9,11 +10,13 @@ export const Contacto = () => {
     const [telefono, setTelefono] = useState('');
     const [mensaje, setMensaje] = useState('');
     const form = useRef();
+    const [showModal, setShowModal] = useState(false);
 
     const contactar = (e) => {
         e.preventDefault();
         const formE = e.target;
         const formData = new FormData(formE);
+        setShowModal(true);
         
         const formJson = Object.fromEntries(formData.entries());
         console.log(formJson);
@@ -50,6 +53,7 @@ export const Contacto = () => {
                             <button type="submit" className="boton-primario"><i className="fa-solid fa-magnifying-glass ff-icon"></i> Enviar</button>
                         </div>
                     </form>
+                    <Modal message={'¡Mensaje enviado!'} show={showModal} onClose={() => setShowModal(false)}></Modal>
                 </section>
           
                 <section className="mapa-section">
