@@ -8,7 +8,7 @@ export const AddAlojamientoForm = () => {
 
     const [Titulo, setTitulo] = useState({});
     const [Descripcion, setDescripcion] = useState({});
-    const [TipoAlojamiento, setTipoAlojamiento] = useState({});
+    const [idTipoAlojamiento, setIdTipoAlojamiento] = useState({});
     const [Latitud, setLatitud] = useState({});
     const [Longitud, setLongitud] = useState({});
     const [PrecioPorDia, setPrecioPorDia] = useState({});
@@ -17,6 +17,8 @@ export const AddAlojamientoForm = () => {
     const [Estado, setEstado] = useState({});
 
     const [showModal, setShowModal] = useState(false);
+    const [modalMsg, setModalMsg] = useState('');
+    const [modalType, setModalType] = useState('');
     const form = useRef();
 
     const agregarAlojamiento = async (e) => {
@@ -48,10 +50,14 @@ export const AddAlojamientoForm = () => {
             const jsonData = await response.json();
             if (response.ok) {
                 console.log(jsonData);
+                setModalMsg('Agregado con éxito.');
                 setShowModal(true);
                 form.current.reset();
             } else {
                 console.log('error');
+                setModalMsg('Se produjo un error.');
+                setModalType('error');
+                setShowModal(true);
             }
         } catch (error) {
             console.error(error);
@@ -95,8 +101,8 @@ export const AddAlojamientoForm = () => {
                         <input required type="text" id="descripcion" name="descripcion" onChange={e => setDescripcion(e.target.value)} className="form-input" placeholder="Descripción detallada del alojamiento" />
                     </div>
                     <div className="form-field">
-                        <label htmlFor="tipoAlojamiento" className="form-label">Tipo de Alojamiento:</label>
-                        <select required id="tipoAlojamiento" name="tipoAlojamiento" onChange={e => setTipoAlojamiento(e.target.value)} className="form-input" placeholder='--SELECCIONE--'>
+                        <label htmlFor="idTipoAlojamiento" className="form-label">Tipo de Alojamiento:</label>
+                        <select required id="idTpoAlojamiento" name="idTipoAlojamiento" onChange={e => setIdTipoAlojamiento(e.target.value)} className="form-input" placeholder='--SELECCIONE--'>
                             <option disabled>--SELECCIONE--</option>
                             {dataTipos.map((item,index) => (
                                 <option key={item.idTipoAlojamiento} value={item.idTipoAlojamiento}>{item.Descripcion.toUpperCase()}</option>
@@ -134,7 +140,7 @@ export const AddAlojamientoForm = () => {
                         <button type='submit' className='boton-primario grow'><i className="fa-solid fa-plus ff-icon"></i>Agregar</button>
                         <Link onClick={volver} className="boton-delete"><i className="fa-solid fa-xmark ff-icon"></i> Cancelar</Link>
                     </div>
-                    <Modal message={'Agregado con éxito'} show={showModal} onClose={() => setShowModal(false)}></Modal>
+                    <Modal message={modalMsg} action={modalType} show={showModal} onClose={() => setShowModal(false)}></Modal>
                 </form>
             </section>
         </>
