@@ -13,10 +13,18 @@ export const Modal = ({action, message, show, onClose, onDelete}) => {
                 </div>
                 );
             break;
+        case 'error':
+            message = (
+                <div className="flex-left">
+                    <i className="fa-solid fa-circle-exclamation icon-modal" style={{color:'crimson'}}></i>
+                    <h3>{message}</h3>
+                </div>
+            );
+            break;
         default:
             message = (
                 <div className="flex-left">
-                    <i className="fa-regular fa-circle-check icon-modal"></i>
+                    <i className="fa-solid fa-ban icon-modal"></i>
                     <h3>{message}</h3>
                 </div>
                 );

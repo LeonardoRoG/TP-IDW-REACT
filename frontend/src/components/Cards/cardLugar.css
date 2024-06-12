@@ -7,7 +7,7 @@
     border-radius: 16px;
     box-shadow: 5px 5px 15px var(--color-sombra-osc);
     transition: all 0.3s ease-out;
-    margin: 8px;
+    flex-grow: 1;
 }
 
 .card-lugar-title > h2{
