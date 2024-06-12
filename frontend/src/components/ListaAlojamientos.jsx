@@ -25,6 +25,21 @@ export const ListaAlojamientos = ({ data, obtenerDatos, eliminar}) => {
         setShowModal(true);
         setIdElegido(idTipoAlojamiento);
     };
+    const [dataTipos, setDataTipos] = useState([]);
+
+    useEffect(() => {
+        const obtenerTipos = async () => {
+            try{
+                const response = await fetch('http://localhost:3001/tiposAlojamiento/getTiposAlojamiento');
+                const jsonData = await response.json();
+                setDataTipos(jsonData);
+            } catch(err){
+                console.error(err);
+            }
+        };
+        obtenerTipos();
+    }, []);
+    
 
     if (data.length === 0) {
         return(
@@ -50,7 +65,11 @@ export const ListaAlojamientos = ({ data, obtenerDatos, eliminar}) => {
                                 <td>{item.idAlojamiento}</td>
                                 <td>{item.Titulo}</td>
                                 <td>{item.Descripcion}</td>
-                                <td>{item.TipoAlojamiento}</td>
+                                <td>
+                                    {dataTipos.map((tipo) => (
+                                        item.idTipoAlojamiento === tipo.idTipoAlojamiento && tipo.Descripcion
+                                    ))}
+                                </td>
                                 <td>{item.Latitud}</td>
                                 <td>{item.Longitud}</td>
                                 <td>{new Intl.NumberFormat("es-AR",  { style: 'currency', currency: 'ARS' }).format(item.PrecioPorDia)}</td>

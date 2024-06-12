@@ -22,6 +22,11 @@ table td{
     text-align: start;
 }
 
+table td{
+    overflow-x: auto;
+    max-width: 200px;
+}
+
 th:last-child{
     text-align: center;
 }
@@ -29,6 +34,7 @@ th:last-child{
 .columna-botones{
     display: flex;
     justify-content: center;
+    max-width: none;
 }
 
 tr{
