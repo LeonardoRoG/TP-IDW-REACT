@@ -1,6 +1,6 @@
 import { BusquedaForm } from '../Forms/BusquedaForm';
-import { CardLugar } from '../components/CardLugar';
-import { Cards } from '../components/Cards';
+import { CardLugar } from '../components/Cards/CardLugar';
+import { Cards } from '../components/Cards/CardsAlojamientos/Cards';
 import { Hero } from '../components/Hero';
 import './inicio.css';
 
@@ -11,7 +11,9 @@ export const Inicio = () =>{
             <h2>Elegí tu destino: </h2>
             <BusquedaForm></BusquedaForm>
             <h2>Alojamientos en oferta</h2>
-            <Cards></Cards>
+            <section className='flex-container'>
+                <Cards></Cards>
+            </section>
             <h2>Destinos destacados</h2>
             <section className='flex-container'>
                 <CardLugar title='Cataratas' subtitle='desde $79.000,-' urlImagen='https://cdn.pixabay.com/photo/2014/11/01/01/57/mouth-of-the-iguassu-511500_960_720.jpg'></CardLugar>

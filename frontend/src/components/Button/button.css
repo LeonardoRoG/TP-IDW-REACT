@@ -1,0 +1,65 @@
+/* Clase base */
+.boton{
+    padding: 12px 20px;
+    border: none;
+    background-color: white;
+    margin: 4px;
+    color: var(--color-primero);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-decoration: none;
+    font-size: 14px;
+    text-align: center;
+}
+
+.boton:hover{
+    background-color: var(--color-primero);
+    color: white;
+}
+
+/* Agregar colores con nombre descriptivo de la misma forma que abajo */
+.danger{
+    background-color: crimson;
+    color: white;
+}
+/* El hover es el mismo color anterior con opacidad 0.75
+   Aclarar si es necesario el color de la letra */
+.danger:hover{
+    background-color: rgba(220, 20, 60, 0.75);
+}
+
+.primary{
+    background-color: var(--color-primero);
+    color: white;
+}
+
+.primary:hover{
+    background-color: var(--color-primero-op);
+}
+
+.warning{
+    background-color: rgb(255, 150, 0);
+    color: var(--color-fuente-osc);
+}
+
+.warning:hover{
+    background-color: rgba(255, 150, 0, 0.75);
+    color: var(--color-fuente-osc);
+}
+
+.shadowed{
+    box-shadow: 2px 2px 8px var(--color-sombra-osc);
+}
+
+.grow{
+    flex-grow: 1;
+}
+
+.rounded{
+    border-radius: 4px;
+}
+
+.ff-icon-bt{
+    padding-right:10px;
+}

@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 
 import './form.css';
+import { Button } from "../components/Button/Button";
 
 export const BusquedaForm = () => {
 
@@ -28,10 +29,10 @@ export const BusquedaForm = () => {
                     </div>
                     <div className="form-field">
                         <label htmlFor="personas" className="form-label">Núm. Personas</label>
-                        <input type="number" id='personas' name="personas" onChange={e => setPersonas(e.target.value)} className="form-input" placeholder=""/>
+                        <input type="number" id='personas' min={1} defaultValue={1} name="personas" onChange={e => setPersonas(e.target.value)} className="form-input" placeholder=""/>
                     </div>
                     <div className="form-field">
-                        <button type="submit" className="boton-primario"><i className="fa-solid fa-magnifying-glass ff-icon"></i> Buscar</button>
+                        <Button type="submit" color='primary' icon='search' name='Buscar'></Button>
                     </div>
                 </form>
             </div>
