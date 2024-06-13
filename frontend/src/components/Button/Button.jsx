@@ -7,10 +7,10 @@ import './button.css';
  * @param {boolean} rounded - Bordes redondeados.
  * @param {boolean} grow - Grow flex 1 adaptable si la clase padre es flex.
  * @param {boolean} shadowed - Botón con sombra.
- * @param {string} icon - Icono a mostrar: edit, delete, add, send, search.
+ * @param {string} icon - Icono a mostrar: edit, delete, add, send, search, cancel, login
  * @param onClick - funcion onClick
  */
-export const Button = ({type, color, onClick, name, icon, rounded, grow, shadowed}) => {
+export const Button = ({type, color, onClick, children, icon, rounded, grow, shadowed}) => {
 
     const iconMappings = {
         delete: 'fa-solid fa-trash',
@@ -19,6 +19,7 @@ export const Button = ({type, color, onClick, name, icon, rounded, grow, shadowe
         send: 'fa-solid fa-arrow-right',
         search: 'fa-solid fa-magnifying-glass',
         cancel: 'fa-solid fa-xmark',
+        login: 'fa-solid fa-right-to-bracket'
     };
       
     const iconClass = iconMappings[icon] || '';
@@ -30,7 +31,7 @@ export const Button = ({type, color, onClick, name, icon, rounded, grow, shadowe
     
 
     return(
-        <button type={type} className={'boton ' + styles + ' ' + color} onClick={onClick}><i className={"ff-icon-bt " + iconClass}></i>{name}</button>
+        <button type={type} className={'boton ' + styles + ' ' + color} onClick={onClick}><i className={"ff-icon-bt " + iconClass}></i>{children}</button>
     )
 
 }

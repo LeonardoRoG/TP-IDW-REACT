@@ -32,7 +32,7 @@ export const BusquedaForm = () => {
                         <input type="number" id='personas' min={1} defaultValue={1} name="personas" onChange={e => setPersonas(e.target.value)} className="form-input" placeholder=""/>
                     </div>
                     <div className="form-field">
-                        <Button type="submit" color='primary' icon='search' name='Buscar'></Button>
+                        <Button type="submit" color='primary' icon='search'>Buscar</Button>
                     </div>
                 </form>
             </div>
