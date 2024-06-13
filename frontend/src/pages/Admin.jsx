@@ -8,6 +8,8 @@ import { AddTipoAlojamientoForm } from '../Forms/AddTipoAlojamientoForm';
 import { Alojamiento } from './admin/Alojamiento';
 import { AddAlojamientoForm } from '../Forms/AddAlojamientoForm';
 import { EditAlojamientoForm } from '../Forms/EditAlojamientoForm';
+import { Servicio } from './admin/Servicio';
+import { AddServicioForm } from '../Forms/AddServicioForm';
 
 export const Admin = () => {
 
@@ -20,6 +22,7 @@ export const Admin = () => {
                         <li><Link to=''>Dashboard</Link></li>
                         <li><Link to='alojamiento'>Alojamientos</Link></li>
                         <li><Link to='tipoAlojamiento'>Tipos de alojamiento</Link></li>
+                        <li><Link to='servicios'>Servicios</Link></li>
                     </ul>
                 </nav>
                 <section className='admin-container'>
@@ -31,6 +34,8 @@ export const Admin = () => {
                         <Route path='alojamiento' element={<Alojamiento></Alojamiento>}></Route>
                         <Route path='alojamiento/agregar' element={<AddAlojamientoForm></AddAlojamientoForm>}></Route>
                         <Route path='alojamiento/:id/edit' element={<EditAlojamientoForm></EditAlojamientoForm>}></Route>
+                        <Route path='servicios' element={<Servicio></Servicio>}></Route>
+                        <Route path='servicios/agregar' element={<AddServicioForm></AddServicioForm>}></Route>
                     </Routes>
                 </section>
             </main>

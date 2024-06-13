@@ -32,7 +32,7 @@ export const Contacto = () => {
             
             <main className="section-flex-contacto">
                 <section className="flex-container-center limit">
-                    <form onSubmit={contactar} ref={form}>
+                    <form onSubmit={contactar} ref={form} className='form-contacto'>
                         <div className="form-field">
                             <label htmlFor="nombre" className="form-label">Nombre:</label>
                             <input required type="text" id="nombre" name="nombre" onChange={e => setNombre(e.target.value)} className="form-input" placeholder=""/>
