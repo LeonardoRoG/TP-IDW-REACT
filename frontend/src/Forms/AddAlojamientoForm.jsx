@@ -51,6 +51,7 @@ export const AddAlojamientoForm = () => {
             if (response.ok) {
                 console.log(jsonData);
                 setModalMsg('Agregado con éxito.');
+                setModalType('success')
                 setShowModal(true);
                 form.current.reset();
             } else {
@@ -60,6 +61,9 @@ export const AddAlojamientoForm = () => {
                 setShowModal(true);
             }
         } catch (error) {
+            console.log('error');
+            setModalMsg('Se produjo un error.');
+            setModalType('error');
             console.error(error);
         }
     };
@@ -140,7 +144,7 @@ export const AddAlojamientoForm = () => {
                         <button type='submit' className='boton-primario grow'><i className="fa-solid fa-plus ff-icon"></i>Agregar</button>
                         <Link onClick={volver} className="boton-delete"><i className="fa-solid fa-xmark ff-icon"></i> Cancelar</Link>
                     </div>
-                    <Modal message={modalMsg} action={modalType} show={showModal} onClose={() => setShowModal(false)}></Modal>
+                    <Modal action={modalType} show={showModal} onClose={() => setShowModal(false)}>{modalMsg}</Modal>
                 </form>
             </section>
         </>

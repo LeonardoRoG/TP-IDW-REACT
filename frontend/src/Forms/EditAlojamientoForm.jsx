@@ -142,7 +142,7 @@ export const EditAlojamientoForm = () => {
                         <button type='submit' className='boton-edit grow'><i className="fa-solid fa-plus ff-icon"></i>Editar</button>
                         <Link onClick={volver} className="boton-delete"><i className="fa-solid fa-xmark ff-icon"></i> Cancelar</Link>
                     </div>
-                    <Modal message={'Editado con éxito'} show={showModal} onClose={volver}></Modal>
+                    <Modal action={'success'} show={showModal} onClose={volver}>Editado con éxito</Modal>
                 </form>
             </section>
         </>

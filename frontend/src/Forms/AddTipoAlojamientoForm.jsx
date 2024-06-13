@@ -9,6 +9,8 @@ export const AddTipoAlojamientoForm = () => {
     const form = useRef();
 
     const [showModal, setShowModal] = useState(false);
+    const [modalMsg, setModalMsg] = useState('');
+    const [actionModal, setActionModal] = useState('');
 
     const enviarDatos = async (e) => {
         // Este método previene que se recargue la página
@@ -30,11 +32,19 @@ export const AddTipoAlojamientoForm = () => {
             if (response.ok) {
                 console.log(jsonData);
                 form.current.reset();
+                setModalMsg('Agregado con éxito.');
+                setActionModal('success');
                 setShowModal(true);
             } else {
+                setModalMsg('Se produjo un error.');
+                setActionModal('error');
+                setShowModal(true);
                 console.log('Error');
             }
         } catch (error) {
+            setModalMsg('Error al conectar al servidor.');
+            setActionModal('error');
+            setShowModal(true);
             console.error(error);
         }
     };
@@ -60,7 +70,7 @@ export const AddTipoAlojamientoForm = () => {
                     <button type='submit' className='boton-primario grow'><i className="fa-solid fa-plus ff-icon"></i>Agregar</button>
                     <Link onClick={volver} className="boton-delete"><i className="fa-solid fa-xmark ff-icon"></i> Cancelar</Link>
                 </div>
-                <Modal message={'Agregado con éxito'} show={showModal} onClose={() => setShowModal(false)}></Modal>
+                <Modal action={actionModal} show={showModal} onClose={() => setShowModal(false)}>{modalMsg}</Modal>
             </form>
         </section>
         </>

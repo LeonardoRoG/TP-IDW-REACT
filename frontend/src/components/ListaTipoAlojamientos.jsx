@@ -48,7 +48,7 @@ export const ListaTipoAlojamientos = ({data, obtenerDatos, eliminar}) => {
                     )}
                 </tbody>
             </table>
-            <Modal action={'delete'} message={'¿Está seguro que desea eliminar?'} show={showModal} onDelete={() => eliminar(idElegido) & setShowModal(false)} onClose={() => setShowModal(false)}></Modal>
+            <Modal action={'delete'} show={showModal} onDelete={() => eliminar(idElegido) & setShowModal(false)} onClose={() => setShowModal(false)}>¿Está seguro que desea eliminar?</Modal>
         </div>
         );
     };
