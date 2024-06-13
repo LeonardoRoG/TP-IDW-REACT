@@ -19,7 +19,7 @@ export const Footer = () => {
             <li><Link to='/'>Inicio</Link></li>
             <li><Link to='/nosotros'>Sobre Nosotros</Link></li>
             <li><Link to="/contacto">Contacto</Link></li>
-            <li><Link to='/tipoAlojamiento'>Admin</Link></li>
+            <li><Link to='/admin'>Admin</Link></li>
           </ul>
         </div>
         <div className='redes-container'> 

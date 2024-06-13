@@ -21,21 +21,3 @@
     box-shadow: 0px 3px 15px var(--color-sombra-osc);
     height: 52px;
 }
-
-
-
-.logo {
-    display: flex; 
-    align-items: center;
-}
-  
-.logo h2 {
-    margin-left: 10px; 
-    color: #eaeaea;
-}
-
-.logo img {
-    height: 40px;
-    width: auto;
-    display: flex;
-}
