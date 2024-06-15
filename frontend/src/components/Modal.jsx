@@ -21,7 +21,7 @@ export const Modal = ({action, children, show, onClose, onDelete}) => {
             icon = (<i className="fa-solid fa-circle-exclamation icon-modal" style={{color:'crimson'}}></i>);
             break;
         case 'success':
-            icon = (<i class="fa-regular fa-circle-check icon-modal"  style={{color:'green'}}></i>);
+            icon = (<i className="fa-regular fa-circle-check icon-modal"  style={{color:'green'}}></i>);
             break;
         default:
             break;

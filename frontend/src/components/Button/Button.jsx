@@ -31,7 +31,7 @@ export const Button = ({type, color, onClick, children, icon, rounded, grow, sha
     
 
     return(
-        <button type={type} className={'boton ' + styles + ' ' + color} onClick={onClick}><i className={"ff-icon-bt " + iconClass}></i>{children}</button>
+        <button type={type} className={'boton ' + styles + ' ' + color} onClick={onClick}>{icon && <i className={"ff-icon-bt " + iconClass}></i>}{children}</button>
     )
 
 }

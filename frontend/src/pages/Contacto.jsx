@@ -26,7 +26,7 @@ export const Contacto = () => {
 
     return (
         <div className='inicio-section'>
-            <Hero title={'¡Contactanos!'} urlImage={"https://cdn.pixabay.com/photo/2018/03/14/18/05/alpine-hut-3225908_1280.jpg" }></Hero>
+            <Hero title={'¡Contactanos!'} urlImage={"https://cdn.pixabay.com/photo/2018/03/14/18/05/alpine-hut-3225908_1280.jpg"} position={'bottom'}></Hero>
             
             <h2 className='titulo-form'>Formulario de Contacto</h2>
             
@@ -53,7 +53,7 @@ export const Contacto = () => {
                             <button type="submit" className="boton-primario"><i className="fa-solid fa-magnifying-glass ff-icon"></i> Enviar</button>
                         </div>
                     </form>
-                    <Modal message={'¡Mensaje enviado!'} show={showModal} onClose={() => setShowModal(false)}></Modal>
+                    <Modal action={'success'} show={showModal} onClose={() => setShowModal(false)}>¡Mensaje enviado!</Modal>
                 </section>
           
                 <section className="mapa-section">
