@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ListaAlojamientos } from '../../components/ListaAlojamientos'
 import { Link } from 'react-router-dom'
 
@@ -16,6 +16,10 @@ export const Alojamiento = () => {
             console.error('Error: ', error);
         }
     };
+    
+    useEffect(() => {
+        obtenerDatos();
+    }, []);
 
     const eliminar = async (idAlojamiento) => {
         try {
@@ -40,7 +44,7 @@ export const Alojamiento = () => {
               <h2>Alojamientos</h2>
               <Link to={`agregar`} className="boton-primario"><i className="fa-solid fa-plus ff-icon"></i>Agregar nuevo</Link>
           </div>
-          <ListaAlojamientos data={data} obtenerDatos={obtenerDatos} eliminar={eliminar}></ListaAlojamientos>
+          <ListaAlojamientos data={data} eliminar={eliminar}></ListaAlojamientos>
       </>
     )
 }

@@ -2,13 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Modal } from "./Modal";
 
-export const ListaAlojamientos = ({ data, obtenerDatos, eliminar}) => {
+export const ListaAlojamientos = ({ data, eliminar}) => {
 
-    useEffect(() => {
-        obtenerDatos();
-    }, []);
 
-    const columns = ['Nro','ID','Titulo','Descripcion','Tipo','Latitud','Longitud','Precio','Dormitorios','Baños','Estado','Acciones'];
+    const columns = ['Nro','ID','Titulo','Descripcion','Tipo','Latitud','Longitud','Precio','Dorm.','Baños','Estado','Acciones'];
 
     // const data = [
     //     {idAlojamiento: 0, titulo: "Arroz", descripcion: 2000, tipo: "almacen", latitud: 23.443, longitud: 45.333, precio: 20000, dormitorios: 3, baños: 2, estado: 'disponible'},

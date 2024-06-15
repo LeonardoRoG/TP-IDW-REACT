@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const CardHeader = ({data}) => {
+export const CardHeader = ({data, dataTipos}) => {
 
     /**
      * @param {string} string recibe un string
@@ -36,7 +36,10 @@ export const CardHeader = ({data}) => {
     <div className='card-header'>
         <div className="card-imagen" style={{backgroundImage: `url("${data.urlImagen}")`}}>
             <div className='card-medio' style={{backgroundColor:generateRandomColor()}}>
-                <p>{capitalize(data.tipoAlojamiento)}</p>
+                <p>{dataTipos.map((tipo) => (
+                    data.idTipoAlojamiento === tipo.idTipoAlojamiento && capitalize(tipo.Descripcion)
+                ))}
+                </p>
             </div>
         </div>
     </div>
