@@ -1,4 +1,5 @@
 import { BusquedaForm } from '../Forms/BusquedaForm';
+import { Button } from '../components/Button/Button';
 import { CardLugar } from '../components/Cards/CardLugar';
 import { Cards } from '../components/Cards/CardsAlojamientos/Cards';
 import { Hero } from '../components/Hero';
@@ -7,7 +8,15 @@ import './inicio.css';
 export const Inicio = () =>{
     return (
         <div className='inicio-section'>
-            <Hero title={'Alojamientos'} urlImage={'https://cdn.pixabay.com/photo/2016/08/11/23/48/mountains-1587287_1280.jpg'}></Hero>
+            <Hero urlImage={'https://cdn.pixabay.com/photo/2016/08/11/23/48/mountains-1587287_1280.jpg'} position={'bottom'}>
+                <div className='hero-inicio'>
+                    <h1>Viajá por toda la Argentina.</h1>
+                    <p>Las mejores experiencias te esperan.</p>
+                    <div>
+                        <Button icon='send' rounded shadowed>Comenzar</Button>
+                    </div>
+                </div>
+            </Hero>
             <h2>Elegí tu destino: </h2>
             <BusquedaForm></BusquedaForm>
             <h2>Alojamientos en oferta</h2>

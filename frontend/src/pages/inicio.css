@@ -6,3 +6,27 @@
 .inicio-section{
     min-height: calc(100vh - 250px);
 }
+
+.hero-inicio{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 1rem;
+    gap: 0.5rem;
+}
+
+.hero-inicio h1{
+    color: white;
+    font-size: clamp(2.5rem, 4vw, 3rem);
+    text-shadow: 0px 0px 8px black;
+}
+
+.hero-inicio p{
+    color: white;
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    text-shadow: 0px 0px 8px black;
+}
+
+.hero-inicio div{
+    padding-top: 1rem;
+}

@@ -10,11 +10,18 @@ export const Nav = ({actualWidth}) => {
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
+    
     // Cuando hacemos clic en un enlace el menu hamburguesa no se cierra automaticamente, la siguiente lógica permite eso
-    document.addEventListener('click', (e) => {
-        if (!e.target.matches("nav a")) return false;
-        setIsOpen(false);
-    });
+    useEffect(() => {
+        const closeMenuOnClick = (e) => {
+            if (!e.target.matches('nav a')) return;
+            setIsOpen(false);
+        };
+        window.addEventListener('click', closeMenuOnClick);
+        return () => {
+            window.removeEventListener('click', closeMenuOnClick);
+        };
+    }, []);
 
     // Si el ancho de la página es mayor al nro mostramos el nav completo, sino el menu hamburguesa
     if (actualWidth > 920) {
