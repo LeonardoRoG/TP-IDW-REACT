@@ -10,6 +10,8 @@ import { AddAlojamientoForm } from '../Forms/AddAlojamientoForm';
 import { EditAlojamientoForm } from '../Forms/EditAlojamientoForm';
 import { Servicio } from './admin/Servicio';
 import { AddServicioForm } from '../Forms/AddServicioForm';
+import { AsociarServicioForm } from '../Forms/AsociarServicioForm';
+import { EditServicioForm } from '../Forms/EditServicioForm';
 
 export const Admin = () => {
 
@@ -36,6 +38,9 @@ export const Admin = () => {
                         <Route path='alojamiento/:id/edit' element={<EditAlojamientoForm></EditAlojamientoForm>}></Route>
                         <Route path='servicios' element={<Servicio></Servicio>}></Route>
                         <Route path='servicios/agregar' element={<AddServicioForm></AddServicioForm>}></Route>
+                        <Route path='servicios/:id/edit' element={<EditServicioForm></EditServicioForm>}></Route>
+                        <Route path='serviciosAsociados/agregar' element={<AsociarServicioForm></AsociarServicioForm>}></Route>
+                        <Route path='serviciosAsociados/:id/edit' element={<AsociarServicioForm></AsociarServicioForm>}></Route>
                     </Routes>
                 </section>
             </main>

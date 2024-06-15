@@ -104,9 +104,9 @@ export const EditAlojamientoForm = () => {
                     </div>
                     <div className="form-field">
                         <label htmlFor="idTipoAlojamiento" className="form-label">Tipo de Alojamiento:</label>
-                        <select required id="idTipoAlojamiento" name="idTipoAlojamiento" defaultValue={data.idTipoAlojamiento} onChange={e => setIdTipoAlojamiento(e.target.value)} className="form-input" placeholder='--SELECCIONE--'>
+                        <select required id="idTipoAlojamiento" name="idTipoAlojamiento" value={data.idTipoAlojamiento} onChange={e => setIdTipoAlojamiento(e.target.value)} className="form-input" placeholder='--SELECCIONE--'>
                             <option disabled>--SELECCIONE--</option>
-                            {dataTipos.map((item,index) => (
+                            {dataTipos.map((item) => (
                                 <option key={item.idTipoAlojamiento} value={item.idTipoAlojamiento}>{item.Descripcion.toUpperCase()}</option>
                             ))}
                         </select>
@@ -133,7 +133,7 @@ export const EditAlojamientoForm = () => {
                     </div>
                     <div className="form-field">
                         <label htmlFor="estado" className="form-label">Estado:</label>
-                        <select required id="estado" name="estado" defaultValue={data.Estado} onChange={e => setEstado(e.target.value)} className="form-input">
+                        <select required id="estado" name="estado" value={data.Estado} onChange={e => setEstado(e.target.value)} className="form-input">
                             <option value="Disponible">DISPONIBLE</option>
                             <option value="Reservado">RESERVADO</option>
                         </select>
