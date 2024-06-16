@@ -6,15 +6,15 @@ export const EditAlojamientoForm = () => {
     
     const BASE_URL = 'http://localhost:3001/';
 
-    const [Titulo, setTitulo] = useState({});
-    const [Descripcion, setDescripcion] = useState({});
-    const [idTipoAlojamiento, setIdTipoAlojamiento] = useState({});
-    const [Latitud, setLatitud] = useState({});
-    const [Longitud, setLongitud] = useState({});
-    const [PrecioPorDia, setPrecioPorDia] = useState({});
-    const [CantidadDormitorios, setCantidadDormitorios] = useState({});
-    const [CantidadBanios, setCantidadBanios] = useState({});
-    const [Estado, setEstado] = useState({});
+    const [Titulo, setTitulo] = useState('');
+    const [Descripcion, setDescripcion] = useState('');
+    const [idTipoAlojamiento, setIdTipoAlojamiento] = useState(0);
+    const [Latitud, setLatitud] = useState(0);
+    const [Longitud, setLongitud] = useState(0);
+    const [PrecioPorDia, setPrecioPorDia] = useState(0);
+    const [CantidadDormitorios, setCantidadDormitorios] = useState(0);
+    const [CantidadBanios, setCantidadBanios] = useState(0);
+    const [Estado, setEstado] = useState('');
 
     const [showModal, setShowModal] = useState(false);
     const form = useRef();
@@ -49,18 +49,31 @@ export const EditAlojamientoForm = () => {
             }
         };
         fetchData();
-    }, []);
+        setIdTipoAlojamiento(data.idTipoAlojamiento);
+        setEstado(data.Estado);
+    }, [id, data.idTipoAlojamiento, data.Estado]);
 
     const actualizarDatos = async (e) => {
         // Este método previene que se recargue la página
         e.preventDefault();
         
         // Construimos el objeto con los datos, despues se transforma a json en el body
-        const formE = e.target;
-        const formData = new FormData(formE);
+        // const formE = e.target;
+        // const formData = new FormData(formE);
 
-        const formJson = Object.fromEntries(formData.entries());
-        console.log(formJson);
+        // const formJson = Object.fromEntries(formData.entries());
+        // console.log(formJson);
+        const formJson = {
+            Titulo : Titulo,
+            Descripcion : Descripcion,
+            idTipoAlojamiento: idTipoAlojamiento,
+            Latitud: Latitud,
+            Longitud: Longitud,
+            PrecioPorDia: PrecioPorDia,
+            CantidadDormitorios: CantidadDormitorios,
+            CantidadBanios: CantidadBanios,
+            Estado: Estado,
+        };
 
         // Intentamos la conexion a la api
         try {
@@ -104,7 +117,7 @@ export const EditAlojamientoForm = () => {
                     </div>
                     <div className="form-field">
                         <label htmlFor="idTipoAlojamiento" className="form-label">Tipo de Alojamiento:</label>
-                        <select required id="idTipoAlojamiento" name="idTipoAlojamiento" value={data.idTipoAlojamiento} onChange={e => setIdTipoAlojamiento(e.target.value)} className="form-input" placeholder='--SELECCIONE--'>
+                        <select required id="idTipoAlojamiento" name="idTipoAlojamiento" value={idTipoAlojamiento} onChange={e => setIdTipoAlojamiento(e.target.value)} className="form-input" placeholder='--SELECCIONE--'>
                             <option disabled>--SELECCIONE--</option>
                             {dataTipos.map((item) => (
                                 <option key={item.idTipoAlojamiento} value={item.idTipoAlojamiento}>{item.Descripcion.toUpperCase()}</option>
@@ -133,7 +146,7 @@ export const EditAlojamientoForm = () => {
                     </div>
                     <div className="form-field">
                         <label htmlFor="estado" className="form-label">Estado:</label>
-                        <select required id="estado" name="estado" value={data.Estado} onChange={e => setEstado(e.target.value)} className="form-input">
+                        <select required id="estado" name="estado" value={Estado} onChange={e => setEstado(e.target.value)} className="form-input">
                             <option value="Disponible">DISPONIBLE</option>
                             <option value="Reservado">RESERVADO</option>
                         </select>

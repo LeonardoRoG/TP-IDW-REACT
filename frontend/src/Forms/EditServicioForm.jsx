@@ -52,13 +52,11 @@ export const EditServicioForm = () => {
                 console.log('error');
                 setModalMsg('Se produjo un error.');
                 setModalType('error');
-                console.log('error');
             }
         } catch (error) {
             console.log('error');
             setModalMsg('Se produjo un error.');
             setModalType('error');
-            console.error(error);
         }
     };
 

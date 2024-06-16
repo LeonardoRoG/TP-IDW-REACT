@@ -34,7 +34,7 @@ export const Header = () => {
       };
     }, []);
   
-    const headerClass = scrollPosition !== 0 ? 'header-fixed-top' : 'header-no-fixed';
+    const headerClass = scrollPosition >= 500 ? 'header-fixed-top' : 'header-no-fixed';
 
     return (
         <header className={'header ' + headerClass}>
