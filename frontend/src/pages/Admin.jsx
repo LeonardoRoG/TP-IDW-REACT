@@ -12,6 +12,9 @@ import { Servicio } from './admin/Servicio';
 import { AddServicioForm } from '../Forms/AddServicioForm';
 import { AsociarServicioForm } from '../Forms/AsociarServicioForm';
 import { EditServicioForm } from '../Forms/EditServicioForm';
+import { EditAlojamientoServicioForm } from '../Forms/EditAlojamientoServicioForm';
+import { Imagenes } from './admin/Imagenes';
+import { AddImagenForm } from '../Forms/AddImagenForm';
 
 export const Admin = () => {
 
@@ -25,6 +28,7 @@ export const Admin = () => {
                         <li><Link to='alojamiento'>Alojamientos</Link></li>
                         <li><Link to='tipoAlojamiento'>Tipos de alojamiento</Link></li>
                         <li><Link to='servicios'>Servicios</Link></li>
+                        <li><Link to='imagenes'>Imágenes</Link></li>
                     </ul>
                 </nav>
                 <section className='admin-container'>
@@ -40,7 +44,9 @@ export const Admin = () => {
                         <Route path='servicios/agregar' element={<AddServicioForm></AddServicioForm>}></Route>
                         <Route path='servicios/:id/edit' element={<EditServicioForm></EditServicioForm>}></Route>
                         <Route path='serviciosAsociados/agregar' element={<AsociarServicioForm></AsociarServicioForm>}></Route>
-                        <Route path='serviciosAsociados/:id/edit' element={<AsociarServicioForm></AsociarServicioForm>}></Route>
+                        <Route path='serviciosAsociados/:id/edit' element={<EditAlojamientoServicioForm></EditAlojamientoServicioForm>}></Route>
+                        <Route path='imagenes' element={<Imagenes></Imagenes>}></Route>
+                        <Route path='imagenes/agregar' element={<AddImagenForm></AddImagenForm>}></Route>
                     </Routes>
                 </section>
             </main>
