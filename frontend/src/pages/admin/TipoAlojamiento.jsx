@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { ListaTipoAlojamientos } from "../../components/ListaTipoAlojamientos";
+import { useEffect, useState } from "react";
+import { ListaTipoAlojamientos } from "../../lists/ListaTipoAlojamientos";
 import { Link } from "react-router-dom";
-import './tipoAlojamiento.css';
+import './adminPages.css';
 
 export const TipoAlojamiento = () => {
 
@@ -16,6 +16,10 @@ export const TipoAlojamiento = () => {
             console.error(err);
         }
     };
+
+    useEffect(() => {
+        obtenerTodos();
+    }, []);
 
     const eliminar = async (idTipo) =>{
         try {
@@ -36,12 +40,11 @@ export const TipoAlojamiento = () => {
 
     return(
         <>
-            {/* <AddTipoAlojamientoForm agregarNuevo={agregarNuevo} setDescripcion={cambiarDescripcion} form={form} resetearForm={resetearForm}></AddTipoAlojamientoForm> */}
             <div className="flex-between">
                 <h2>Tipos de alojamientos</h2>
                 <Link to={`agregar`} className="boton-primario"><i className="fa-solid fa-plus ff-icon"></i>Agregar nuevo</Link>
             </div>
-            <ListaTipoAlojamientos data={data} obtenerDatos={obtenerTodos} eliminar={eliminar}></ListaTipoAlojamientos>
+            <ListaTipoAlojamientos data={data} eliminar={eliminar}></ListaTipoAlojamientos>
         </>
     )
 }

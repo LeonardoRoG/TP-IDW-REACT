@@ -108,8 +108,8 @@ export const AddAlojamientoForm = () => {
                     </div>
                     <div className="form-field">
                         <label htmlFor="idTipoAlojamiento" className="form-label">Tipo de Alojamiento:</label>
-                        <select required id="idTpoAlojamiento" name="idTipoAlojamiento" onChange={e => setIdTipoAlojamiento(e.target.value)} className="form-input" placeholder='--SELECCIONE--'>
-                            <option selected disabled>--SELECCIONE--</option>
+                        <select required id="idTpoAlojamiento" name="idTipoAlojamiento" onChange={e => setIdTipoAlojamiento(e.target.value)} defaultValue={'--SELECCIONE--'} className="form-input" placeholder='--SELECCIONE--'>
+                            <option disabled>--SELECCIONE--</option>
                             {dataTipos.map((item) => (
                                 <option key={item.idTipoAlojamiento} value={item.idTipoAlojamiento}>{item.Descripcion.toUpperCase()}</option>
                             ))}
@@ -137,8 +137,8 @@ export const AddAlojamientoForm = () => {
                     </div>
                     <div className="form-field">
                         <label htmlFor="estado" className="form-label">Estado:</label>
-                        <select required id="estado" name="estado" onChange={e => setEstado(e.target.value)} className="form-input">
-                            <option selected disabled>--SELECCIONE--</option>
+                        <select required id="estado" name="estado" onChange={e => setEstado(e.target.value)} defaultValue={'--SELECCIONE--'} className="form-input">
+                            <option disabled>--SELECCIONE--</option>
                             <option value="Disponible">DISPONIBLE</option>
                             <option value="Reservado">RESERVADO</option>
                         </select>

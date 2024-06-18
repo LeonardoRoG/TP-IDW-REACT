@@ -7,6 +7,11 @@
     height: 215px;
 }
 
+.card-principal{
+    position: relative;
+    bottom: 6%;
+}
+
 .card-content{
     margin: 0px 16px 8px 16px;
     
@@ -14,15 +19,17 @@
 
 .card-footer{
     margin: 8px 16px;
+    display: flex;
+    justify-content: center;
 }
 
 .card-medio{
     display: flex;
-    justify-content: center;
-    bottom: 3%;
+    justify-content: end;
+    padding: 0rem 0.5rem;
+    bottom: 4%;
     position: relative;
 }
-
 .card-item{
     background-color: transparent;
     width: 270px;
@@ -78,13 +85,17 @@
     scale: 103%;
 }
 
+.location{
+    font-style: italic;
+    color: gray;
+    padding: 0rem 1rem;
+}
+
 .type-pill{
     background-color: rgb(198, 255, 243);
-    border-radius: 12px;
-    padding: 2px 24px;
+    border-radius: 20px;
+    padding: 6px 24px;
     font-weight: 600;
-    position: relative;
-    top: 4%;
     transition: all 0.2s ease-out;
 }
 
@@ -94,6 +105,7 @@
 
 .type-pill p{
     color: var(--color-fuente);
+    font-size: 0.9rem;
 }
 
 hr{

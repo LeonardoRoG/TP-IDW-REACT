@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { CardHeader } from './CardHeader';
 import './cards.css';
+import { Button } from '../../Button/Button';
 
 export const Cards = () => {
 
@@ -109,14 +110,16 @@ export const Cards = () => {
                     </div>
                 </div>
 
-                <div>
+                <div className='card-principal'>
                     <div className='card-content'>
+                        <p className='location'>Ubicación</p>
                         <h3>{item.Titulo}</h3>
                         <p>Precio: {new Intl.NumberFormat("es-AR",  { style: 'currency', currency: 'ARS' }).format(item.PrecioPorDia)}</p>
+                        <p><i className="fa-solid fa-bed"></i> {item.CantidadDormitorios} | <i className="fa-solid fa-toilet"></i> {item.CantidadBanios}</p>
+                        <p>Servicios que ofrece: </p>
                     </div>
                     <div className="card-footer">
-                        <p>{item.CantidadDormitorios} dormitorio/s | {item.CantidadBanios} baño/s </p>
-                        <p>Servicios que ofrece: </p>
+                        <Button extrarounded shadowed icon='send'></Button>
                     </div>
                 </div>
 
