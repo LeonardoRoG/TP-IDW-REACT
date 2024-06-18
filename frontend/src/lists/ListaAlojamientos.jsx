@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { Modal } from "./Modal";
+import { Modal } from "../components/Modal";
+import { Button } from "../components/Button/Button";
 
 export const ListaAlojamientos = ({ data, eliminar}) => {
 
@@ -74,8 +74,11 @@ export const ListaAlojamientos = ({ data, eliminar}) => {
                                 <td>{item.CantidadBanios}</td>
                                 <td>{item.Estado}</td>
                                 <td className="columna-botones">
-                                    <Link to={`/admin/alojamiento/${item.idAlojamiento}/edit`} className="boton-edit"><i className="fa-solid fa-pen-to-square ff-icon"></i></Link>
-                                    <button className="boton-delete" onClick={() => handleEliminarButton(item.idAlojamiento)}><i className="fa-solid fa-trash ff-icon"></i></button>
+                                    <Button color='secondary' rounded shadowed icon={'link'}></Button>
+                                    {/* <Link to={`/admin/alojamiento/${item.idAlojamiento}/edit`} className="boton-edit"><i className="fa-solid fa-pen-to-square ff-icon"></i></Link> */}
+                                    <Button to={`/admin/alojamiento/${item.idAlojamiento}/edit`} icon='edit' color='warning' rounded shadowed></Button>
+                                    {/* <button className="boton-delete" onClick={() => handleEliminarButton(item.idAlojamiento)}><i className="fa-solid fa-trash ff-icon"></i></button> */}
+                                    <Button color='danger' icon='delete' rounded shadowed onClick={() => handleEliminarButton(item.idAlojamiento)}></Button>
                                 </td>
                             </tr>
                         ))}

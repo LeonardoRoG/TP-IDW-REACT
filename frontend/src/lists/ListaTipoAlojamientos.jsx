@@ -1,13 +1,9 @@
-import { useEffect, useState } from 'react';
-import './listaTipoAlojamientos.css';
+import { useState } from 'react';
+import './listas.css';
 import { Link } from 'react-router-dom';
-import { Modal } from './Modal';
+import { Modal } from '../components/Modal';
 
-export const ListaTipoAlojamientos = ({data, obtenerDatos, eliminar}) => {
-
-    useEffect(() => {
-        obtenerDatos();
-    }, []);
+export const ListaTipoAlojamientos = ({data, eliminar}) => {
 
     const [showModal, setShowModal] = useState(false);
 

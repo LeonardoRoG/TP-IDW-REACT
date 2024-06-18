@@ -24,7 +24,7 @@ table td{
 
 table td{
     overflow-x: auto;
-    max-width: 200px;
+    max-width: 400px;
 }
 
 th:last-child{
@@ -36,6 +36,7 @@ th:last-child{
     justify-content: center;
     max-width: none;
     gap: 0.5rem;
+    width: 100%;
 }
 
 tr{
