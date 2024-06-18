@@ -8,12 +8,19 @@
 }
 
 .card-content{
-    margin: 16px 16px 8px 16px;
+    margin: 0px 16px 8px 16px;
     
 }
 
 .card-footer{
     margin: 8px 16px;
+}
+
+.card-medio{
+    display: flex;
+    justify-content: center;
+    bottom: 3%;
+    position: relative;
 }
 
 .card-item{
@@ -47,8 +54,9 @@
     height: 100%;
     border-radius: 16px 16px 0px 0px;
     display: flex;
-    justify-content: center;
-    align-items: flex-end;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .card-item div h3{
@@ -70,7 +78,7 @@
     scale: 103%;
 }
 
-.card-medio{
+.type-pill{
     background-color: rgb(198, 255, 243);
     border-radius: 12px;
     padding: 2px 24px;
@@ -80,11 +88,11 @@
     transition: all 0.2s ease-out;
 }
 
-.card-item:hover .card-medio{
+.card-item:hover .type-pill{
     top: 6%;
 }
 
-.card-medio p{
+.type-pill p{
     color: var(--color-fuente);
 }
 
@@ -101,6 +109,45 @@ hr{
     gap: 1rem;
 }
 
+.top-header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+}
+
+.fav{
+    font-weight: 600;
+    font-size: x-large;
+    padding-left: 0.5rem;
+    color: rgba(0, 0, 0, 0.445);
+    transition: all 0.2s;
+}
+
+.fav:hover i{
+    color:crimson;
+}
+
 .status{
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline;
+    background-color: rgba(0, 0, 0, 0.301);
+    gap: 0.5rem;
+    font-weight: 600;
+    font-size: small;
     position: relative;
+    border-radius: 20px;
+    padding: 6px 12px;
+    transition: all 0.2s;
+}
+
+.card-item:hover .disponible{
+    background-color: lightgreen;
+    color: green;
+}
+
+.card-item:hover .reservado{
+    background-color: bisque;
+    color: crimson;
 }
