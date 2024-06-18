@@ -16,7 +16,7 @@ code {
   --color-primero:rgb(0, 100, 100);
   --color-primero-op: rgba(0, 100, 100, 0.75);
   --color-segundo: rgb(40, 80, 100);
-  --color-segundo-op: rgba(40, 80, 100, 0.6);
+  --color-segundo-op: rgba(40, 80, 100, 0.75);
   --color-tercero: rgb();
   --color-tercero-op: rgba();
 

@@ -32,4 +32,6 @@
 
 .textarea{
     transition: background-color 0.2s ease-in-out;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: small;
 }

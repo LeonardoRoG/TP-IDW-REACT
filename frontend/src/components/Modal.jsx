@@ -1,5 +1,6 @@
 import React from "react";
 import './modal.css';
+import { Button } from "./Button/Button";
 
 /**
  * Modal personalizado con opción de mostrar ícono, texto y dos botones de acción, siendo uno de éstos opcional
@@ -35,8 +36,8 @@ export const Modal = ({action, children, show, onClose, onDelete}) => {
                 <h3>{children}</h3>
             </div>
             <div className="columna-botones">
-                {onDelete? <button onClick={onDelete} className="boton-delete">Si</button> : ''}
-                <button onClick={onClose} className="boton-primario">Cerrar</button>
+                {onDelete? <Button onClick={onDelete} color='danger' grow rounded shadowed>Si</Button> : ''}
+                <Button onClick={onClose} color='primary' grow rounded shadowed>Cerrar</Button>
             </div>
         </div>);
 };
