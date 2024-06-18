@@ -5,9 +5,9 @@ import { Modal } from '../components/Modal';
 
 export const EditTipoAlojamientoForm = () => {
 
-    const [descripcion, setDescripcion] = useState({});
+    const [descripcion, setDescripcion] = useState('');
     const {id} = useParams();
-    const [data, setData] = useState([]);
+    const [data, setData] = useState({});
     // navigate es para el botón de volver atrás
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
@@ -20,12 +20,13 @@ export const EditTipoAlojamientoForm = () => {
                 const jsonData = await response.json();
                 setData(jsonData);
                 console.log(jsonData);
+                setDescripcion(data.Descripcion);
             } catch (error) {
                 console.error(error);
             }
         };
         fetchData();
-    }, []);
+    }, [data.Descripcion, id]);
 
     const actualizarDatos = async (e) => {
         // Este método previene que se recargue la página
@@ -69,7 +70,7 @@ export const EditTipoAlojamientoForm = () => {
                 <form onSubmit={actualizarDatos} className="flex-container-center">
                     <div className="form-field">
                         <label htmlFor="descripcion" className="form-label">Descripción:</label>
-                        <input required type="text" id='descripcion' name='descripcion' defaultValue={data.Descripcion} onChange={e => setDescripcion(e.target.value)} className="form-input" placeholder=''/>
+                        <input required type="text" id='descripcion' name='descripcion' value={descripcion} onChange={e => setDescripcion(e.target.value)} className="form-input" placeholder=''/>
                     </div>
                     <div className='columna-botones'>
                         <button type='submit' className='boton-edit grow'><i className="fa-solid fa-pen-to-square ff-icon"></i>Editar</button>

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Modal } from "../components/Modal";
+import { Button } from "../components/Button/Button";
 
 export const AddAlojamientoForm = () => {
     
@@ -102,7 +103,8 @@ export const AddAlojamientoForm = () => {
                     </div>
                     <div className="form-field">
                         <label htmlFor="descripcion" className="form-label">Descripcion:</label>
-                        <input required type="text" id="descripcion" name="descripcion" onChange={e => setDescripcion(e.target.value)} className="form-input" placeholder="Descripción detallada del alojamiento" />
+                        {/* <input required type="text" id="descripcion" name="descripcion" onChange={e => setDescripcion(e.target.value)} className="form-input" placeholder="Descripción detallada del alojamiento" /> */}
+                        <textarea required type="text" id="descripcion" name="descripcion" rows="4" onChange={e => setDescripcion(e.target.value)} className="form-input textarea" placeholder="Descripción detallada del alojamiento"/>
                     </div>
                     <div className="form-field">
                         <label htmlFor="idTipoAlojamiento" className="form-label">Tipo de Alojamiento:</label>
@@ -142,7 +144,7 @@ export const AddAlojamientoForm = () => {
                         </select>
                     </div>
                     <div className="columna-botones">
-                        <button type='submit' className='boton-primario grow'><i className="fa-solid fa-plus ff-icon"></i>Agregar</button>
+                        <Button type='submit' color='primary' grow icon='add'>Agregar</Button>
                         <Link onClick={volver} className="boton-delete"><i className="fa-solid fa-xmark ff-icon"></i> Cancelar</Link>
                     </div>
                     <Modal action={modalType} show={showModal} onClose={() => setShowModal(false)}>{modalMsg}</Modal>

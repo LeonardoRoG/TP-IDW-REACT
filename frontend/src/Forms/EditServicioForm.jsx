@@ -6,7 +6,7 @@ import { Button } from "../components/Button/Button";
 export const EditServicioForm = () => {
 
     const BASE_URL = 'http://localhost:3001/';
-    const [nombre, setNombre] = useState({});
+    const [nombre, setNombre] = useState('');
     const {id} = useParams();
 
     const [showModal, setShowModal] = useState(false);
@@ -22,12 +22,13 @@ export const EditServicioForm = () => {
                 const jsonData = await response.json();
                 setData(jsonData);
                 console.log(jsonData);
+                setNombre(data.Nombre);
             } catch (error) {
                 console.error(error);
             }
         };
         fetchData();
-    }, [id]);
+    }, [id, data.Nombre]);
 
     const editarServicio = async (e) => {
         e.preventDefault();
@@ -74,7 +75,7 @@ export const EditServicioForm = () => {
             <form onSubmit={editarServicio} className="flex-container-center">
                 <div className="form-field">
                     <label htmlFor="nombre" className="form-label">Nombre del servicio:</label>
-                    <input required type="text" id='nombre' name='nombre' defaultValue={data.Nombre} onChange={e => setNombre(e.target.value)} className="form-input" placeholder=''/>
+                    <input required type="text" id='nombre' name='nombre' value={nombre} onChange={e => setNombre(e.target.value)} className="form-input" placeholder=''/>
                 </div>
                 <div className='columna-botones'>
                     <Button color={'warning'} type='submit' icon='edit' grow>Editar</Button>

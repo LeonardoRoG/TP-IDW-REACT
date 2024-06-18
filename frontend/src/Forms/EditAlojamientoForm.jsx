@@ -44,13 +44,13 @@ export const EditAlojamientoForm = () => {
                 const jsonData = await response.json();
                 setData(jsonData);
                 console.log(jsonData);
+                setIdTipoAlojamiento(data.idTipoAlojamiento);
+                setEstado(data.Estado);
             } catch (error) {
                 console.error(error);
             }
         };
         fetchData();
-        setIdTipoAlojamiento(data.idTipoAlojamiento);
-        setEstado(data.Estado);
     }, [id, data.idTipoAlojamiento, data.Estado]);
 
     const actualizarDatos = async (e) => {
@@ -58,22 +58,22 @@ export const EditAlojamientoForm = () => {
         e.preventDefault();
         
         // Construimos el objeto con los datos, despues se transforma a json en el body
-        // const formE = e.target;
-        // const formData = new FormData(formE);
+        const formE = e.target;
+        const formData = new FormData(formE);
 
-        // const formJson = Object.fromEntries(formData.entries());
-        // console.log(formJson);
-        const formJson = {
-            Titulo : Titulo,
-            Descripcion : Descripcion,
-            idTipoAlojamiento: idTipoAlojamiento,
-            Latitud: Latitud,
-            Longitud: Longitud,
-            PrecioPorDia: PrecioPorDia,
-            CantidadDormitorios: CantidadDormitorios,
-            CantidadBanios: CantidadBanios,
-            Estado: Estado,
-        };
+        const formJson = Object.fromEntries(formData.entries());
+        console.log(formJson);
+        // const formJson = {
+        //     Titulo : Titulo,
+        //     Descripcion : Descripcion,
+        //     idTipoAlojamiento: idTipoAlojamiento,
+        //     Latitud: Latitud,
+        //     Longitud: Longitud,
+        //     PrecioPorDia: PrecioPorDia,
+        //     CantidadDormitorios: CantidadDormitorios,
+        //     CantidadBanios: CantidadBanios,
+        //     Estado: Estado,
+        // };
 
         // Intentamos la conexion a la api
         try {
