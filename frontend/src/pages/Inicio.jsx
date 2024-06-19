@@ -8,7 +8,7 @@ import './inicio.css';
 export const Inicio = () =>{
     return (
         <div className='inicio-section'>
-            <Hero urlImage={'https://cdn.pixabay.com/photo/2016/08/11/23/48/mountains-1587287_1280.jpg'} position={'bottom'}>
+            <Hero urlImage={'./img/lago-home.jpg'} position={'center'}>
                 <div className='hero-inicio'>
                     <h1>Viajá por toda la Argentina.</h1>
                     <p>Las mejores experiencias te esperan.</p>
