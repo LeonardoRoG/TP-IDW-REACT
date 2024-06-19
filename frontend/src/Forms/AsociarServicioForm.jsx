@@ -1,13 +1,20 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import './form.css';
 import { Button } from "../components/Button/Button";
 import { Link, useNavigate } from "react-router-dom";
+import { Modal } from "../components/Modal";
 
 export const AsociarServicioForm = () => {
 
     const BASE_URL = 'http://localhost:3001/';
     const [idAlojamiento, setIdAlojamiento] = useState(0);
     const [idServicio, setIdServicio] = useState(0);
+
+    const [showModal, setShowModal] = useState(false);
+    const [modalMsg, setModalMsg] = useState('');
+    const [modalType, setModalType] = useState('');
+
+    const form = useRef();
 
     const asociarServicio = async (e) => {
         e.preventDefault();
@@ -26,11 +33,21 @@ export const AsociarServicioForm = () => {
             const jsonData = await response.json();
             if (response.ok) {
                 console.log(jsonData);
+                setModalMsg('Agregado con éxito.');
+                setModalType('success')
+                setShowModal(true);
+                form.current.reset();
             } else {
                 console.log('error');
+                setModalMsg('Se produjo un error.');
+                setModalType('error');
+                setShowModal(true);
             }
         } catch (error) {
             console.error(error);
+            setModalMsg('Se produjo un error.');
+            setModalType('error');
+            setShowModal(true);
         }
     };
 
@@ -75,7 +92,7 @@ export const AsociarServicioForm = () => {
                 <h3>Seleccione los datos para la relación alojamiento-servicio</h3>
             </div>
             <section className="section-flex">
-                <form onSubmit={asociarServicio} className="flex-container-center">
+                <form ref={form} onSubmit={asociarServicio} className="flex-container-center">
                     <div className="form-field">
                         <label htmlFor="idAlojamiento" className="form-label">Seleccione el alojamiento:</label>
                         <select required name="idAlojamiento" id="idAlojamiento" onChange={e => setIdAlojamiento(e.target.value)} defaultValue={'--SELECCIONE--'} className="form-input">
@@ -99,6 +116,7 @@ export const AsociarServicioForm = () => {
                         <Link onClick={volver} className="boton-delete"><i className="fa-solid fa-xmark ff-icon"></i> Cancelar</Link>
                     </div>
                 </form>
+                <Modal action={modalType} show={showModal} onClose={() => setShowModal(false)}>{modalMsg}</Modal>
             </section>
         </>
     )

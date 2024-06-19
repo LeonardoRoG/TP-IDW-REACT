@@ -5,9 +5,10 @@ import { Modal } from "../components/Modal";
 export const AddImagenForm = () => {
 
     const BASE_URL = 'http://localhost:3001/';
-    const [idAlojamiento, setIdAlojamiento] = useState({});
-    const [ruta, setRuta] = useState({});
+    const [idAlojamiento, setIdAlojamiento] = useState(0);
+    // const [ruta, setRuta] = useState('');
 
+    let ruta = '';
     const [showModal, setShowModal] = useState(false);
     const [modalMsg, setModalMsg] = useState('');
     const [modalType, setModalType] = useState('');
@@ -28,8 +29,26 @@ export const AddImagenForm = () => {
         obtenerDatosAlojamientos();
     }, []);
 
+    const [imageFile, setImageFile] = useState(0);
+
     const agregarImagen = async (e) => {
         e.preventDefault();
+
+        const urlImgBB = `https://api.imgbb.com/1/upload?key=21922a33fdb2b98ea6c116e0cfd2cde3&name=${imageFile.name}`;
+        const data = new FormData();
+        data.append("image", imageFile);
+
+        try {
+            const response = await fetch(urlImgBB, {
+                method: 'POST',
+                body: data
+            });
+            const responseData = await response.json();
+            console.log(responseData);
+            ruta = responseData.data.display_url;
+        } catch (error) {
+            console.error(error);
+        }
 
         const json ={
             idAlojamiento: idAlojamiento,
@@ -59,7 +78,7 @@ export const AddImagenForm = () => {
             setModalType('error');
             console.error(error);
         }
-    };
+    }
 
     const navigate = useNavigate();
     const volver = () => {
@@ -83,8 +102,8 @@ export const AddImagenForm = () => {
                     </select>
                 </div>
                 <div className="form-field">
-                    <label htmlFor="ruta" className="form-label">Ruta del archivo:</label>
-                    <input required type="text" id='ruta' name='ruta' onChange={e => setRuta(e.target.value)} className="form-input" placeholder=''/>
+                    <label htmlFor="ruta" className="form-label">Subir archivo:</label>
+                    <input required type="file" id='ruta' name='ruta' onChange={e => setImageFile(e.target.files[0])} className="form-input" placeholder=''/>
                 </div>
                 <div className='columna-botones'>
                     <button type='submit' className='boton-primario grow'><i className="fa-solid fa-plus ff-icon"></i>Agregar</button>
