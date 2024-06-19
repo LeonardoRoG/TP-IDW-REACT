@@ -67,36 +67,80 @@ export const Cards = () => {
         obtenerImagenes();
     }, []);
 
-        /**
+    const [dataServicios, setDataServicios] = useState([]);
+
+    useEffect(() => {
+        const obtenerServicios = async () => {
+            try {
+                const response = await fetch(BASE_URL + 'servicio/getAllServicios');
+                const jsonData = await response.json();
+                setDataServicios(jsonData);
+            } catch (err) {
+                console.error(err);
+            }
+        };
+        obtenerServicios();
+    }, []);
+
+    const [dataAsociados, setDataAsociados] = useState([]);
+
+    useEffect(() => {
+        const obtenerServiciosAsociados = async () => {
+            try {
+                const response = await fetch(BASE_URL + 'alojamientosServicios/getAllAlojamientoServicios');
+                const jsonData = await response.json();
+                setDataAsociados(jsonData);
+            } catch (err){
+                console.error(err);
+            }
+        };
+        obtenerServiciosAsociados();
+    }, []);
+
+    /**
      * @param {string} string recibe un string
      * @returns string con la primera letra en mayúsculas
      */
-        function capitalize(string) {
-            return string.charAt(0).toUpperCase() + string.slice(1);
-        };
+    function capitalize(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    };
 
-        /**
+    /**
      * Función para generar colores claros aleatorios
      * @returns código de color
      */
-        const generateRandomColor = () => {
-            // Genera un color con luminosidad alta (entre 70% y 100%)
-            const luminosity = Math.floor(Math.random() * 31) + 70;
-            const randomColor = Math.floor(Math.random() * 16777215).toString(16);
-            const hexColor = `#${randomColor}`;
-            
-            // Convierte el color hexadecimal a RGB
-            const r = parseInt(hexColor.slice(1, 3), 16);
-            const g = parseInt(hexColor.slice(3, 5), 16);
-            const b = parseInt(hexColor.slice(5, 7), 16);
-            
-            // Calcula la luminosidad del color
-            const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-            
-            // Si la luminosidad es alta, devuelve el color; de lo contrario, genera otro
-            return luminance >= luminosity / 100 ? hexColor : generateRandomColor();
-        };
-    
+    const generateRandomColor = () => {
+        // Genera un color con luminosidad alta (entre 70% y 100%)
+        const luminosity = Math.floor(Math.random() * 31) + 70;
+        const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+        const hexColor = `#${randomColor}`;
+        
+        // Convierte el color hexadecimal a RGB
+        const r = parseInt(hexColor.slice(1, 3), 16);
+        const g = parseInt(hexColor.slice(3, 5), 16);
+        const b = parseInt(hexColor.slice(5, 7), 16);
+        
+        // Calcula la luminosidad del color
+        const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+        
+        // Si la luminosidad es alta, devuelve el color; de lo contrario, genera otro
+        return luminance >= luminosity / 100 ? hexColor : generateRandomColor();
+    };
+
+    // <p>Servicios que ofrece: 
+    // {dataServicios.map((servicio) => {
+    //     const servicioOfrecido = dataAsociados.find((asoc) =>
+    //         asoc.idAlojamiento === item.idAlojamiento && asoc.idServicio === servicio.idServicio
+    //     );
+    //     if (servicioOfrecido) {
+    //         return ' ' + servicio.Nombre + ','
+    //     }
+    //     return null;})} etc.</p>
+
+    function servicioEncontrado(serv, asoc){
+        return serv.idAlojamiento === asoc.idAlojamiento;
+    }
+
     if (dataCards.length > 0){
         return(dataCards.map(item =>
             <div key={item.idAlojamiento} className='card-item'>
@@ -111,12 +155,22 @@ export const Cards = () => {
                 </div>
 
                 <div className='card-principal'>
-                    <div className='card-content'>
+                    <div className='card-title'>
                         <p className='location'>Ubicación</p>
                         <h3>{item.Titulo}</h3>
-                        <p>Precio: {new Intl.NumberFormat("es-AR",  { style: 'currency', currency: 'ARS' }).format(item.PrecioPorDia)}</p>
+                        <p>Precio: {new Intl.NumberFormat("es-AR",  { style: 'currency', currency: 'ARS' }).format(item.PrecioPorDia)}<i> /día</i></p>
+                    </div>
+                    <div className='card-content'>
                         <p><i className="fa-solid fa-bed"></i> {item.CantidadDormitorios} | <i className="fa-solid fa-toilet"></i> {item.CantidadBanios}</p>
-                        <p>Servicios que ofrece: </p>
+                        <p>Incluye 
+                            {dataServicios.map((servicio) => {
+                                const servicioOfrecido = dataAsociados.find((asoc) =>
+                                    asoc.idAlojamiento === item.idAlojamiento && asoc.idServicio === servicio.idServicio
+                                );
+                                if (servicioOfrecido) {
+                                    return ' ' + servicio.Nombre + ','
+                                }
+                                return null;})}</p>
                     </div>
                     <div className="card-footer">
                         <Button extrarounded shadowed icon='send'></Button>

@@ -27,7 +27,7 @@ export const CardHeader = ({data, dataTipos, dataImagenes}) => {
                 </div>
                 <div className={`status ${data.Estado === 'Disponible' ? 'disponible' : 'reservado'}`}>
                     <i className="fa-solid fa-circle-dot"></i>
-                    <p>{data.Estado}</p>
+                    <span>{data.Estado}</span>
                 </div>
             </div>
         </div>
