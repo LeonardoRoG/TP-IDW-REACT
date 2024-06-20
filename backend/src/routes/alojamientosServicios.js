@@ -8,6 +8,9 @@ router.get('/getAllAlojamientoServicios', alojamientoServicioController.getAllAl
 // Ruta para obtener un alojamientoservicio por ID
 router.get('/getAlojamientoServicio/:id', alojamientoServicioController.getAlojamientoServicioById);
 
+// Ruta para obtener todos los alojamientoservicios por idAlojamiento
+router.get('/getAlojamientoServicios/:idAlojamiento', alojamientoServicioController.getAllAlojamientoServiciosByIdAlojamiento);
+
 // Ruta para crear un nuevo alojamientoservicio
 router.post('/createAlojamientoServicio', alojamientoServicioController.createAlojamientoServicio);
 
