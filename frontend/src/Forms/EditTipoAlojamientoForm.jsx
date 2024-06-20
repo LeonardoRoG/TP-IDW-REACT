@@ -23,7 +23,6 @@ export const EditTipoAlojamientoForm = () => {
                 const response = await fetch(`http://localhost:3001/tiposAlojamiento/getTipoAlojamiento/` + id);
                 const jsonData = await response.json();
                 setData(jsonData);
-                console.log(jsonData);
                 setDescripcion(data.Descripcion);
             } catch (error) {
                 console.error(error);

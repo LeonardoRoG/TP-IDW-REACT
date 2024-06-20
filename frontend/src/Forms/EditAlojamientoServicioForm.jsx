@@ -24,7 +24,6 @@ export const EditAlojamientoServicioForm = () => {
                 const response = await fetch(BASE_URL + 'alojamientosServicios/getAlojamientoServicio/' + id);
                 const jsonData = await response.json();
                 setData(jsonData);
-                console.log(jsonData);
             } catch (error) {
                 console.error(error);
             }

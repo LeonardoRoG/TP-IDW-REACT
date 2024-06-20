@@ -21,7 +21,6 @@ export const EditServicioForm = () => {
                 const response = await fetch(BASE_URL + 'servicio/getServicio/' + id);
                 const jsonData = await response.json();
                 setData(jsonData);
-                console.log(jsonData);
                 setNombre(data.Nombre);
             } catch (error) {
                 console.error(error);

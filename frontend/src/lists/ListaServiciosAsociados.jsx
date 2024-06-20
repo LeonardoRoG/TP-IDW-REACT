@@ -64,7 +64,7 @@ export const ListaServiciosAsociados = ({dataAsociados, dataServicios, eliminar}
                                 </td>
                                 <td className="columna-botones">
                                     <Button to={`/admin/serviciosAsociados/${item.idAlojamientoServicio}/edit`} color='warning' icon='edit' shadowed rounded></Button>
-                                    <Button color='danger' icon='delete' onClick={() => handleEliminarButton(item.idAlojamientoServicio)}></Button>
+                                    <Button color='danger' icon='delete' shadowed rounded onClick={() => handleEliminarButton(item.idAlojamientoServicio)}></Button>
                                 </td>
                             </tr>
                         )}
