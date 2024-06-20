@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './listas.css';
-import { Link } from 'react-router-dom';
 import { Modal } from '../components/Modal';
+import { Button } from '../components/Button/Button';
 
 export const ListaTipoAlojamientos = ({data, eliminar}) => {
 
@@ -37,8 +37,8 @@ export const ListaTipoAlojamientos = ({data, eliminar}) => {
                             <td>{item.idTipoAlojamiento}</td>
                             <td>{item.Descripcion}</td>
                             <td className="columna-botones">
-                                <Link to={`/admin/tipoAlojamiento/${item.idTipoAlojamiento}/edit`} className="boton-edit"><i className="fa-solid fa-pen-to-square ff-icon"></i>Editar</Link>
-                                <button className="boton-delete" onClick={() => handleEliminarButton(item.idTipoAlojamiento)}><i className="fa-solid fa-trash ff-icon"></i>Eliminar</button>
+                                <Button to={`/admin/tipoAlojamiento/${item.idTipoAlojamiento}/edit`} color='warning' icon='edit' shadowed rounded></Button>
+                                <Button color='danger' icon='delete' onClick={() => handleEliminarButton(item.idTipoAlojamiento)}></Button>
                             </td>
                         </tr>
                     )}

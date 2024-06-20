@@ -48,24 +48,20 @@ export const AddAlojamientoForm = () => {
                 headers: { 'Content-Type':'application/json'},
                 body: JSON.stringify(formJson)
             });
-            const jsonData = await response.json();
             if (response.ok) {
-                console.log(jsonData);
                 setModalMsg('Agregado con éxito.');
                 setModalType('success')
                 setShowModal(true);
                 form.current.reset();
             } else {
-                console.log('error');
                 setModalMsg('Se produjo un error.');
                 setModalType('error');
                 setShowModal(true);
             }
         } catch (error) {
-            console.log('error');
             setModalMsg('Se produjo un error.');
             setModalType('error');
-            console.error(error);
+            setShowModal(true);
         }
     };
 
@@ -144,8 +140,8 @@ export const AddAlojamientoForm = () => {
                         </select>
                     </div>
                     <div className="columna-botones">
-                        <Button type='submit' color='primary' grow icon='add'>Agregar</Button>
-                        <Link onClick={volver} className="boton-delete"><i className="fa-solid fa-xmark ff-icon"></i> Cancelar</Link>
+                        <Button type='submit' color='primary' grow shadowed rounded icon='add'>Agregar</Button>
+                        <Button onClick={volver} color='danger' icon='cancel' shadowed rounded>Cancelar</Button>
                     </div>
                     <Modal action={modalType} show={showModal} onClose={() => setShowModal(false)}>{modalMsg}</Modal>
                 </form>

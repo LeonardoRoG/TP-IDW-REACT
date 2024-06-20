@@ -1,6 +1,7 @@
 import { useRef, useState } from "react"
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Modal } from "../components/Modal";
+import { Button } from "../components/Button/Button";
 
 export const AddServicioForm = () => {
 
@@ -25,24 +26,20 @@ export const AddServicioForm = () => {
                 headers: { 'Content-Type' : 'application/json' },
                 body: JSON.stringify(json)
             });
-            const jsonData = await response.json();
             if (response.ok) {
-                console.log(jsonData);
                 setModalMsg('Agregado con éxito.');
                 setModalType('success')
                 setShowModal(true);
                 form.current.reset();
             } else {
-                console.log('error');
                 setModalMsg('Se produjo un error.');
                 setModalType('error');
-                console.log('error');
+                setShowModal(true);
             }
         } catch (error) {
-            console.log('error');
             setModalMsg('Se produjo un error.');
             setModalType('error');
-            console.error(error);
+            setShowModal(true);
         }
     };
 
@@ -63,8 +60,8 @@ export const AddServicioForm = () => {
                     <input required type="text" id='nombre' name='nombre' onChange={e => setNombre(e.target.value)} className="form-input" placeholder=''/>
                 </div>
                 <div className='columna-botones'>
-                    <button type='submit' className='boton-primario grow'><i className="fa-solid fa-plus ff-icon"></i>Agregar</button>
-                    <Link onClick={volver} className="boton-delete"><i className="fa-solid fa-xmark ff-icon"></i> Cancelar</Link>
+                    <Button type='submit' color='primary' grow shadowed rounded icon='add'>Agregar</Button>
+                    <Button onClick={volver} color='danger' icon='cancel' shadowed rounded>Cancelar</Button>
                 </div>
                 <Modal action={modalType} show={showModal} onClose={() => setShowModal(false)}>{modalMsg}</Modal>
             </form>

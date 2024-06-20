@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import './form.css';
 import { Button } from "../components/Button/Button";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Modal } from "../components/Modal";
 
 export const AsociarServicioForm = () => {
@@ -30,21 +30,17 @@ export const AsociarServicioForm = () => {
                 headers: { 'Content-Type' : 'application/json' },
                 body: JSON.stringify(json)
             });
-            const jsonData = await response.json();
             if (response.ok) {
-                console.log(jsonData);
                 setModalMsg('Agregado con éxito.');
                 setModalType('success')
                 setShowModal(true);
                 form.current.reset();
             } else {
-                console.log('error');
                 setModalMsg('Se produjo un error.');
                 setModalType('error');
                 setShowModal(true);
             }
         } catch (error) {
-            console.error(error);
             setModalMsg('Se produjo un error.');
             setModalType('error');
             setShowModal(true);
@@ -112,8 +108,8 @@ export const AsociarServicioForm = () => {
                         </select>
                     </div>
                     <div className="columna-botones">
-                        <Button type='submit' color='primary' icon='add' grow>Enviar</Button>
-                        <Link onClick={volver} className="boton-delete"><i className="fa-solid fa-xmark ff-icon"></i> Cancelar</Link>
+                        <Button type='submit' color='primary' grow shadowed rounded icon='add'>Agregar</Button>
+                        <Button onClick={volver} color='danger' icon='cancel' shadowed rounded>Cancelar</Button>
                     </div>
                 </form>
                 <Modal action={modalType} show={showModal} onClose={() => setShowModal(false)}>{modalMsg}</Modal>

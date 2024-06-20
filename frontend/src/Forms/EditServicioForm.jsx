@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Modal } from "../components/Modal";
 import { Button } from "../components/Button/Button";
 
@@ -43,21 +43,19 @@ export const EditServicioForm = () => {
                 headers: { 'Content-Type' : 'application/json' },
                 body: JSON.stringify(json)
             });
-            const jsonData = await response.json();
             if (response.ok) {
-                console.log(jsonData);
                 setModalMsg('Editado con éxito.');
                 setModalType('success')
                 setShowModal(true);
             } else {
-                console.log('error');
                 setModalMsg('Se produjo un error.');
                 setModalType('error');
+                setShowModal(true);
             }
         } catch (error) {
-            console.log('error');
             setModalMsg('Se produjo un error.');
             setModalType('error');
+            setShowModal(true);
         }
     };
 
@@ -78,8 +76,8 @@ export const EditServicioForm = () => {
                     <input required type="text" id='nombre' name='nombre' value={nombre} onChange={e => setNombre(e.target.value)} className="form-input" placeholder=''/>
                 </div>
                 <div className='columna-botones'>
-                    <Button color={'warning'} type='submit' icon='edit' grow>Editar</Button>
-                    <Link onClick={volver} className="boton-delete"><i className="fa-solid fa-xmark ff-icon"></i> Cancelar</Link>
+                    <Button type='submit' color='warning' icon='edit' grow shadowed rounded>Editar</Button>
+                    <Button onClick={volver} color='danger' icon='cancel' shadowed rounded>Cancelar</Button>
                 </div>
                 <Modal action={modalType} show={showModal} onClose={() => volver()}>{modalMsg}</Modal>
             </form>

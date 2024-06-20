@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import './form.css';
 import { Button } from "../components/Button/Button";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Modal } from "../components/Modal";
 
 export const EditAlojamientoServicioForm = () => {
@@ -78,22 +78,19 @@ export const EditAlojamientoServicioForm = () => {
                 headers: { 'Content-Type' : 'application/json' },
                 body: JSON.stringify(json)
             });
-            console.log(json);
-            const jsonData = await response.json();
             if (response.ok) {
-                console.log(jsonData);
                 setModalMsg('Editado con éxito.');
                 setModalType('success')
                 setShowModal(true);
             } else {
-                console.log('error');
                 setModalMsg('Se produjo un error.');
                 setModalType('error');
+                setShowModal(true);
             }
         } catch (error) {
-            console.error(error);
             setModalMsg('Se produjo un error.');
             setModalType('error');
+            setShowModal(true);
         }
     };
 
@@ -128,8 +125,8 @@ export const EditAlojamientoServicioForm = () => {
                         </select>
                     </div>
                     <div className="columna-botones">
-                        <Button type='submit' color='primary' icon='add' grow>Enviar</Button>
-                        <Link onClick={volver} className="boton-delete"><i className="fa-solid fa-xmark ff-icon"></i> Cancelar</Link>
+                        <Button type='submit' color='warning' icon='edit' grow shadowed rounded>Editar</Button>
+                        <Button onClick={volver} color='danger' icon='cancel' shadowed rounded>Cancelar</Button>
                     </div>
                 </form>
                 <Modal action={modalType} show={showModal} onClose={() => volver()}>{modalMsg}</Modal>

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Modal } from "../components/Modal";
+import { Button } from "../components/Button/Button";
 
 export const EditAlojamientoForm = () => {
     
@@ -17,6 +18,8 @@ export const EditAlojamientoForm = () => {
     const [Estado, setEstado] = useState('');
 
     const [showModal, setShowModal] = useState(false);
+    const [modalMsg, setModalMsg] = useState('');
+    const [modalType, setModalType] = useState('');
     const form = useRef();
 
     const {id} = useParams();
@@ -82,15 +85,19 @@ export const EditAlojamientoForm = () => {
                 headers: { 'Content-Type' : 'application/json' },
                 body: JSON.stringify(formJson)
             });
-            const jsonData = await response.json();
             if (response.ok) {
-                console.log(jsonData);
+                setModalMsg('Editado con éxito.');
+                setModalType('success')
                 setShowModal(true);
             } else {
-                console.log('Error');
+                setModalMsg('Se produjo un error.');
+                setModalType('error');
+                setShowModal(true);
             }
         } catch (error) {
-            console.error(error);
+            setModalMsg('Se produjo un error.');
+            setModalType('error');
+            setShowModal(true);
         }
     };
 
@@ -152,10 +159,10 @@ export const EditAlojamientoForm = () => {
                         </select>
                     </div>
                     <div className="columna-botones">
-                        <button type='submit' className='boton-edit grow'><i className="fa-solid fa-plus ff-icon"></i>Editar</button>
-                        <Link onClick={volver} className="boton-delete"><i className="fa-solid fa-xmark ff-icon"></i> Cancelar</Link>
+                        <Button type='submit' color='warning' icon='edit' grow shadowed rounded>Editar</Button>
+                        <Button onClick={volver} color='danger' icon='cancel' shadowed rounded>Cancelar</Button>
                     </div>
-                    <Modal action={'success'} show={showModal} onClose={volver}>Editado con éxito</Modal>
+                    <Modal action={modalType} show={showModal} onClose={() => volver()}>{modalMsg}</Modal>
                 </form>
             </section>
         </>

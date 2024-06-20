@@ -68,10 +68,12 @@ export const EditImagenForm = () => {
             } else {
                 setModalMsg('Se produjo un error.');
                 setModalType('error');
+                setShowModal(true);
             }
         } catch (error) {
             setModalMsg('Error de conexión.');
             setModalType('error');
+            setShowModal(true);
         }
     };
 

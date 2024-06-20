@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ListaImagenes } from "../../lists/ListaImagenes";
-import { Link } from "react-router-dom";
+import { Button } from "../../components/Button/Button";
 
 export const Imagenes = () => {
 
@@ -42,7 +42,7 @@ export const Imagenes = () => {
         <>
             <div className="flex-between">
                 <h2>Imágenes</h2>
-                <Link to={`agregar`} className="boton-primario"><i className="fa-solid fa-plus ff-icon"></i>Agregar nueva</Link>
+                <Button to={`agregar`} color='primary' rounded shadowed icon='add'>Agregar nueva</Button>
             </div>
             <ListaImagenes data={data} eliminar={eliminarImagen}></ListaImagenes>
         </>

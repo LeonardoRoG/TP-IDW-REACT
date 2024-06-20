@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
 import { Modal } from "../components/Modal";
 import { useState } from "react";
+import { Button } from "../components/Button/Button";
 
 export const ListaServicios = ({data, eliminar}) => {
 
@@ -30,8 +30,8 @@ export const ListaServicios = ({data, eliminar}) => {
                             <td>{item.idServicio}</td>
                             <td>{item.Nombre}</td>
                             <td className="columna-botones">
-                                <Link to={`/admin/servicios/${item.idServicio}/edit`} className="boton warning"><i className="fa-solid fa-pen-to-square ff-icon"></i>Editar</Link>
-                                <button className="boton-delete" onClick={() => handleEliminarButton(item.idServicio)}><i className="fa-solid fa-trash ff-icon"></i>Eliminar</button>
+                                <Button to={`/admin/servicios/${item.idServicio}/edit`} color='warning' icon='edit' shadowed rounded></Button>
+                                <Button onClick={() => handleEliminarButton(item.idServicio)} color='danger' icon='delete' shadowed rounded></Button>
                             </td>
                         </tr>
                     )}

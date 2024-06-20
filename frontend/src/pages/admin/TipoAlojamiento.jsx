@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ListaTipoAlojamientos } from "../../lists/ListaTipoAlojamientos";
-import { Link } from "react-router-dom";
 import './adminPages.css';
+import { Button } from "../../components/Button/Button";
 
 export const TipoAlojamiento = () => {
 
@@ -42,7 +42,7 @@ export const TipoAlojamiento = () => {
         <>
             <div className="flex-between">
                 <h2>Tipos de alojamientos</h2>
-                <Link to={`agregar`} className="boton-primario"><i className="fa-solid fa-plus ff-icon"></i>Agregar nuevo</Link>
+                <Button to={`agregar`} color='primary' rounded shadowed icon='add'>Agregar nuevo</Button>
             </div>
             <ListaTipoAlojamientos data={data} eliminar={eliminar}></ListaTipoAlojamientos>
         </>

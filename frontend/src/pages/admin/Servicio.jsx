@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { ListaServiciosAsociados } from "../../lists/ListaServiciosAsociados";
 import { ListaServicios } from "../../lists/ListaServicios";
+import { Button } from "../../components/Button/Button";
 
 export const Servicio = () => {
 
@@ -76,12 +76,12 @@ export const Servicio = () => {
         <>
             <div className="flex-between">
                 <h2>Servicios</h2>
-                <Link to={`agregar`} className="boton-primario"><i className="fa-solid fa-plus ff-icon"></i>Agregar nuevo</Link>
+                <Button to={`agregar`} color='primary' rounded shadowed icon='add'>Agregar nuevo</Button>
             </div>
             <ListaServicios data={data} eliminar={eliminarServicio}></ListaServicios>
             <div className="flex-between">
                 <h2>Servicios Asociados</h2>
-                <Link to={'/admin/serviciosAsociados/agregar'} className="boton-primario"><i className="fa-solid fa-plus ff-icon"></i>Asociar nuevo</Link>
+                <Button to={'/admin/serviciosAsociados/agregar'} color='primary' rounded shadowed icon='add'>Asociar nuevo</Button>
             </div>
             <ListaServiciosAsociados dataAsociados={dataAsociados} dataServicios={data} eliminar={eliminarServicioAsociado}></ListaServiciosAsociados>
         </>

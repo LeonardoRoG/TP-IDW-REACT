@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button } from "../components/Button/Button";
 import { Modal } from "../components/Modal";
-import { Link } from "react-router-dom";
 
 export const ListaServiciosAsociados = ({dataAsociados, dataServicios, eliminar}) => {
 
@@ -64,8 +63,8 @@ export const ListaServiciosAsociados = ({dataAsociados, dataServicios, eliminar}
                                     ))}
                                 </td>
                                 <td className="columna-botones">
-                                    <Link to={`/admin/serviciosAsociados/${item.idAlojamientoServicio}/edit`} className="boton warning"><i className="fa-solid fa-pen-to-square ff-icon"></i>Editar</Link>
-                                    <Button color='danger' icon='delete' onClick={() => handleEliminarButton(item.idAlojamientoServicio)}>Eliminar</Button>
+                                    <Button to={`/admin/serviciosAsociados/${item.idAlojamientoServicio}/edit`} color='warning' icon='edit' shadowed rounded></Button>
+                                    <Button color='danger' icon='delete' onClick={() => handleEliminarButton(item.idAlojamientoServicio)}></Button>
                                 </td>
                             </tr>
                         )}
