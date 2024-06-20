@@ -6,6 +6,7 @@ import { Footer } from './components/Footer';
 import { Nosotros } from './pages/Nosotros';
 import { Contacto } from './pages/Contacto';
 import { Admin } from './pages/Admin';
+import { AlojamientoDetalle } from './pages/AlojamientoDetalle';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path='/contacto' element={<Contacto></Contacto>}></Route>
           {/* Acá hay que agregar las otras rutas */}
           <Route path='/admin//*' element={<Admin/>}></Route>
+          <Route path='/alojamiento/:id' element={<AlojamientoDetalle></AlojamientoDetalle>}></Route>
         </Routes>
         <Footer></Footer>
       </Router>
