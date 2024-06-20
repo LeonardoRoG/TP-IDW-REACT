@@ -1,10 +1,7 @@
 import React from 'react'
+import { StatusPill } from './StatusPill';
 
-export const CardHeader = ({data, dataTipos, dataImagenes}) => {
-
-
-
-
+export const CardHeader = ({data, dataImagenes}) => {
 
     const obtenerUrl = (imagenes) => {
         const imagenEncontrada = imagenes.find((imagen) =>
@@ -16,8 +13,6 @@ export const CardHeader = ({data, dataTipos, dataImagenes}) => {
         }
     };
 
-    
-
     return (
     <div className='card-header'>
         <div className="card-imagen" style={{backgroundImage: `url("${obtenerUrl(dataImagenes)}")`}}>
@@ -25,10 +20,7 @@ export const CardHeader = ({data, dataTipos, dataImagenes}) => {
                 <div className='fav'>
                     <i className="fa-solid fa-heart"></i>
                 </div>
-                <div className={`status ${data.Estado === 'Disponible' ? 'disponible' : 'reservado'}`}>
-                    <i className="fa-solid fa-circle-dot"></i>
-                    <span>{data.Estado}</span>
-                </div>
+                <StatusPill data={data}></StatusPill>
             </div>
         </div>
     </div>

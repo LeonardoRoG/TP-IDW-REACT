@@ -13,7 +13,7 @@ export const Inicio = () =>{
                     <h1>Viajá por toda la Argentina.</h1>
                     <p>Las mejores experiencias te esperan.</p>
                     <div>
-                        <Button icon='send' rounded shadowed>Comenzar</Button>
+                        <Button icon='send' extrarounded shadowed>Comenzar</Button>
                     </div>
                 </div>
             </Hero>

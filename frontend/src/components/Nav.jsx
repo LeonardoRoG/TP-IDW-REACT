@@ -42,7 +42,7 @@ export const Nav = ({actualWidth}) => {
                 <li><Link to="/contacto">CONTACTO</Link></li>
                 <li><Link to="/admin">ADMIN</Link></li>
             </ul>
-            <Button color='warning' rounded={true} icon={'login'}>Registrarse</Button>
+            <Button color='warning' rounded shadowed icon={'login'}>Registrarse</Button>
         </nav>
         <i className={`${isOpen ? 'fa-solid fa-xmark menu-icon' : 'fa-solid fa-bars menu-icon' }`} onClick={toggleMenu}></i>
     </div>

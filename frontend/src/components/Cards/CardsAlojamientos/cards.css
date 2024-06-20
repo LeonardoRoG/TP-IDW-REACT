@@ -83,6 +83,8 @@
     font-weight: 600;
     transition: all 0.2s ease-out;
     box-shadow: 0px 0px 8px var(--color-sombra-osc);
+    text-transform: capitalize;
+    text-align: center;
 }
 
 .card-item:hover .type-pill{
@@ -128,9 +130,10 @@ hr{
 
 .status{
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: baseline;
     background-color: rgba(0, 0, 0, 0.301);
+    box-shadow: 0px 0px 8px var(--color-sombra-osc);
     color: rgb(27, 27, 27);
     gap: 0.5rem;
     font-weight: 600;
@@ -141,14 +144,18 @@ hr{
     transition: all 0.2s;
 }
 
-.card-item:hover .disponible{
+.card-item:hover .disponible,
+.disponible:hover{
     background-color: lightgreen;
     color: green;
+    box-shadow: 0px 0px 8px lightgreen;
 }
 
-.card-item:hover .reservado{
+.card-item:hover .reservado,
+.reservado:hover{
     background-color: bisque;
     color: crimson;
+    box-shadow: 0px 0px 8px bisque;
 }
 
 .flex-between-card{
