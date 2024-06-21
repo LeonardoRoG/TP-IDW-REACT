@@ -7,6 +7,7 @@ import { Nosotros } from './pages/Nosotros';
 import { Contacto } from './pages/Contacto';
 import { Admin } from './pages/Admin';
 import { AlojamientoDetalle } from './pages/AlojamientoDetalle';
+import { Formulario } from './pages/Formulario';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           {/* Acá hay que agregar las otras rutas */}
           <Route path='/admin//*' element={<Admin/>}></Route>
           <Route path='/alojamiento/:id' element={<AlojamientoDetalle></AlojamientoDetalle>}></Route>
+          <Route path='/formulario' element={<Formulario></Formulario>}></Route>
         </Routes>
         <Footer></Footer>
       </Router>
