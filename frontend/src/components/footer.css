@@ -8,7 +8,7 @@
 footer {
     display: flex;
     justify-content: space-around;
-    align-items: flex-start; /* Cambia a 'center' para alinear verticalmente */
+    align-items: flex-start; 
     width: 100%;
     max-width: 1200px;
     margin: auto;
@@ -20,7 +20,7 @@ footer {
 .secciones-container,
 .redes-container {
     flex: 1;
-    min-width: 190px; /* Asegura que las secciones tengan un tamaño mínimo */
+    min-width: 190px; 
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -37,6 +37,7 @@ footer {
   
 .secciones-container ul {
     padding: 7px;
+    margin-top: -18px;
 }
 
 .redes-container {
@@ -48,7 +49,7 @@ footer {
 .redes-container .icons {
     display: flex;
     justify-content: center;
-    gap: 10px; /* Espacio entre los íconos */
+    gap: 10px; 
 }
 
 .redes-container a {
@@ -77,6 +78,7 @@ footer {
     text-decoration: none;
     border-bottom: 2px solid transparent;
     transition: all 0.2s ease-in-out;
+    font-size: 15px;
 }
 
 .redes-container a{

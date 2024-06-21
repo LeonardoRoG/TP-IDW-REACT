@@ -20,6 +20,7 @@ export const Footer = () => {
             <li><Link to='/nosotros'>Sobre Nosotros</Link></li>
             <li><Link to="/contacto">Contacto</Link></li>
             <li><Link to='/tipoAlojamiento'>Admin</Link></li>
+            <li><Link to='/formulario'>Iniciar Sesión</Link></li>
           </ul>
         </div>
         <div className='redes-container'> 
