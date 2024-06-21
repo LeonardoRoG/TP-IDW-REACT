@@ -74,7 +74,7 @@ export const ListaAlojamientos = ({ data, eliminar}) => {
                                 <td>{item.CantidadBanios}</td>
                                 <td>{item.Estado}</td>
                                 <td className="columna-botones">
-                                    <Button color='secondary' rounded shadowed icon={'link'}></Button>
+                                    <Button to={`/alojamiento/${item.idAlojamiento}`} target='blank_' color='secondary' rounded shadowed icon='link'></Button>
                                     <Button to={`/admin/alojamiento/${item.idAlojamiento}/edit`} icon='edit' color='warning' rounded shadowed></Button>
                                     <Button color='danger' icon='delete' rounded shadowed onClick={() => handleEliminarButton(item.idAlojamiento)}></Button>
                                 </td>

@@ -12,7 +12,7 @@ import './button.css';
  * @param onClick - funcion onClick
  * --- Para Link usar 'to', para anchor usar 'href'
  */
-export const Button = ({type, color, onClick, children, icon, rounded, extrarounded, grow, shadowed, to, href, target}) => {
+export const Button = ({type, color, onClick, children, icon, rounded, extrarounded, grow, shadowed, to, href, target, disabled}) => {
 
     const iconMappings = {
         delete: 'fa-solid fa-trash',
@@ -34,10 +34,10 @@ export const Button = ({type, color, onClick, children, icon, rounded, extraroun
     if(extrarounded) styles += ' extrarounded ';
     
     if(!to && !href) return(
-        <button type={type} className={'boton ' + styles + ' ' + color} onClick={onClick}>{icon && <i className={"ff-icon-bt " + iconClass}></i>}{children}</button>
+        <button disabled={disabled} type={type} className={'boton ' + styles + ' ' + color} onClick={onClick}>{icon && <i className={"ff-icon-bt " + iconClass}></i>}{children}</button>
     )
     if(to) return(
-        <Link type={type} to={to} className={'boton ' + styles + ' ' + color}>{icon && <i className={"ff-icon-bt " + iconClass}></i>}{children}</Link>
+        <Link type={type} to={to} target={target} className={'boton ' + styles + ' ' + color}>{icon && <i className={"ff-icon-bt " + iconClass}></i>}{children}</Link>
     )
     if(href) return(
         <a type={type} target={target} className={'boton ' + styles + ' ' + color} href={href}>{icon && <i className={"ff-icon-bt " + iconClass}></i>}{children}</a>

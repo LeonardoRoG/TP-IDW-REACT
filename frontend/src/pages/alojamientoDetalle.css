@@ -5,13 +5,26 @@
     gap: 1rem;
 }
 
+.detalle-section-carrusel{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 16px;
+    box-shadow: 0px 0px 8px var(--color-sombra);
+    width: 50%;
+    max-width: 900px;
+    min-width: 50%;
+    height: fit-content;
+}
+
 .detalle-carrusel{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 1rem;
-    width: 50%;
-    max-width: 800px;
+    width: 100%;
 }
 
 .detalle-carrusel img{
@@ -21,9 +34,74 @@
 
 .detalle-pills{
     display: flex;
+    flex-wrap: wrap;
     gap: 0.5rem;
 }
 
-@media (min-width: 576px) {
-    
+.detalle-footer{
+    position: sticky;
+    width: 100%;
+    bottom: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 1rem;
+    background-color: white;
+    border-top: 1px solid var(--color-sombra);
+    box-shadow: 0px 0px 8px var(--color-sombra-osc);
+    gap: 1rem;
+}
+
+.detalle-footer p{
+    color: var(--color-primero);
+    font-size: x-large;
+    font-weight: 600;
+}
+
+.detalle-footer i{
+    font-size: small;
+}
+
+.detalle-section{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.detalle-servicios{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.lista-servicios{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.lista-servicios span{
+    padding: 6px 20px;
+    border-radius: 6px;
+    font-size: small;
+    box-shadow: 2px 2px 8px var(--color-sombra);
+    font-weight: 600;
+}
+
+@media (max-width: 900px) {
+    .main-detalle{
+        flex-direction: column-reverse
+    }
+    .detalle-carrusel{
+        width: 100%;
+    }
+    .detalle-section-carrusel{
+        width: 100%;
+    }
+}
+
+@media (max-width: 420px) {
+    .detalle-footer{
+        justify-content: center;
+    }
 }

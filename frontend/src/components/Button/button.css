@@ -23,6 +23,25 @@
     box-shadow: none;
 }
 
+.boton:disabled{
+    color: var(--color-fuente);
+    background-color: var(--color-sombra);
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.boton:disabled:hover{
+    color: var(--color-fuente);
+    background-color: var(--color-sombra);
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.boton:disabled:active{
+    transform: none;
+    filter: none;
+}
+
 .boton:hover{
     background-color: var(--color-primero);
     color: white;
@@ -81,7 +100,7 @@
 }
 
 .extrarounded{
-    border-radius: 20px;
+    border-radius: 35px;
 }
 
 /* .ff-icon-bt{
