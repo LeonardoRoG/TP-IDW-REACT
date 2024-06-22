@@ -34,13 +34,13 @@ export const Header = () => {
       };
     }, []);
   
-    const headerClass = scrollPosition >= 500 ? 'header-fixed-top' : 'header-no-fixed';
+    const headerClass = scrollPosition >= 200 ? 'header-fixed-top' : 'header-no-fixed';
 
     return (
         <header className={'header ' + headerClass}>
             <Logo>IDW - CheckIn</Logo>
             <Nav actualWidth={actualWidth}></Nav>
-            {actualWidth > 920 && <Button color='warning' rounded shadowed icon={'login'}>Registrarse</Button>}
+            {actualWidth > 920 && <Button to="/formulario" color='warning' rounded shadowed icon={'login'}>Registrarse</Button>}
         </header>
     );
 }
