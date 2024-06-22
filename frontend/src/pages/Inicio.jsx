@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { BusquedaForm } from '../Forms/BusquedaForm';
 import { Button } from '../components/Button/Button';
 import { CardLugar } from '../components/Cards/CardLugar';
@@ -6,6 +7,125 @@ import { Hero } from '../components/Hero';
 import './inicio.css';
 
 export const Inicio = () =>{
+
+    const BASE_URL = 'http://localhost:3001/';
+    const [dataCards, setDataCards] = useState([]);
+
+    useEffect(() => {
+        const obtenerDatos = async () => {
+            try {
+                const response = await fetch(BASE_URL + 'alojamiento/getAlojamientos');
+                const jsonData = await response.json();
+                setDataCards(jsonData);
+            } catch (error) {
+                console.error('Error: ', error);
+            }
+        };
+        obtenerDatos();
+    }, []);
+
+    const [dataTipos, setDataTipos] = useState([]);
+
+    useEffect(() => {
+        const obtenerTipos = async () => {
+            try{
+                const response = await fetch('http://localhost:3001/tiposAlojamiento/getTiposAlojamiento');
+                const jsonData = await response.json();
+                setDataTipos(jsonData);
+            } catch(err){
+                console.error(err);
+            }
+        };
+        obtenerTipos();
+    }, []);
+
+    const [dataImagenes, setDataImagenes] = useState([]);
+
+    useEffect(() => {
+        const obtenerImagenes = async () => {
+            try {
+                const response = await fetch(BASE_URL + 'imagen/getAllImagenes');
+                const jsonData = await response.json();
+                setDataImagenes(jsonData);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        obtenerImagenes();
+    }, []);
+
+    const [dataServicios, setDataServicios] = useState([]);
+
+    useEffect(() => {
+        const obtenerServicios = async () => {
+            try {
+                const response = await fetch(BASE_URL + 'servicio/getAllServicios');
+                const jsonData = await response.json();
+                setDataServicios(jsonData);
+            } catch (err) {
+                console.error(err);
+            }
+        };
+        obtenerServicios();
+    }, []);
+
+    const [dataAsociados, setDataAsociados] = useState([]);
+
+    useEffect(() => {
+        const obtenerServiciosAsociados = async () => {
+            try {
+                const response = await fetch(BASE_URL + 'alojamientosServicios/getAllAlojamientoServicios');
+                const jsonData = await response.json();
+                setDataAsociados(jsonData);
+            } catch (err){
+                console.error(err);
+            }
+        };
+        obtenerServiciosAsociados();
+    }, []);
+
+    const [mostrarData, setMostrarData] = useState([]);
+    const [childData, setChildData] = useState({
+        idTipoAlojamiento: 0,
+        precioMax: 0,
+        Estado: 'Todos'
+    });
+
+    const handleChildData = (dataFromChild) => {
+        setChildData(dataFromChild);
+    }
+
+    useEffect(() => {
+        const filtrarDatos = (item) => {
+            return (
+                (Number(item.PrecioPorDia) < Number(childData.precioMax)) &&
+                (Number(item.idTipoAlojamiento) === Number(childData.idTipoAlojamiento))
+            );
+        };
+
+        const filtrarTodosPorPrecio = (item) => {
+            return (
+                (Number(item.PrecioPorDia) < Number(childData.precioMax))
+            )
+        }
+
+        const filtrarPorTipo = (item) => {
+            return (
+                (Number(item.idTipoAlojamiento) === Number(childData.idTipoAlojamiento))
+            )
+        }
+    
+        if (Number(childData.precioMax) === 0 && Number(childData.idTipoAlojamiento) === 0) {
+            setMostrarData(dataCards);
+        } else if (Number(childData.precioMax) !== 0 && Number(childData.idTipoAlojamiento) === 0){
+            setMostrarData(dataCards.filter(filtrarTodosPorPrecio));
+        } else if (Number(childData.precioMax) === 0 && Number(childData.idTipoAlojamiento) !== 0){
+            setMostrarData(dataCards.filter(filtrarPorTipo));
+        } else {
+            setMostrarData(dataCards.filter(filtrarDatos));
+        }
+    }, [childData, dataCards]);
+
     return (
         <div className='inicio-section'>
             <Hero urlImage={'./img/lago-home.jpg'} position={'center'}>
@@ -18,10 +138,17 @@ export const Inicio = () =>{
                 </div>
             </Hero>
             <h2>Elegí tu destino: </h2>
-            <BusquedaForm></BusquedaForm>
+            {childData? childData.idTipoAlojamiento : null}
+            <BusquedaForm onSendData={handleChildData}></BusquedaForm>
             <h2>Alojamientos en oferta</h2>
             <section className='flex-container'>
-                <Cards></Cards>
+                <Cards
+                    dataCards={mostrarData}
+                    dataTipos={dataTipos}
+                    dataServicios={dataServicios}
+                    dataImagenes={dataImagenes}
+                    dataAsociados={dataAsociados}
+                ></Cards>
             </section>
             <h2>Destinos destacados</h2>
             <section className='flex-container'>

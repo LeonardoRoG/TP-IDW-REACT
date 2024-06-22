@@ -117,15 +117,18 @@ export const AlojamientoDetalle = () => {
                         <TypePill item={data} dataTipos={dataTipo}></TypePill>
                         <StatusPill data={data} on></StatusPill>
                     </div>
+                    <p className='location'>Ubicación</p>
                     <h2>{data.Titulo}</h2>
                     <p>{data.Descripcion}</p>
                     <div className="detalle-servicios">
-                        <p>Este alojamiento posee: </p>
+                        <p>Este alojamiento ofrece: </p>
                         <div className="lista-servicios">
+                            <span className="servicios-item"><i className="fa-solid fa-bed"></i> {data.CantidadDormitorios}</span>
+                            <span className="servicios-item"><i className="fa-solid fa-toilet"></i> {data.CantidadBanios}</span>
                             {dataServiciosAloj.map((item) => {
                                 const servicio = dataServicios.find((servicio) => servicio.idServicio === item.idServicio);
                                 return (
-                                    <span key={item.idAlojamientoServicio}>
+                                    <span className="servicios-item" key={item.idAlojamientoServicio}>
                                         {servicio ? servicio.Nombre : 'Servicio no encontrado'}
                                     </span>
                                 );

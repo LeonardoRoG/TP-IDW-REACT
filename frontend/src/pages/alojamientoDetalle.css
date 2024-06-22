@@ -11,7 +11,7 @@
     align-items: center;
     gap: 1rem;
     padding: 1rem;
-    border-radius: 16px;
+    border-radius: 1rem;
     box-shadow: 0px 0px 8px var(--color-sombra);
     width: 50%;
     max-width: 900px;
@@ -30,6 +30,8 @@
 .detalle-carrusel img{
     width: 100%;
     height: auto;
+    border-radius: 0.5rem;
+    box-shadow: 2px 2px 8px var(--color-sombra);
 }
 
 .detalle-pills{
@@ -48,7 +50,7 @@
     padding: 1rem;
     background-color: white;
     border-top: 1px solid var(--color-sombra);
-    box-shadow: 0px 0px 8px var(--color-sombra-osc);
+    box-shadow: 0px 0px 8px var(--color-sombra);
     gap: 1rem;
 }
 
@@ -68,6 +70,11 @@
     gap: 1rem;
 }
 
+.detalle-section h2{
+    color: var(--color-primero);
+    font-size: 2rem;
+}
+
 .detalle-servicios{
     display: flex;
     flex-direction: column;
@@ -80,7 +87,7 @@
     gap: 1rem;
 }
 
-.lista-servicios span{
+.servicios-item{
     padding: 6px 20px;
     border-radius: 6px;
     font-size: small;
