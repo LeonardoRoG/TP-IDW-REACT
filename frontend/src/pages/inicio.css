@@ -1,5 +1,9 @@
-.inicio-section > h3,
-.inicio-section > h2{
+.boton-comenzar{
+    width: clamp(120px, 15vh, 170px);
+}
+
+.inicio-section main > h3,
+.inicio-section main > h2{
     padding: 0.5rem 1rem;
 }
 
@@ -29,4 +33,9 @@
 
 .hero-inicio div{
     padding-top: 1rem;
+}
+
+.main-inicio{
+    position: relative;
+    bottom: 100px;
 }

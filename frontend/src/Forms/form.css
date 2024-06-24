@@ -1,24 +1,3 @@
-.boton-primario{
-    padding: 12px 20px;
-    border: none;
-    background-color: var(--color-primero);
-    color: var(--color-fuente-alt);
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    text-decoration: none;
-    font-size: 14px;
-    text-align: center;
-}
-
-.boton-primario:hover{
-    background-color: var(--color-primero-op);
-}
-
-.grow{
-    flex-grow: 1;
-}
-
 .form-buscador{
     display: flex;
     flex-wrap: wrap;
@@ -63,18 +42,36 @@
 
 .flex-container-center{
     display: flex;
-    width: calc(100% - 20px);
-    max-width: 750px;
+    width: calc(100% - 1rem);
+    max-width: 800px;
     align-items: stretch;
     flex-direction: column;
-    gap: 10px;
-    padding: 0 1rem;
+    gap: 0.5rem;
+    padding: 1rem;
+    box-shadow: 2px 2px 8px var(--color-sombra);
+    border-radius: 0.5rem;
+    background-color: white;
+}
+
+.buscador{
+    max-width: fit-content;
+}
+
+.columna-botones-buscador{
+    display: flex;
+    justify-content: flex-end;
+    max-width: none;
+    gap: 0.5rem;
+    width: 100%;
+    flex-grow: 1;
+    flex-wrap: wrap;
 }
 
 .section-flex{
     display: flex;
     justify-content: center;
-    padding: 20px 0;
+    padding: 0.5rem;
+    padding-top: 1rem;
 }
 
 .doble-form > .form-field{
