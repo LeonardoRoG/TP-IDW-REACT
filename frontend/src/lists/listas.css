@@ -52,6 +52,11 @@ tbody tr:hover{
     background-color: rgb(231, 231, 231);
 }
 
+.num-column{
+    text-align: end;
+    font-variant-numeric: tabular-nums;
+}
+
 .boton-edit{
     padding: 10px 20px;
     border: none;

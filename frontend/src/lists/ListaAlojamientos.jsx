@@ -58,9 +58,9 @@ export const ListaAlojamientos = ({ data, eliminar}) => {
                                         item.idTipoAlojamiento === tipo.idTipoAlojamiento && tipo.Descripcion
                                     ))}
                                 </td>
-                                <td>{item.Latitud}</td>
-                                <td>{item.Longitud}</td>
-                                <td>{new Intl.NumberFormat("es-AR",  { style: 'currency', currency: 'ARS' }).format(item.PrecioPorDia)}</td>
+                                <td className="num-column">{item.Latitud}</td>
+                                <td className="num-column">{item.Longitud}</td>
+                                <td className="num-column">{new Intl.NumberFormat("es-AR",  { style: 'currency', currency: 'ARS' }).format(item.PrecioPorDia)}</td>
                                 <td>{item.CantidadDormitorios}</td>
                                 <td>{item.CantidadBanios}</td>
                                 <td>{item.Estado}</td>

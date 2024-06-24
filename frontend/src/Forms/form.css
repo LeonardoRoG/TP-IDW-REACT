@@ -35,6 +35,20 @@
     flex-grow: 1;
 }
 
+.item-check{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.form-field-checkbox{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
 .form-label{
     color: var(--color-fuente-op);
     font-size: medium;
