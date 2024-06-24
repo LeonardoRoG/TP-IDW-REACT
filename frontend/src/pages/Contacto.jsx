@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import './contacto.css';
 import { Hero } from "../components/Hero";
 import { Modal } from '../components/Modal';
+import { Button } from '../components/Button/Button';
 
 export const Contacto = () => {
 
@@ -50,7 +51,7 @@ export const Contacto = () => {
                             <textarea required type="text" id="mensaje" name="mensaje" rows="4" onChange={e => setMensaje(e.target.value)} className="form-input textarea" placeholder=""/>
                         </div>
                         <div className="form-field">
-                            <button type="submit" className="boton-primario"><i className="fa-solid fa-magnifying-glass ff-icon"></i> Enviar</button>
+                            <Button type="submit" color='primary' rounded shadowed icon='send'>Enviar</Button>
                         </div>
                     </form>
                     <Modal action={'success'} show={showModal} onClose={() => setShowModal(false)}>¡Mensaje enviado!</Modal>

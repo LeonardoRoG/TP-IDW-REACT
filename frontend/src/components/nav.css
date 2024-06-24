@@ -23,7 +23,7 @@
     color: #fff;
     font-weight: 400;
     text-transform: uppercase;
-    text-shadow: 0px 0px 8px black;
+    text-shadow: 0px 0px 4px black;
 }
 
 .open > a{
@@ -38,6 +38,7 @@
 
 .nav ul li a:hover {
     color: aquamarine;
+    text-shadow: none;
 }
 
 .nav.stroke ul li a{
@@ -55,10 +56,13 @@
     color: transparent;
     background: aquamarine;
     height: 2px;
+    text-shadow: none;
+    visibility: hidden;
 }
 
 .nav.stroke ul li a:hover:after {
     width: 100%;
+    visibility: visible;
 }
 
 .menu-icon{
