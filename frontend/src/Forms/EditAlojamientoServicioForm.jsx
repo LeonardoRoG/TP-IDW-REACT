@@ -3,14 +3,15 @@ import './form.css';
 import { Button } from "../components/Button/Button";
 import { useNavigate, useParams } from "react-router-dom";
 import { Modal } from "../components/Modal";
-import { getAlojamientoServicio, updateAlojamientoServicio } from "../services/alojamientoServicioService";
-import { getAllAlojamientos } from "../services/alojamientoService";
+import { addAlojamientoServicio, deleteAlojamientoServicio, getAlojamientoServicios } from "../services/alojamientoServicioService";
+import { getAlojamiento } from "../services/alojamientoService";
 import { getAllServicios } from "../services/servicioService";
 
 export const EditAlojamientoServicioForm = () => {
 
-    const [idAlojamiento, setIdAlojamiento] = useState(0);
-    const [idServicio, setIdServicio] = useState(0);
+    const [alojamiento, setAlojamiento] = useState({});
+    const [alojamientoServiciosObtenidos, setAlojamientoServiciosObtenidos] = useState([]);
+    const [serviciosElegidos, setServiciosElegidos] = useState([]);
 
     const {id} = useParams();
 
@@ -18,35 +19,32 @@ export const EditAlojamientoServicioForm = () => {
     const [modalMsg, setModalMsg] = useState('');
     const [modalType, setModalType] = useState('');
 
-    const [data, setData] = useState({});
-
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const jsonData = await getAlojamientoServicio(id);
-                setData(jsonData);
+                const jsonData = await getAlojamientoServicios(id);
+                setServiciosElegidos(jsonData.map(servicio => servicio.idServicio));
+                setAlojamientoServiciosObtenidos(jsonData.map(servicio => servicio.idAlojamientoServicio));
+                console.log(jsonData);
             } catch (error) {
                 console.error(error);
             }
         };
         fetchData();
-        setIdAlojamiento(data.idAlojamiento);
-        setIdServicio(data.idServicio);
-    }, [id, data.idAlojamiento, data.idServicio]);
-
-    const [dataAlojamientos, setDataAlojamientos] = useState([]);
+    }, [id]);
 
     useEffect(() => {
-        const obtenerDatosAlojamientos = async () => {
+        const obtenerDatosAlojamiento = async () => {
             try {
-                const jsonData = await getAllAlojamientos();
-                setDataAlojamientos(jsonData);
+                const jsonData = await getAlojamiento(id);
+                setAlojamiento(jsonData);
+
             } catch (error) {
                 console.error('Error: ', error);
             }
         };
-        obtenerDatosAlojamientos();
-    }, []);
+        obtenerDatosAlojamiento();
+    }, [id]);
 
     const [dataServicios, setDataServicios] = useState([]);
 
@@ -65,15 +63,25 @@ export const EditAlojamientoServicioForm = () => {
     const editarAlojamientoServicio = async (e) => {
         e.preventDefault();
 
-        const json = {
-            idAlojamiento : idAlojamiento,
-            idServicio : idServicio
-        };
-
         try {
-            const response = await updateAlojamientoServicio(id, json);
-            setModalMsg(response.message);
-            setModalType('success')
+            for (const item of alojamientoServiciosObtenidos) {
+                await deleteAlojamientoServicio(item);
+            }
+            try {
+                for (const item of serviciosElegidos) {
+                    const json = {
+                        idAlojamiento : id,
+                        idServicio : item
+                    };
+                    const response = await addAlojamientoServicio(json);
+                    setModalMsg(response.message);
+                    setModalType('success');
+                }
+            } catch (error) {
+                setModalMsg('Se produjo un error.');
+                setModalType('error');
+                setShowModal(true);
+            }   
             setShowModal(true);
         } catch (error) {
             setModalMsg('Se produjo un error.');
@@ -87,6 +95,16 @@ export const EditAlojamientoServicioForm = () => {
         navigate('/admin/servicios');
     }
 
+    const handleCheckboxChange = (e) => {
+        const { name, checked} = e.target;
+        const idServicio = Number(name);
+        if (checked) {
+            setServiciosElegidos([...serviciosElegidos, idServicio])
+        } else {
+            setServiciosElegidos(serviciosElegidos.filter(servicio => servicio !== idServicio))
+        }
+    };
+
     return (
         <>
             <div className="flex-left">
@@ -95,22 +113,17 @@ export const EditAlojamientoServicioForm = () => {
             <section className="section-flex">
                 <form onSubmit={editarAlojamientoServicio} className="flex-container-center">
                     <div className="form-field">
-                        <label htmlFor="idAlojamiento" className="form-label">Seleccione el alojamiento:</label>
-                        <select required name="idAlojamiento" id="idAlojamiento" value={idAlojamiento} onChange={e => setIdAlojamiento(e.target.value)} className="form-input">
-                            <option disabled>--SELECCIONE--</option>
-                            {dataAlojamientos.map((item) => (
-                                <option key={item.idAlojamiento} value={item.idAlojamiento}>{item.Titulo}</option>
-                            ))}
-                        </select>
+                        <label className="form-label">Alojamiento seleccionado: </label>
+                        <h3>{alojamiento.Titulo}</h3>
                     </div>
-                    <div className="form-field">
-                        <label htmlFor="idServicio" className="form-label">Seleccione el alojamiento:</label>
-                        <select required name="idServicio" id="idServicio" value={idServicio} onChange={e => setIdServicio(e.target.value)} className="form-input">
-                            <option disabled>--SELECCIONE--</option>
+                    <label htmlFor="idServicio" className="form-label">Seleccione los servicios:</label>
+                    <div className="form-field-checkbox">
                             {dataServicios.map((item) => (
-                                <option key={item.idServicio} value={item.idServicio}>{item.Nombre}</option>
+                                <div className="item-check" key={item.idServicio}>
+                                    <label htmlFor={item.idServicio}>{item.Nombre}</label>
+                                    <input type="checkbox" id={item.idServicio} name={item.idServicio} checked={serviciosElegidos.includes(item.idServicio)} onChange={handleCheckboxChange}/>
+                                </div>
                             ))}
-                        </select>
                     </div>
                     <div className="columna-botones">
                         <Button type='submit' color='warning' icon='edit' grow shadowed rounded>Editar</Button>

@@ -4,6 +4,8 @@ import { Modal } from "../components/Modal";
 import { Button } from "../components/Button/Button";
 import { addAlojamiento } from "../services/alojamientoService";
 import { getAllTiposAlojamientos } from "../services/tipoAlojamientoService";
+import { addAlojamientoServicio } from "../services/alojamientoServicioService";
+import { getAllServicios } from "../services/servicioService";
 
 export const AddAlojamientoForm = () => {
 
@@ -39,6 +41,18 @@ export const AddAlojamientoForm = () => {
 
         try {
             const response = await addAlojamiento(formJson);
+            try {
+                for (const item of serviciosElegidos) {
+                    const json = {
+                        idAlojamiento : response.id,
+                        idServicio : item
+                    };
+                    await addAlojamientoServicio(json);
+                }
+            } catch (error) {
+                setModalMsg('Se produjo un error.');
+                setModalType('error');
+            }
             setModalMsg(response.message);
             setModalType('success')
             setShowModal(true);
@@ -69,6 +83,30 @@ export const AddAlojamientoForm = () => {
     const volver = () => {
         navigate('/admin/alojamiento');
     }
+
+    const [serviciosElegidos, setServiciosElegidos] = useState([]);
+    const [dataServicios, setDataServicios] = useState([]);
+
+    useEffect(() => {
+        const obtenerServicios = async () => {
+            try {
+                const jsonData = await getAllServicios();
+                setDataServicios(jsonData);
+            } catch (err) {
+                console.error(err);
+            }
+        };
+        obtenerServicios();
+    }, []);
+
+    const handleCheckboxChange = (e) => {
+        const { value, checked} = e.target;
+        if (checked) {
+            setServiciosElegidos([...serviciosElegidos, value])
+        } else {
+            setServiciosElegidos(serviciosElegidos.filter(servicio => servicio !== value))
+        }
+    };
 
     return (
         <>
@@ -121,6 +159,17 @@ export const AddAlojamientoForm = () => {
                             <option value="Disponible">DISPONIBLE</option>
                             <option value="Reservado">RESERVADO</option>
                         </select>
+                    </div>
+                    <div className="flex-left">
+                        <h3>Seleccione los datos para la relación alojamiento-servicio</h3>
+                    </div>
+                    <div className="form-field-checkbox">
+                        {dataServicios.map((item) => (
+                            <div className="item-check" key={item.idServicio}>
+                                <label htmlFor={item.idServicio}>{item.Nombre}</label>
+                                <input type="checkbox" id={item.idServicio} name={item.idServicio} value={item.idServicio} onChange={handleCheckboxChange}/>
+                            </div>
+                        ))}
                     </div>
                     <div className="columna-botones">
                         <Button type='submit' color='primary' grow shadowed rounded icon='add'>Agregar</Button>

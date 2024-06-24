@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { Button } from "../components/Button/Button";
-import { Modal } from "../components/Modal";
 import { getAllAlojamientos } from "../services/alojamientoService";
 
-export const ListaServiciosAsociados = ({dataAsociados, dataServicios, eliminar}) => {
+export const ListaServiciosAsociados = ({dataAsociados, dataServicios}) => {
 
     const [dataAlojamientos, setDataAlojamientos] = useState([]);
 
@@ -18,14 +17,6 @@ export const ListaServiciosAsociados = ({dataAsociados, dataServicios, eliminar}
         };
         obtenerDatos();
     }, []);
-
-    const [showModal, setShowModal] = useState(false);
-
-    const [idElegido, setIdElegido] = useState('');
-    const handleEliminarButton = (idServicio) => {
-        setShowModal(true);
-        setIdElegido(idServicio);
-    }
 
     //Ordena los datos segun el id del alojamiento
     dataAsociados.sort((a, b) => a.idAlojamiento - b.idAlojamiento);
@@ -48,28 +39,30 @@ export const ListaServiciosAsociados = ({dataAsociados, dataServicios, eliminar}
                         </tr>
                     </thead>
                     <tbody>
-                        {dataAsociados.map((item, index) => 
-                            <tr key={item.idAlojamientoServicio}>
+                        {dataAlojamientos.map((item, index) => 
+                            <tr key={item.idAlojamiento}>
                                 <td>{index + 1}</td>
                                 <td>
-                                    {dataAlojamientos.map((alojamiento) => (
-                                        alojamiento.idAlojamiento === item.idAlojamiento && alojamiento.Titulo
-                                    ))}
+                                    {item.Titulo}
                                 </td>
                                 <td>
-                                    {dataServicios.map((servicio) => (
-                                        servicio.idServicio === item.idServicio && servicio.Nombre
-                                    ))}
+                                    {dataServicios.map((servicio) => {
+                                        const servicioOfrecido = dataAsociados.find((asoc) =>
+                                            asoc.idAlojamiento === item.idAlojamiento && asoc.idServicio === servicio.idServicio
+                                        );
+                                        if (servicioOfrecido) {
+                                            return servicio.Nombre + ', '
+                                        }
+                                        return null;
+                                    })}
                                 </td>
                                 <td className="columna-botones">
-                                    <Button to={`/admin/serviciosAsociados/${item.idAlojamientoServicio}/edit`} color='warning' icon='edit' shadowed rounded></Button>
-                                    <Button color='danger' icon='delete' shadowed rounded onClick={() => handleEliminarButton(item.idAlojamientoServicio)}></Button>
+                                    <Button to={`/admin/serviciosAsociados/${item.idAlojamiento}/edit`} color='warning' icon='edit' shadowed rounded></Button>
                                 </td>
                             </tr>
                         )}
                     </tbody>
                 </table>
-                <Modal action={'delete'} show={showModal} onDelete={() => eliminar(idElegido) & setShowModal(false)} onClose={() => setShowModal(false)}>¿Está seguro que desea eliminar?</Modal>
             </div>
         )
     }
