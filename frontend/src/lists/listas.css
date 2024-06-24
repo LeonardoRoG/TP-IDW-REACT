@@ -22,6 +22,11 @@ table td{
     text-align: start;
 }
 
+table td{
+    overflow-x: auto;
+    max-width: 400px;
+}
+
 th:last-child{
     text-align: center;
 }
@@ -29,6 +34,9 @@ th:last-child{
 .columna-botones{
     display: flex;
     justify-content: center;
+    max-width: none;
+    gap: 0.5rem;
+    width: 100%;
 }
 
 tr{
@@ -48,7 +56,6 @@ tbody tr:hover{
     padding: 10px 20px;
     border: none;
     background-color: darkorange;
-    margin: 4px;
     color: var(--color-fuente-alt);
     font-weight: 600;
     cursor: pointer;
@@ -66,7 +73,6 @@ tbody tr:hover{
     padding: 12px 20px;
     border: none;
     background-color: crimson;
-    margin: 4px;
     color: var(--color-fuente-alt);
     font-weight: 600;
     cursor: pointer;

@@ -1,0 +1,109 @@
+import { useEffect, useRef, useState } from "react";
+import './form.css';
+import { Button } from "../components/Button/Button";
+import { useNavigate } from "react-router-dom";
+import { Modal } from "../components/Modal";
+import { getAllServicios } from "../services/servicioService";
+import { getAllAlojamientos } from "../services/alojamientoService";
+import { addAlojamientoServicio } from "../services/alojamientoServicioService";
+
+export const AsociarServicioForm = () => {
+
+    const [idAlojamiento, setIdAlojamiento] = useState(0);
+    const [idServicio, setIdServicio] = useState(0);
+
+    const [showModal, setShowModal] = useState(false);
+    const [modalMsg, setModalMsg] = useState('');
+    const [modalType, setModalType] = useState('');
+
+    const form = useRef();
+
+    const asociarServicio = async (e) => {
+        e.preventDefault();
+
+        const json = {
+            idAlojamiento : idAlojamiento,
+            idServicio : idServicio
+        };
+
+        try {
+            const response = await addAlojamientoServicio(json);
+            setModalMsg(response.message);
+            setModalType('success');
+            setShowModal(true);
+            form.current.reset();
+        } catch (error) {
+            setModalMsg('Se produjo un error.');
+            setModalType('error');
+            setShowModal(true);
+        }
+    };
+
+    const [dataAlojamientos, setDataAlojamientos] = useState([]);
+
+    useEffect(() => {
+        const obtenerDatosAlojamientos = async () => {
+            try {
+                const jsonData = await getAllAlojamientos();
+                setDataAlojamientos(jsonData);
+            } catch (error) {
+                console.error('Error: ', error);
+            }
+        };
+        obtenerDatosAlojamientos();
+    }, []);
+
+    const [dataServicios, setDataServicios] = useState([]);
+
+    useEffect(() => {
+        const obtenerServicios = async () => {
+            try {
+                const jsonData = await getAllServicios();
+                setDataServicios(jsonData);
+            } catch (err) {
+                console.error(err);
+            }
+        };
+        obtenerServicios();
+    }, []);
+
+    const navigate = useNavigate();
+    const volver = () => {
+        navigate('/admin/servicios');
+    }
+
+    return (
+        <>
+            <div className="flex-left">
+                <h3>Seleccione los datos para la relación alojamiento-servicio</h3>
+            </div>
+            <section className="section-flex">
+                <form ref={form} onSubmit={asociarServicio} className="flex-container-center">
+                    <div className="form-field">
+                        <label htmlFor="idAlojamiento" className="form-label">Seleccione el alojamiento:</label>
+                        <select required name="idAlojamiento" id="idAlojamiento" onChange={e => setIdAlojamiento(e.target.value)} defaultValue={'--SELECCIONE--'} className="form-input">
+                            <option disabled>--SELECCIONE--</option>
+                            {dataAlojamientos.map((item) => (
+                                <option key={item.idAlojamiento} value={item.idAlojamiento}>{item.Titulo}</option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="form-field">
+                        <label htmlFor="idServicio" className="form-label">Seleccione el alojamiento:</label>
+                        <select required name="idServicio" id="idServicio" onChange={e => setIdServicio(e.target.value)} defaultValue={'--SELECCIONE--'} className="form-input">
+                            <option disabled>--SELECCIONE--</option>
+                            {dataServicios.map((item) => (
+                                <option key={item.idServicio} value={item.idServicio}>{item.Nombre}</option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="columna-botones">
+                        <Button type='submit' color='primary' grow shadowed rounded icon='add'>Agregar</Button>
+                        <Button onClick={volver} color='danger' icon='cancel' shadowed rounded>Cancelar</Button>
+                    </div>
+                </form>
+                <Modal action={modalType} show={showModal} onClose={() => setShowModal(false)}>{modalMsg}</Modal>
+            </section>
+        </>
+    )
+}

@@ -1,3 +1,11 @@
+.nav-desktop{
+    display: flex;
+    width: 66%;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
+    background-color: green;
+}
 
 .nav ul {
     list-style: none;
@@ -10,13 +18,12 @@
 
 .nav ul li a {
     display: block;
-    padding: 15px;
+    padding: 0.5rem 1rem;
     text-decoration: none;
     color: #fff;
     font-weight: 400;
     text-transform: uppercase;
-    margin: 0 10px;
-    text-shadow: 0px 0px 8px black;
+    text-shadow: 0px 0px 4px black;
 }
 
 .open > a{
@@ -31,6 +38,7 @@
 
 .nav ul li a:hover {
     color: aquamarine;
+    text-shadow: none;
 }
 
 .nav.stroke ul li a{
@@ -48,10 +56,13 @@
     color: transparent;
     background: aquamarine;
     height: 2px;
+    text-shadow: none;
+    visibility: hidden;
 }
 
 .nav.stroke ul li a:hover:after {
     width: 100%;
+    visibility: visible;
 }
 
 .menu-icon{
@@ -68,15 +79,20 @@
     left: 0;
     height: 450px;
     width: 100%;
-    margin-top: -200%;
-    transition: all 0.2s linear;
+    margin-top: -100%;
+    transition: all 0.4s ease-out;
     background-color: var(--color-primero);
     z-index: 100;
     box-shadow: 0px 3px 15px var(--color-sombra-osc);
+    visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .main-nav.open {
     margin-top: 0;
+    visibility: visible;
 }
 
 .open{

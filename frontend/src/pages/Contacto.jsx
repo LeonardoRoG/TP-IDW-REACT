@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import './contacto.css';
 import { Hero } from "../components/Hero";
 import { Modal } from '../components/Modal';
+import { Button } from '../components/Button/Button';
 
 export const Contacto = () => {
 
@@ -26,13 +27,13 @@ export const Contacto = () => {
 
     return (
         <div className='inicio-section'>
-            <Hero title={'¡Contactanos!'} urlImage={"https://cdn.pixabay.com/photo/2018/03/14/18/05/alpine-hut-3225908_1280.jpg" }></Hero>
+            <Hero title={'¡Contactanos!'} urlImage={"https://cdn.pixabay.com/photo/2018/03/14/18/05/alpine-hut-3225908_1280.jpg"} position={'bottom'}></Hero>
             
             <h2 className='titulo-form'>Formulario de Contacto</h2>
             
             <main className="section-flex-contacto">
                 <section className="flex-container-center limit">
-                    <form onSubmit={contactar} ref={form}>
+                    <form onSubmit={contactar} ref={form} className='form-contacto'>
                         <div className="form-field">
                             <label htmlFor="nombre" className="form-label">Nombre:</label>
                             <input required type="text" id="nombre" name="nombre" onChange={e => setNombre(e.target.value)} className="form-input" placeholder=""/>
@@ -50,10 +51,10 @@ export const Contacto = () => {
                             <textarea required type="text" id="mensaje" name="mensaje" rows="4" onChange={e => setMensaje(e.target.value)} className="form-input textarea" placeholder=""/>
                         </div>
                         <div className="form-field">
-                            <button type="submit" className="boton-primario"><i className="fa-solid fa-magnifying-glass ff-icon"></i> Enviar</button>
+                            <Button type="submit" color='primary' rounded shadowed icon='send'>Enviar</Button>
                         </div>
                     </form>
-                    <Modal message={'¡Mensaje enviado!'} show={showModal} onClose={() => setShowModal(false)}></Modal>
+                    <Modal action={'success'} show={showModal} onClose={() => setShowModal(false)}>¡Mensaje enviado!</Modal>
                 </section>
           
                 <section className="mapa-section">

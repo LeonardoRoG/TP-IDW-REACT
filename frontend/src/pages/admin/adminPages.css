@@ -1,0 +1,54 @@
+.flex-inline{
+    display: inline-flex;
+    padding: 0.5rem 1rem;
+}
+
+.flex-left {
+    display: flex;
+    align-items: start;
+    padding: 1rem;
+    gap: 6px;
+}
+
+.flex-between {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    gap: 6px;
+    justify-content: space-between;
+}
+
+.dashboard-content{
+    display: flex;
+    padding: 1rem;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: stretch;
+    flex-wrap: wrap;
+}
+
+.dashboard-card{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 2px 2px 8px var(--color-sombra);
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: center;
+    gap: 1rem;
+    flex-grow: 1;
+}
+
+.dashboard-card h4{
+    font-size: clamp(1.5rem, 7vw, 3rem);
+}
+
+.dashboard-card h3{
+    font-size: clamp(1.8rem, 10vw, 4.4rem);
+}
+
+.dashboard-card:last-child{
+    background-color: var(--color-primero);
+    color: white;
+}

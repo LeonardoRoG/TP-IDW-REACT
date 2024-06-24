@@ -4,7 +4,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 4px 20px;
+    padding: 0.5rem 1rem;
     z-index: 10;
     transition: all ease-in-out 0.2s;
 }
@@ -20,22 +20,4 @@
     backdrop-filter: blur(6px);
     box-shadow: 0px 3px 15px var(--color-sombra-osc);
     height: 52px;
-}
-
-
-
-.logo {
-    display: flex; 
-    align-items: center;
-}
-  
-.logo h2 {
-    margin-left: 10px; 
-    color: #eaeaea;
-}
-
-.logo img {
-    height: 40px;
-    width: auto;
-    display: flex;
 }

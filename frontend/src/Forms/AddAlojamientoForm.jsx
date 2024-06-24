@@ -1,60 +1,52 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Modal } from "../components/Modal";
+import { Button } from "../components/Button/Button";
+import { addAlojamiento } from "../services/alojamientoService";
+import { getAllTiposAlojamientos } from "../services/tipoAlojamientoService";
 
 export const AddAlojamientoForm = () => {
-    
-    const BASE_URL = 'http://localhost:3001/';
 
-    const [Titulo, setTitulo] = useState({});
-    const [Descripcion, setDescripcion] = useState({});
-    const [TipoAlojamiento, setTipoAlojamiento] = useState({});
-    const [Latitud, setLatitud] = useState({});
-    const [Longitud, setLongitud] = useState({});
-    const [PrecioPorDia, setPrecioPorDia] = useState({});
-    const [CantidadDormitorios, setCantidadDormitorios] = useState({});
-    const [CantidadBanios, setCantidadBanios] = useState({});
-    const [Estado, setEstado] = useState({});
+    const [Titulo, setTitulo] = useState('');
+    const [Descripcion, setDescripcion] = useState('');
+    const [idTipoAlojamiento, setIdTipoAlojamiento] = useState(0);
+    const [Latitud, setLatitud] = useState(0);
+    const [Longitud, setLongitud] = useState(0);
+    const [PrecioPorDia, setPrecioPorDia] = useState(0);
+    const [CantidadDormitorios, setCantidadDormitorios] = useState(0);
+    const [CantidadBanios, setCantidadBanios] = useState(0);
+    const [Estado, setEstado] = useState('');
 
     const [showModal, setShowModal] = useState(false);
+    const [modalMsg, setModalMsg] = useState('');
+    const [modalType, setModalType] = useState('');
     const form = useRef();
 
     const agregarAlojamiento = async (e) => {
         e.preventDefault();
-        const formE = e.target;
-        const formData = new FormData(formE);
 
-        const formJson = Object.fromEntries(formData.entries());
-        console.log(formJson);
-
-        // const json = {
-        //     Titulo : Titulo,
-        //     Descripcion : Descripcion,
-        //     TipoAlojamiento: TipoAlojamiento,
-        //     Latitud: Latitud,
-        //     Longitud: Longitud,
-        //     PrecioPorDia: PrecioPorDia,
-        //     CantidadDormitorios: CantidadDormitorios,
-        //     CantidadBanios: CantidadBanios,
-        //     Estado: Estado,
-        // };
+        const formJson = {
+            Titulo : Titulo,
+            Descripcion : Descripcion,
+            idTipoAlojamiento: idTipoAlojamiento,
+            Latitud: Latitud,
+            Longitud: Longitud,
+            PrecioPorDia: PrecioPorDia,
+            CantidadDormitorios: CantidadDormitorios,
+            CantidadBanios: CantidadBanios,
+            Estado: Estado,
+        };
 
         try {
-            const response = await fetch(BASE_URL + 'alojamiento/createAlojamiento',{
-                method: 'POST',
-                headers: { 'Content-Type':'application/json'},
-                body: JSON.stringify(formJson)
-            });
-            const jsonData = await response.json();
-            if (response.ok) {
-                console.log(jsonData);
-                setShowModal(true);
-                form.current.reset();
-            } else {
-                console.log('error');
-            }
+            const response = await addAlojamiento(formJson);
+            setModalMsg(response.message);
+            setModalType('success')
+            setShowModal(true);
+            form.current.reset();
         } catch (error) {
-            console.error(error);
+            setModalMsg('Se produjo un error.');
+            setModalType('error');
+            setShowModal(true);
         }
     };
 
@@ -63,8 +55,7 @@ export const AddAlojamientoForm = () => {
     useEffect(() => {
         const obtenerTipos = async () => {
             try{
-                const response = await fetch(BASE_URL+'tiposAlojamiento/getTiposAlojamiento');
-                const jsonData = await response.json();
+                const jsonData = await getAllTiposAlojamientos();
                 setDataTipos(jsonData);
             } catch(err){
                 console.error(err);
@@ -76,7 +67,7 @@ export const AddAlojamientoForm = () => {
     const navigate = useNavigate();
 
     const volver = () => {
-        navigate(-1);
+        navigate('/admin/alojamiento');
     }
 
     return (
@@ -92,13 +83,13 @@ export const AddAlojamientoForm = () => {
                     </div>
                     <div className="form-field">
                         <label htmlFor="descripcion" className="form-label">Descripcion:</label>
-                        <input required type="text" id="descripcion" name="descripcion" onChange={e => setDescripcion(e.target.value)} className="form-input" placeholder="Descripción detallada del alojamiento" />
+                        <textarea required type="text" id="descripcion" name="descripcion" rows="4" onChange={e => setDescripcion(e.target.value)} className="form-input textarea" placeholder="Descripción detallada del alojamiento"/>
                     </div>
                     <div className="form-field">
-                        <label htmlFor="tipoAlojamiento" className="form-label">Tipo de Alojamiento:</label>
-                        <select required id="tipoAlojamiento" name="tipoAlojamiento" onChange={e => setTipoAlojamiento(e.target.value)} className="form-input" placeholder='--SELECCIONE--'>
+                        <label htmlFor="idTipoAlojamiento" className="form-label">Tipo de Alojamiento:</label>
+                        <select required id="idTpoAlojamiento" name="idTipoAlojamiento" onChange={e => setIdTipoAlojamiento(e.target.value)} defaultValue={'--SELECCIONE--'} className="form-input" placeholder='--SELECCIONE--'>
                             <option disabled>--SELECCIONE--</option>
-                            {dataTipos.map((item,index) => (
+                            {dataTipos.map((item) => (
                                 <option key={item.idTipoAlojamiento} value={item.idTipoAlojamiento}>{item.Descripcion.toUpperCase()}</option>
                             ))}
                         </select>
@@ -125,16 +116,17 @@ export const AddAlojamientoForm = () => {
                     </div>
                     <div className="form-field">
                         <label htmlFor="estado" className="form-label">Estado:</label>
-                        <select required id="estado" name="estado" onChange={e => setEstado(e.target.value)} className="form-input">
+                        <select required id="estado" name="estado" onChange={e => setEstado(e.target.value)} defaultValue={'--SELECCIONE--'} className="form-input">
+                            <option disabled>--SELECCIONE--</option>
                             <option value="Disponible">DISPONIBLE</option>
                             <option value="Reservado">RESERVADO</option>
                         </select>
                     </div>
                     <div className="columna-botones">
-                        <button type='submit' className='boton-primario grow'><i className="fa-solid fa-plus ff-icon"></i>Agregar</button>
-                        <Link onClick={volver} className="boton-delete"><i className="fa-solid fa-xmark ff-icon"></i> Cancelar</Link>
+                        <Button type='submit' color='primary' grow shadowed rounded icon='add'>Agregar</Button>
+                        <Button onClick={volver} color='danger' icon='cancel' shadowed rounded>Cancelar</Button>
                     </div>
-                    <Modal message={'Agregado con éxito'} show={showModal} onClose={() => setShowModal(false)}></Modal>
+                    <Modal action={modalType} show={showModal} onClose={() => setShowModal(false)}>{modalMsg}</Modal>
                 </form>
             </section>
         </>

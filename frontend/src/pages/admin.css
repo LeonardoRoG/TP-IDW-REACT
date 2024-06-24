@@ -22,7 +22,6 @@
     color: var(--color-fuente);
     font-weight: 400;
     text-transform: uppercase;
-    margin: 0 10px;
     border-bottom: 2px solid transparent;
     transition: all 0.2s ease-in-out;
 }

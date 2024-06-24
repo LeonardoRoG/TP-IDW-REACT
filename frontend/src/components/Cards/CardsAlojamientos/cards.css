@@ -1,0 +1,185 @@
+.card-header{
+    height: 325px;
+    transition: all 0.2s ease-out;
+}
+
+.card-item:hover .card-header{
+    height: 230px;
+}
+
+.card-principal{
+    position: relative;
+    bottom: 6%;
+    padding: 0 1rem;
+}
+
+.card-title{
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.card-content{
+    padding-top: 0.5rem;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.card-footer{
+    padding-top: 0.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+.card-medio{
+    display: flex;
+    justify-content: end;
+    padding: 0rem 0.5rem;
+    bottom: 4%;
+    position: relative;
+}
+.card-item{
+    background-color: transparent;
+    width: 270px;
+    min-width: 225px;
+    max-width: 330px;
+    height: 410px;
+    border-radius: 16px;
+    box-shadow: 5px 5px 15px var(--color-sombra);
+    transition: all 200ms ease-out;
+    overflow: hidden;
+    flex-grow: 1;
+}
+
+.card-link{
+    text-decoration: none;
+    color: #000;
+}
+
+.card-item:hover{
+    scale: 103%;
+
+}
+
+.card-imagen{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 16px 16px 0px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-item div h3{
+    margin-top: 0px;
+}
+
+.location{
+    font-style: italic;
+    color: gray;
+    padding: 0rem 1rem;
+}
+
+.type-pill{
+    background-color: rgb(198, 255, 243);
+    border-radius: 20px;
+    padding: 6px 24px;
+    font-weight: 600;
+    transition: all 0.2s ease-out;
+    box-shadow: 0px 0px 8px var(--color-sombra-osc);
+    text-transform: capitalize;
+    text-align: center;
+}
+
+.card-item:hover .type-pill{
+    top: 6%;
+}
+
+.type-pill p{
+    color: var(--color-fuente);
+    font-size: 0.9rem;
+}
+
+hr{
+    color: #fff;
+    margin: 0px 16px;
+}
+
+.flex-container{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0.5rem 1rem;
+    gap: 1rem;
+}
+
+.top-header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+}
+
+.fav{
+    font-weight: 600;
+    font-size: x-large;
+    padding-left: 0.5rem;
+    color: rgba(0, 0, 0, 0.445);
+    transition: all 0.2s;
+}
+
+.fav:hover i{
+    color:crimson;
+}
+
+.status{
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    background-color: rgba(0, 0, 0, 0.301);
+    box-shadow: 0px 0px 8px var(--color-sombra-osc);
+    color: rgb(27, 27, 27);
+    gap: 0.5rem;
+    font-weight: 600;
+    font-size: small;
+    position: relative;
+    border-radius: 20px;
+    padding: 6px 12px;
+    transition: all 0.2s;
+}
+
+.disponible.on{
+    background-color: lightgreen;
+    color: green;
+    box-shadow: 0px 0px 8px lightgreen;
+}
+
+.reservado.on{
+    background-color: bisque;
+    color: crimson;
+    box-shadow: 0px 0px 8px bisque;
+}
+
+.card-item:hover .disponible,
+.disponible:hover{
+    background-color: lightgreen;
+    color: green;
+    box-shadow: 0px 0px 8px lightgreen;
+}
+
+.card-item:hover .reservado,
+.reservado:hover{
+    background-color: bisque;
+    color: crimson;
+    box-shadow: 0px 0px 8px bisque;
+}
+
+.flex-between-card{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0rem;
+    align-items: center;
+}

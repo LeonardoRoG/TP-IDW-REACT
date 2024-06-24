@@ -1,22 +1,25 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Modal } from "../components/Modal";
+import { Button } from "../components/Button/Button";
+import { getAllTiposAlojamientos } from "../services/tipoAlojamientoService";
+import { getAlojamiento, putAlojamiento } from "../services/alojamientoService";
 
 export const EditAlojamientoForm = () => {
-    
-    const BASE_URL = 'http://localhost:3001/';
 
-    const [Titulo, setTitulo] = useState({});
-    const [Descripcion, setDescripcion] = useState({});
-    const [TipoAlojamiento, setTipoAlojamiento] = useState({});
-    const [Latitud, setLatitud] = useState({});
-    const [Longitud, setLongitud] = useState({});
-    const [PrecioPorDia, setPrecioPorDia] = useState({});
-    const [CantidadDormitorios, setCantidadDormitorios] = useState({});
-    const [CantidadBanios, setCantidadBanios] = useState({});
-    const [Estado, setEstado] = useState({});
+    const [Titulo, setTitulo] = useState('');
+    const [Descripcion, setDescripcion] = useState('');
+    const [idTipoAlojamiento, setIdTipoAlojamiento] = useState(0);
+    const [Latitud, setLatitud] = useState(0);
+    const [Longitud, setLongitud] = useState(0);
+    const [PrecioPorDia, setPrecioPorDia] = useState(0);
+    const [CantidadDormitorios, setCantidadDormitorios] = useState(0);
+    const [CantidadBanios, setCantidadBanios] = useState(0);
+    const [Estado, setEstado] = useState('');
 
     const [showModal, setShowModal] = useState(false);
+    const [modalMsg, setModalMsg] = useState('');
+    const [modalType, setModalType] = useState('');
     const form = useRef();
 
     const {id} = useParams();
@@ -27,8 +30,7 @@ export const EditAlojamientoForm = () => {
     useEffect(() => {
         const obtenerTipos = async () => {
             try{
-                const response = await fetch(BASE_URL+'tiposAlojamiento/getTiposAlojamiento');
-                const jsonData = await response.json();
+                const jsonData = await getAllTiposAlojamientos();
                 setDataTipos(jsonData);
             } catch(err){
                 console.error(err);
@@ -40,16 +42,16 @@ export const EditAlojamientoForm = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`${BASE_URL}alojamiento/getAlojamiento/${id}`);
-                const jsonData = await response.json();
+                const jsonData = await getAlojamiento(id);
                 setData(jsonData);
-                console.log(jsonData);
+                setIdTipoAlojamiento(data.idTipoAlojamiento);
+                setEstado(data.Estado);
             } catch (error) {
                 console.error(error);
             }
         };
         fetchData();
-    }, []);
+    }, [id, data.idTipoAlojamiento, data.Estado]);
 
     const actualizarDatos = async (e) => {
         // Este método previene que se recargue la página
@@ -64,27 +66,21 @@ export const EditAlojamientoForm = () => {
 
         // Intentamos la conexion a la api
         try {
-            const response = await fetch(`${BASE_URL}alojamiento/putAlojamiento/${id}`,{
-                method: 'PUT',
-                headers: { 'Content-Type' : 'application/json' },
-                body: JSON.stringify(formJson)
-            });
-            const jsonData = await response.json();
-            if (response.ok) {
-                console.log(jsonData);
-                setShowModal(true);
-            } else {
-                console.log('Error');
-            }
+            const response = await putAlojamiento(id, formJson);
+            setModalMsg(response.message);
+            setModalType('success')
+            setShowModal(true);
         } catch (error) {
-            console.error(error);
+            setModalMsg('Se produjo un error.');
+            setModalType('error');
+            setShowModal(true);
         }
     };
 
     const navigate = useNavigate();
 
     const volver = () => {
-        navigate(-1);
+        navigate('/admin/alojamiento');
     }
 
     return (
@@ -103,10 +99,10 @@ export const EditAlojamientoForm = () => {
                         <input required type="text" id="descripcion" name="descripcion" defaultValue={data.Descripcion} onChange={e => setDescripcion(e.target.value)} className="form-input" placeholder="Descripción detallada del alojamiento" />
                     </div>
                     <div className="form-field">
-                        <label htmlFor="tipoAlojamiento" className="form-label">Tipo de Alojamiento:</label>
-                        <select required id="tipoAlojamiento" name="tipoAlojamiento" defaultValue={data.TipoAlojamiento} onChange={e => setTipoAlojamiento(e.target.value)} className="form-input" placeholder='--SELECCIONE--'>
+                        <label htmlFor="idTipoAlojamiento" className="form-label">Tipo de Alojamiento:</label>
+                        <select required id="idTipoAlojamiento" name="idTipoAlojamiento" value={idTipoAlojamiento} onChange={e => setIdTipoAlojamiento(e.target.value)} className="form-input" placeholder='--SELECCIONE--'>
                             <option disabled>--SELECCIONE--</option>
-                            {dataTipos.map((item,index) => (
+                            {dataTipos.map((item) => (
                                 <option key={item.idTipoAlojamiento} value={item.idTipoAlojamiento}>{item.Descripcion.toUpperCase()}</option>
                             ))}
                         </select>
@@ -133,16 +129,16 @@ export const EditAlojamientoForm = () => {
                     </div>
                     <div className="form-field">
                         <label htmlFor="estado" className="form-label">Estado:</label>
-                        <select required id="estado" name="estado" defaultValue={data.Estado} onChange={e => setEstado(e.target.value)} className="form-input">
+                        <select required id="estado" name="estado" value={Estado} onChange={e => setEstado(e.target.value)} className="form-input">
                             <option value="Disponible">DISPONIBLE</option>
                             <option value="Reservado">RESERVADO</option>
                         </select>
                     </div>
                     <div className="columna-botones">
-                        <button type='submit' className='boton-edit grow'><i className="fa-solid fa-plus ff-icon"></i>Editar</button>
-                        <Link onClick={volver} className="boton-delete"><i className="fa-solid fa-xmark ff-icon"></i> Cancelar</Link>
+                        <Button type='submit' color='warning' icon='edit' grow shadowed rounded>Editar</Button>
+                        <Button onClick={volver} color='danger' icon='cancel' shadowed rounded>Cancelar</Button>
                     </div>
-                    <Modal message={'Editado con éxito'} show={showModal} onClose={() => setShowModal(false)}></Modal>
+                    <Modal action={modalType} show={showModal} onClose={() => volver()}>{modalMsg}</Modal>
                 </form>
             </section>
         </>
