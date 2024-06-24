@@ -2,12 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "../components/Modal";
 import { Button } from "../components/Button/Button";
+import { addImagen } from "../services/imagenService";
+import { getAllAlojamientos } from "../services/alojamientoService";
 
 export const AddImagenForm = () => {
 
-    const BASE_URL = 'http://localhost:3001/';
     const [idAlojamiento, setIdAlojamiento] = useState(0);
-    // const [ruta, setRuta] = useState('');
 
     let ruta = '';
     const [showModal, setShowModal] = useState(false);
@@ -20,8 +20,7 @@ export const AddImagenForm = () => {
     useEffect(() => {
         const obtenerDatosAlojamientos = async () => {
             try {
-                const response = await fetch(BASE_URL + 'alojamiento/getAlojamientos');
-                const jsonData = await response.json();
+                const jsonData = await getAllAlojamientos();
                 setDataAlojamientos(jsonData);
             } catch (error) {
                 console.error('Error: ', error);
@@ -39,6 +38,9 @@ export const AddImagenForm = () => {
         const data = new FormData();
         data.append("image", imageFile);
 
+        setModalMsg('Cargando...');
+        setModalType('success')
+        setShowModal(true);
         try {
             const response = await fetch(urlImgBB, {
                 method: 'POST',
@@ -49,6 +51,9 @@ export const AddImagenForm = () => {
             ruta = responseData.data.display_url;
         } catch (error) {
             console.error(error);
+            setModalMsg('Error en la conexión al servidor.');
+            setModalType('error')
+            setShowModal(true);
         }
 
         const json ={
@@ -57,21 +62,11 @@ export const AddImagenForm = () => {
         };
 
         try {
-            const response = await fetch(BASE_URL+ 'imagen/createImagen',{
-                method: 'POST',
-                headers: { 'Content-Type' : 'application/json' },
-                body: JSON.stringify(json)
-            });
-            if (response.ok) {
-                setModalMsg('Agregado con éxito.');
-                setModalType('success')
-                setShowModal(true);
-                form.current.reset();
-            } else {
-                setModalMsg('Se produjo un error.');
-                setModalType('error');
-                setShowModal(true);
-            }
+            const response = await addImagen(json);
+            setModalMsg(response.message);
+            setModalType('success')
+            setShowModal(true);
+            form.current.reset();
         } catch (error) {
             setModalMsg('Se produjo un error.');
             setModalType('error');
@@ -81,7 +76,7 @@ export const AddImagenForm = () => {
 
     const navigate = useNavigate();
     const volver = () => {
-        navigate(-1);
+        navigate('/admin/imagenes');
     }
 
     return(

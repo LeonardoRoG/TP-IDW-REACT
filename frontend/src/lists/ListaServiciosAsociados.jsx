@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
 import { Button } from "../components/Button/Button";
 import { Modal } from "../components/Modal";
+import { getAllAlojamientos } from "../services/alojamientoService";
 
 export const ListaServiciosAsociados = ({dataAsociados, dataServicios, eliminar}) => {
 
     const [dataAlojamientos, setDataAlojamientos] = useState([]);
-    const BASE_URL = 'http://localhost:3001/'
 
     useEffect(() => {
         const obtenerDatos = async () => {
             try {
-                const response = await fetch(BASE_URL + 'alojamiento/getAlojamientos');
-                const jsonData = await response.json();
+                const jsonData = await getAllAlojamientos();
                 setDataAlojamientos(jsonData);
             } catch (error) {
                 console.error('Error: ', error);

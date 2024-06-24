@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react";
 import { ListaImagenes } from "../../lists/ListaImagenes";
 import { Button } from "../../components/Button/Button";
+import { deleteImagen, getAllImagenes } from "../../services/imagenService";
+import { Modal } from "../../components/Modal";
 
 export const Imagenes = () => {
 
-    const BASE_URL = 'http://localhost:3001/';
     const [data, setData] = useState([]);
+
+    const [showModal, setShowModal] = useState(false);
+    const [modalMsg, setModalMsg] = useState('');
+    const [modalType, setModalType] = useState('');
 
     const obtenerImagenes = async () => {
         try {
-            const response = await fetch(BASE_URL + 'imagen/getAllImagenes');
-            const jsonData = await response.json();
+            const jsonData = await getAllImagenes();
             setData(jsonData);
         } catch (error) {
             console.error(error);
@@ -23,18 +27,15 @@ export const Imagenes = () => {
 
     const eliminarImagen = async (idImagen) => {
         try {
-            const response = await fetch(BASE_URL + 'imagen/deleteImagen/' + idImagen, {
-                method: 'DELETE',
-                headers: { 'Content-Type' : 'application/json' }
-            });
-            if (response.ok) {
-                console.log('Eliminado');
-                obtenerImagenes();
-            } else {
-                console.log('error');
-            }
+            const response = await deleteImagen(idImagen);
+            setModalMsg(response.message);
+            setModalType('success');
+            setShowModal(true);
+            obtenerImagenes();
         } catch (error) {
-            console.error(error);
+            setModalMsg('Ocurrió un error.');
+            setModalType('error');
+            setShowModal(true);
         }
     };
 
@@ -45,6 +46,7 @@ export const Imagenes = () => {
                 <Button to={`agregar`} color='primary' rounded shadowed icon='add'>Agregar nueva</Button>
             </div>
             <ListaImagenes data={data} eliminar={eliminarImagen}></ListaImagenes>
+            <Modal action={modalType} show={showModal} onClose={() => setShowModal(false)}>{modalMsg}</Modal>
         </>
     )
 

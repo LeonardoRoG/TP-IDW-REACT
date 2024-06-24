@@ -2,10 +2,10 @@ import { useRef, useState } from "react"
 import { useNavigate } from "react-router-dom";
 import { Modal } from "../components/Modal";
 import { Button } from "../components/Button/Button";
+import { addServicio } from "../services/servicioService";
 
 export const AddServicioForm = () => {
 
-    const BASE_URL = 'http://localhost:3001/';
     const [nombre, setNombre] = useState({});
 
     const [showModal, setShowModal] = useState(false);
@@ -21,21 +21,11 @@ export const AddServicioForm = () => {
         };
 
         try {
-            const response = await fetch(BASE_URL+ 'servicio/createServicio',{
-                method: 'POST',
-                headers: { 'Content-Type' : 'application/json' },
-                body: JSON.stringify(json)
-            });
-            if (response.ok) {
-                setModalMsg('Agregado con éxito.');
-                setModalType('success')
-                setShowModal(true);
-                form.current.reset();
-            } else {
-                setModalMsg('Se produjo un error.');
-                setModalType('error');
-                setShowModal(true);
-            }
+            const response = await addServicio(json);
+            setModalMsg(response.message);
+            setModalType('success')
+            setShowModal(true);
+            form.current.reset();
         } catch (error) {
             setModalMsg('Se produjo un error.');
             setModalType('error');
@@ -45,7 +35,7 @@ export const AddServicioForm = () => {
 
     const navigate = useNavigate();
     const volver = () => {
-        navigate(-1);
+        navigate('/admin/servicios');
     }
 
     return(

@@ -95,6 +95,46 @@
     font-weight: 600;
 }
 
+.summary{
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 2px 2px 8px var(--color-sombra);
+}
+
+.detalle-anfitrion{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    box-shadow: 2px 2px 8px var(--color-sombra);
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.anfitrion-avatar{
+    background-image: url('https://a.espncdn.com/combiner/i?img=/i/headshots/soccer/players/full/45843.png&w=350&h=254');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-width: 100px;
+    min-height: 100px;
+    border-radius: 50%;
+}
+
+.anfitrion-contenido{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.anfitrion-contenido h5{
+    font-size: 1.2rem;
+}
+
+.anfitrion-contenido span{
+    font-size: 0.8rem;
+    font-style: italic;
+}
+
 @media (max-width: 900px) {
     .main-detalle{
         flex-direction: column-reverse

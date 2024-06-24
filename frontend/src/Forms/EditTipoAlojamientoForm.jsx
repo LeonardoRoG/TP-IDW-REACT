@@ -3,6 +3,7 @@ import './form.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Modal } from '../components/Modal';
 import { Button } from '../components/Button/Button';
+import { getTipoAlojamiento, putTipoAlojamiento } from '../services/tipoAlojamientoService';
 
 export const EditTipoAlojamientoForm = () => {
 
@@ -20,8 +21,7 @@ export const EditTipoAlojamientoForm = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`http://localhost:3001/tiposAlojamiento/getTipoAlojamiento/` + id);
-                const jsonData = await response.json();
+                const jsonData = await getTipoAlojamiento(id);
                 setData(jsonData);
                 setDescripcion(data.Descripcion);
             } catch (error) {
@@ -35,7 +35,6 @@ export const EditTipoAlojamientoForm = () => {
         // Este método previene que se recargue la página
         e.preventDefault();
         
-
         // Construimos el objeto con los datos, despues se transforma a json en el body
         const json = {
             Descripcion : descripcion
@@ -43,20 +42,10 @@ export const EditTipoAlojamientoForm = () => {
 
         // Intentamos la conexion a la api
         try {
-            const response = await fetch(`http://localhost:3001/tiposAlojamiento/putTipoAlojamiento/` + id,{
-                method: 'PUT',
-                headers: { 'Content-Type' : 'application/json' },
-                body: JSON.stringify(json)
-            });
-            if (response.ok) {
-                setModalMsg('Editado con éxito.');
-                setModalType('success')
-                setShowModal(true);
-            } else {
-                setModalMsg('Se produjo un error.');
-                setModalType('error');
-                setShowModal(true);
-            }
+            const response = await putTipoAlojamiento(id, json);
+            setModalMsg(response.message);
+            setModalType('success')
+            setShowModal(true);
         } catch (error) {
             setModalMsg('Se produjo un error.');
             setModalType('error');
@@ -65,7 +54,7 @@ export const EditTipoAlojamientoForm = () => {
     };
 
     const volver = () => {
-        navigate(-1);
+        navigate('/admin/tipoAlojamiento');
     }
 
     return (

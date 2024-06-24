@@ -2,16 +2,21 @@ import { useEffect, useState } from "react";
 import { ListaServiciosAsociados } from "../../lists/ListaServiciosAsociados";
 import { ListaServicios } from "../../lists/ListaServicios";
 import { Button } from "../../components/Button/Button";
+import { deleteServicio, getAllServicios } from "../../services/servicioService";
+import { Modal } from "../../components/Modal";
+import { deleteAlojamientoServicio, getAllAlojamientoServicios } from "../../services/alojamientoServicioService";
 
 export const Servicio = () => {
 
-    const BASE_URL = 'http://localhost:3001/';
     const [data, setData] = useState([]);
+
+    const [showModal, setShowModal] = useState(false);
+    const [modalMsg, setModalMsg] = useState('');
+    const [modalType, setModalType] = useState('');
 
     const obtenerServicios = async () => {
         try {
-            const response = await fetch(BASE_URL + 'servicio/getAllServicios');
-            const jsonData = await response.json();
+            const jsonData = await getAllServicios();
             setData(jsonData);
         } catch (err) {
             console.error(err);
@@ -26,8 +31,7 @@ export const Servicio = () => {
 
     const obtenerServiciosAsociados = async () => {
         try {
-            const response = await fetch(BASE_URL + 'alojamientosServicios/getAllAlojamientoServicios');
-            const jsonData = await response.json();
+            const jsonData = await getAllAlojamientoServicios();
             setDataAsociados(jsonData);
         } catch (err){
             console.error(err);
@@ -40,35 +44,29 @@ export const Servicio = () => {
 
     const eliminarServicio = async (idServicio) => {
         try{
-            const response = await fetch(`${BASE_URL}servicio/deleteServicio/${idServicio}`,{
-                method: 'DELETE',
-                headers: { 'Content-Type' : 'application/json' }
-            });
-            if (response.ok) {
-                console.log('Eliminado');
-                obtenerServicios();
-            } else {
-                console.log('Error');
-            }
+            const response = await deleteServicio(idServicio);
+            setModalMsg(response.message);
+            setModalType('success');
+            setShowModal(true);
+            obtenerServicios();
         } catch (err){
-            console.error(err);
+            setModalMsg('Ocurrió un error.');
+            setModalType('error');
+            setShowModal(true);
         }
     };
 
     const eliminarServicioAsociado = async (idServicioAsociado) => {
         try {
-            const response = await fetch(`${BASE_URL}alojamientosServicios/deleteAlojamientoServicio/${idServicioAsociado}`,{
-                method: 'DELETE',
-                headers: { 'Content-Type' : 'application/json' }
-            });
-            if (response.ok) {
-                console.log('Eliminado');
-                obtenerServiciosAsociados();
-            } else {
-                console.log('error');
-            }
+            const response = await deleteAlojamientoServicio(idServicioAsociado);
+            setModalMsg(response.message);
+            setModalType('success');
+            setShowModal(true);
+            obtenerServiciosAsociados();
         } catch (error) {
-            console.error(error);
+            setModalMsg('Ocurrió un error.');
+            setModalType('error');
+            setShowModal(true);
         }
     };
 
@@ -84,6 +82,7 @@ export const Servicio = () => {
                 <Button to={'/admin/serviciosAsociados/agregar'} color='primary' rounded shadowed icon='add'>Asociar nuevo</Button>
             </div>
             <ListaServiciosAsociados dataAsociados={dataAsociados} dataServicios={data} eliminar={eliminarServicioAsociado}></ListaServiciosAsociados>
+            <Modal action={modalType} show={showModal} onClose={() => setShowModal(false)}>{modalMsg}</Modal>
         </>
     )
 

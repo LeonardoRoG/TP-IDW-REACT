@@ -5,10 +5,13 @@ import './alojamientoDetalle.css';
 import { TypePill } from "../components/Cards/CardsAlojamientos/TypePill";
 import { StatusPill } from "../components/Cards/CardsAlojamientos/StatusPill";
 import { Button } from "../components/Button/Button";
+import { getAlojamiento } from "../services/alojamientoService";
+import { getAllTiposAlojamientos } from "../services/tipoAlojamientoService";
+import { getAllServicios } from "../services/servicioService";
+import { getAlojamientoServicios } from "../services/alojamientoServicioService";
+import { getAllImagenes } from "../services/imagenService";
 
 export const AlojamientoDetalle = () => {
-
-    const BASE_URL = 'http://localhost:3001/';
 
     const {id} = useParams();
     const [data, setData] = useState({});
@@ -16,8 +19,7 @@ export const AlojamientoDetalle = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`${BASE_URL}alojamiento/getAlojamiento/${id}`);
-                const jsonData = await response.json();
+                const jsonData = await getAlojamiento(id);
                 setData(jsonData);
                 console.log(jsonData);
             } catch (error) {
@@ -32,8 +34,7 @@ export const AlojamientoDetalle = () => {
     useEffect(() => {
         const obtenerImagenes = async () => {
             try {
-                const response = await fetch(BASE_URL + 'imagen/getAllImagenes');
-                const jsonData = await response.json();
+                const jsonData = await getAllImagenes();
                 setDataImagenes(jsonData);
             } catch (error) {
                 console.error(error);
@@ -47,8 +48,7 @@ export const AlojamientoDetalle = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`${BASE_URL}tiposAlojamiento/getTiposAlojamiento`);
-                const jsonData = await response.json();
+                const jsonData = await getAllTiposAlojamientos();
                 setDataTipo(jsonData);
                 console.log(jsonData);
             } catch (error) {
@@ -63,8 +63,7 @@ export const AlojamientoDetalle = () => {
     useEffect(() => {
         const obtenerServicios = async () => {
             try {
-                const response = await fetch(BASE_URL + 'servicio/getAllServicios');
-                const jsonData = await response.json();
+                const jsonData = await getAllServicios();
                 setDataServicios(jsonData);
             } catch (err) {
                 console.error(err);
@@ -78,8 +77,7 @@ export const AlojamientoDetalle = () => {
     useEffect(() => {
         const obtenerDatosServAloj = async () => {
             try {
-                const response = await fetch(`${BASE_URL}alojamientosServicios/getAlojamientoServicios/${id}`);
-                const jsonData = await response.json();
+                const jsonData = await getAlojamientoServicios(id);
                 setDataServiciosAloj(jsonData);
                 console.log(jsonData);
             } catch (error) {
@@ -133,6 +131,22 @@ export const AlojamientoDetalle = () => {
                                     </span>
                                 );
                             })}
+                        </div>
+                    </div>
+                    <div className="summary">
+                        <details>
+                            <summary>Más detalles</summary>
+                            <p>Horario de check in desde las 16:00 hs</p>
+                            <p>Horario de check out hasta las 11:00 hs</p>
+                            <p>Se permiten mascotas.</p>
+                        </details>
+                    </div>
+                    <div className="detalle-anfitrion">
+                        <div className="anfitrion-avatar"></div>
+                        <div className="anfitrion-contenido">
+                            <span>Anfitrión</span>
+                            <h5>Leo Messi</h5>
+                            <p>12 años de experiencia como anfitrion. Tiene 14 alojamientos publicados. Sus huéspedes lo recomiendan</p>
                         </div>
                     </div>
                 </section>

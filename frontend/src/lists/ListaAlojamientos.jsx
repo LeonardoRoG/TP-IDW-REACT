@@ -1,19 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Modal } from "../components/Modal";
 import { Button } from "../components/Button/Button";
+import { getAllTiposAlojamientos } from "../services/tipoAlojamientoService";
 
 export const ListaAlojamientos = ({ data, eliminar}) => {
 
-
     const columns = ['Nro','ID','Titulo','Descripcion','Tipo','Latitud','Longitud','Precio','Dorm.','Baños','Estado','Acciones'];
-
-    // const data = [
-    //     {idAlojamiento: 0, titulo: "Arroz", descripcion: 2000, tipo: "almacen", latitud: 23.443, longitud: 45.333, precio: 20000, dormitorios: 3, baños: 2, estado: 'disponible'},
-    //     {idAlojamiento: 1, titulo: "Arroz", descripcion: 2000, tipo: "almacen", latitud: 23.443, longitud: 45.333, precio: 20000, dormitorios: 3, baños: 2, estado: 'disponible'},
-    //     {idAlojamiento: 2, titulo: "Arroz", descripcion: 2000, tipo: "almacen", latitud: 23.443, longitud: 45.333, precio: 20000, dormitorios: 3, baños: 2, estado: 'disponible'},
-    //     {idAlojamiento: 3, titulo: "Arroz", descripcion: 2000, tipo: "almacen", latitud: 23.443, longitud: 45.333, precio: 20000, dormitorios: 3, baños: 2, estado: 'disponible'},
-    //     {idAlojamiento: 4, titulo: "Arroz", descripcion: 2000, tipo: "almacen", latitud: 23.443, longitud: 45.333, precio: 20000, dormitorios: 3, baños: 2, estado: 'disponible'},
-    // ]
 
     const [showModal, setShowModal] = useState(false);
 
@@ -27,8 +19,7 @@ export const ListaAlojamientos = ({ data, eliminar}) => {
     useEffect(() => {
         const obtenerTipos = async () => {
             try{
-                const response = await fetch('http://localhost:3001/tiposAlojamiento/getTiposAlojamiento');
-                const jsonData = await response.json();
+                const jsonData = await getAllTiposAlojamientos();
                 setDataTipos(jsonData);
             } catch(err){
                 console.error(err);

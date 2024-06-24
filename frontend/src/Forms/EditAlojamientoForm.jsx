@@ -2,10 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Modal } from "../components/Modal";
 import { Button } from "../components/Button/Button";
+import { getAllTiposAlojamientos } from "../services/tipoAlojamientoService";
+import { getAlojamiento, putAlojamiento } from "../services/alojamientoService";
 
 export const EditAlojamientoForm = () => {
-    
-    const BASE_URL = 'http://localhost:3001/';
 
     const [Titulo, setTitulo] = useState('');
     const [Descripcion, setDescripcion] = useState('');
@@ -30,8 +30,7 @@ export const EditAlojamientoForm = () => {
     useEffect(() => {
         const obtenerTipos = async () => {
             try{
-                const response = await fetch(BASE_URL+'tiposAlojamiento/getTiposAlojamiento');
-                const jsonData = await response.json();
+                const jsonData = await getAllTiposAlojamientos();
                 setDataTipos(jsonData);
             } catch(err){
                 console.error(err);
@@ -43,8 +42,7 @@ export const EditAlojamientoForm = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`${BASE_URL}alojamiento/getAlojamiento/${id}`);
-                const jsonData = await response.json();
+                const jsonData = await getAlojamiento(id);
                 setData(jsonData);
                 setIdTipoAlojamiento(data.idTipoAlojamiento);
                 setEstado(data.Estado);
@@ -65,34 +63,13 @@ export const EditAlojamientoForm = () => {
 
         const formJson = Object.fromEntries(formData.entries());
         console.log(formJson);
-        // const formJson = {
-        //     Titulo : Titulo,
-        //     Descripcion : Descripcion,
-        //     idTipoAlojamiento: idTipoAlojamiento,
-        //     Latitud: Latitud,
-        //     Longitud: Longitud,
-        //     PrecioPorDia: PrecioPorDia,
-        //     CantidadDormitorios: CantidadDormitorios,
-        //     CantidadBanios: CantidadBanios,
-        //     Estado: Estado,
-        // };
 
         // Intentamos la conexion a la api
         try {
-            const response = await fetch(`${BASE_URL}alojamiento/putAlojamiento/${id}`,{
-                method: 'PUT',
-                headers: { 'Content-Type' : 'application/json' },
-                body: JSON.stringify(formJson)
-            });
-            if (response.ok) {
-                setModalMsg('Editado con éxito.');
-                setModalType('success')
-                setShowModal(true);
-            } else {
-                setModalMsg('Se produjo un error.');
-                setModalType('error');
-                setShowModal(true);
-            }
+            const response = await putAlojamiento(id, formJson);
+            setModalMsg(response.message);
+            setModalType('success')
+            setShowModal(true);
         } catch (error) {
             setModalMsg('Se produjo un error.');
             setModalType('error');
@@ -103,7 +80,7 @@ export const EditAlojamientoForm = () => {
     const navigate = useNavigate();
 
     const volver = () => {
-        navigate(-1);
+        navigate('/admin/alojamiento');
     }
 
     return (

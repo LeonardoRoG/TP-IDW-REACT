@@ -2,10 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "../components/Modal";
 import { Button } from "../components/Button/Button";
+import { addAlojamiento } from "../services/alojamientoService";
+import { getAllTiposAlojamientos } from "../services/tipoAlojamientoService";
 
 export const AddAlojamientoForm = () => {
-    
-    const BASE_URL = 'http://localhost:3001/';
 
     const [Titulo, setTitulo] = useState('');
     const [Descripcion, setDescripcion] = useState('');
@@ -24,11 +24,6 @@ export const AddAlojamientoForm = () => {
 
     const agregarAlojamiento = async (e) => {
         e.preventDefault();
-        // const formE = e.target;
-        // const formData = new FormData(formE);
-
-        // const formJson = Object.fromEntries(formData.entries());
-        // console.log(formJson);
 
         const formJson = {
             Titulo : Titulo,
@@ -43,21 +38,11 @@ export const AddAlojamientoForm = () => {
         };
 
         try {
-            const response = await fetch(BASE_URL + 'alojamiento/createAlojamiento',{
-                method: 'POST',
-                headers: { 'Content-Type':'application/json'},
-                body: JSON.stringify(formJson)
-            });
-            if (response.ok) {
-                setModalMsg('Agregado con éxito.');
-                setModalType('success')
-                setShowModal(true);
-                form.current.reset();
-            } else {
-                setModalMsg('Se produjo un error.');
-                setModalType('error');
-                setShowModal(true);
-            }
+            const response = await addAlojamiento(formJson);
+            setModalMsg(response.message);
+            setModalType('success')
+            setShowModal(true);
+            form.current.reset();
         } catch (error) {
             setModalMsg('Se produjo un error.');
             setModalType('error');
@@ -70,8 +55,7 @@ export const AddAlojamientoForm = () => {
     useEffect(() => {
         const obtenerTipos = async () => {
             try{
-                const response = await fetch(BASE_URL+'tiposAlojamiento/getTiposAlojamiento');
-                const jsonData = await response.json();
+                const jsonData = await getAllTiposAlojamientos();
                 setDataTipos(jsonData);
             } catch(err){
                 console.error(err);
@@ -83,7 +67,7 @@ export const AddAlojamientoForm = () => {
     const navigate = useNavigate();
 
     const volver = () => {
-        navigate(-1);
+        navigate('/admin/alojamiento');
     }
 
     return (
@@ -99,7 +83,6 @@ export const AddAlojamientoForm = () => {
                     </div>
                     <div className="form-field">
                         <label htmlFor="descripcion" className="form-label">Descripcion:</label>
-                        {/* <input required type="text" id="descripcion" name="descripcion" onChange={e => setDescripcion(e.target.value)} className="form-input" placeholder="Descripción detallada del alojamiento" /> */}
                         <textarea required type="text" id="descripcion" name="descripcion" rows="4" onChange={e => setDescripcion(e.target.value)} className="form-input textarea" placeholder="Descripción detallada del alojamiento"/>
                     </div>
                     <div className="form-field">

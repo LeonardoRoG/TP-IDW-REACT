@@ -3,6 +3,7 @@ import './form.css';
 import { Modal } from '../components/Modal';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/Button/Button';
+import { addTipoAlojamiento } from '../services/tipoAlojamientoService';
 
 export const AddTipoAlojamientoForm = () => {
 
@@ -24,23 +25,13 @@ export const AddTipoAlojamientoForm = () => {
 
         // Intentamos la conexion a la api
         try {
-            const response = await fetch('http://localhost:3001/tiposAlojamiento/CreateTipoAlojamiento',{
-                method: 'POST',
-                headers: { 'Content-Type' : 'application/json' },
-                body: JSON.stringify(json)
-            });
-            if (response.ok) {
-                form.current.reset();
-                setModalMsg('Agregado con éxito.');
-                setActionModal('success');
-                setShowModal(true);
-            } else {
-                setModalMsg('Se produjo un error.');
-                setActionModal('error');
-                setShowModal(true);
-            }
+            const response = await addTipoAlojamiento(json);
+            form.current.reset();
+            setModalMsg(response.message);
+            setActionModal('success');
+            setShowModal(true);
         } catch (error) {
-            setModalMsg('Error al conectar al servidor.');
+            setModalMsg('Se produjo un error.');
             setActionModal('error');
             setShowModal(true);
         }
@@ -49,7 +40,7 @@ export const AddTipoAlojamientoForm = () => {
     const navigate = useNavigate();
 
     const volver = () => {
-        navigate(-1);
+        navigate('/admin/tipoAlojamiento');
     }
 
     return (

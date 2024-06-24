@@ -16,6 +16,7 @@ import { EditAlojamientoServicioForm } from '../Forms/EditAlojamientoServicioFor
 import { Imagenes } from './admin/Imagenes';
 import { AddImagenForm } from '../Forms/AddImagenForm';
 import { EditImagenForm } from '../Forms/EditImagenForm';
+import { Dashboard } from './admin/Dashboard';
 
 export const Admin = () => {
 
@@ -34,7 +35,7 @@ export const Admin = () => {
                 </nav>
                 <section className='admin-container'>
                     <Routes>
-                        <Route path='' element={'En construcción'}></Route>
+                        <Route path='' element={<Dashboard></Dashboard>}></Route>
                         <Route path='tipoAlojamiento' element={<TipoAlojamiento></TipoAlojamiento>}></Route>
                         <Route path='tipoAlojamiento/agregar' element={<AddTipoAlojamientoForm></AddTipoAlojamientoForm>}></Route>
                         <Route path='tipoAlojamiento/:id/edit' element={<EditTipoAlojamientoForm></EditTipoAlojamientoForm>}></Route>

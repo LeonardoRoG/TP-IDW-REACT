@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "../components/Button/Button";
 import { Modal } from "../components/Modal";
+import { getImagen, updateImagen } from "../services/imagenService";
+import { getAllAlojamientos } from "../services/alojamientoService";
 
 export const EditImagenForm = () => {
     
-    const BASE_URL = 'http://localhost:3001/';
     const [idAlojamiento, setIdAlojamiento] = useState(0);
     const [rutaArchivo, setRutaArchivo] = useState('');
     const {id} = useParams();
@@ -19,8 +20,7 @@ export const EditImagenForm = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(BASE_URL + 'imagen/getImagen/' + id);
-                const jsonData = await response.json();
+                const jsonData = await getImagen(id);
                 setData(jsonData);
                 setIdAlojamiento(data.idAlojamiento);
                 setRutaArchivo(data.RutaArchivo);
@@ -37,8 +37,7 @@ export const EditImagenForm = () => {
     useEffect(() => {
         const obtenerAlojamientos = async () => {
             try {
-                const response = await fetch(BASE_URL + 'alojamiento/getAlojamientos');
-                const jsonData = await response.json();
+                const jsonData = await getAllAlojamientos();
                 setDataAlojamientos(jsonData);
             } catch (error) {
                 console.error('Error al obtener datos de los alojamientos:', error);
@@ -56,22 +55,12 @@ export const EditImagenForm = () => {
         };
 
         try {
-            const response = await fetch(BASE_URL + 'imagen/updateImagen/' + id, {
-                method: 'PUT',
-                headers: { 'Content-Type' : 'application/json' },
-                body: JSON.stringify(json)
-            });
-            if (response.ok) {
-                setModalMsg('Editado con éxito.');
-                setModalType('success')
-                setShowModal(true);
-            } else {
-                setModalMsg('Se produjo un error.');
-                setModalType('error');
-                setShowModal(true);
-            }
+            const response = await updateImagen(id, json);
+            setModalMsg(response.message);
+            setModalType('success')
+            setShowModal(true);
         } catch (error) {
-            setModalMsg('Error de conexión.');
+            setModalMsg('Se produjo un error.');
             setModalType('error');
             setShowModal(true);
         }
@@ -79,7 +68,7 @@ export const EditImagenForm = () => {
 
     const navigate = useNavigate();
     const volver = () => {
-        navigate(-1);
+        navigate('/admin/imagenes');
     }
 
     return (

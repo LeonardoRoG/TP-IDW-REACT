@@ -2,10 +2,10 @@ import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom";
 import { Modal } from "../components/Modal";
 import { Button } from "../components/Button/Button";
+import { getServicio, updateServicio } from "../services/servicioService";
 
 export const EditServicioForm = () => {
 
-    const BASE_URL = 'http://localhost:3001/';
     const [nombre, setNombre] = useState('');
     const {id} = useParams();
 
@@ -18,8 +18,7 @@ export const EditServicioForm = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(BASE_URL + 'servicio/getServicio/' + id);
-                const jsonData = await response.json();
+                const jsonData = await getServicio(id);
                 setData(jsonData);
                 setNombre(data.Nombre);
             } catch (error) {
@@ -37,20 +36,10 @@ export const EditServicioForm = () => {
         };
 
         try {
-            const response = await fetch(BASE_URL+ 'servicio/updateServicio/' + id,{
-                method: 'PUT',
-                headers: { 'Content-Type' : 'application/json' },
-                body: JSON.stringify(json)
-            });
-            if (response.ok) {
-                setModalMsg('Editado con éxito.');
-                setModalType('success')
-                setShowModal(true);
-            } else {
-                setModalMsg('Se produjo un error.');
-                setModalType('error');
-                setShowModal(true);
-            }
+            const response = await updateServicio(id, json);
+            setModalMsg(response.message);
+            setModalType('success')
+            setShowModal(true);
         } catch (error) {
             setModalMsg('Se produjo un error.');
             setModalType('error');
@@ -60,7 +49,7 @@ export const EditServicioForm = () => {
 
     const navigate = useNavigate();
     const volver = () => {
-        navigate(-1);
+        navigate('/admin/servicios');
     }
 
     return(

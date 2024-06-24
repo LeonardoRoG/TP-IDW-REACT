@@ -3,10 +3,12 @@ import './form.css';
 import { Button } from "../components/Button/Button";
 import { useNavigate, useParams } from "react-router-dom";
 import { Modal } from "../components/Modal";
+import { getAlojamientoServicio, updateAlojamientoServicio } from "../services/alojamientoServicioService";
+import { getAllAlojamientos } from "../services/alojamientoService";
+import { getAllServicios } from "../services/servicioService";
 
 export const EditAlojamientoServicioForm = () => {
 
-    const BASE_URL = 'http://localhost:3001/';
     const [idAlojamiento, setIdAlojamiento] = useState(0);
     const [idServicio, setIdServicio] = useState(0);
 
@@ -21,8 +23,7 @@ export const EditAlojamientoServicioForm = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(BASE_URL + 'alojamientosServicios/getAlojamientoServicio/' + id);
-                const jsonData = await response.json();
+                const jsonData = await getAlojamientoServicio(id);
                 setData(jsonData);
             } catch (error) {
                 console.error(error);
@@ -38,8 +39,7 @@ export const EditAlojamientoServicioForm = () => {
     useEffect(() => {
         const obtenerDatosAlojamientos = async () => {
             try {
-                const response = await fetch(BASE_URL + 'alojamiento/getAlojamientos');
-                const jsonData = await response.json();
+                const jsonData = await getAllAlojamientos();
                 setDataAlojamientos(jsonData);
             } catch (error) {
                 console.error('Error: ', error);
@@ -53,8 +53,7 @@ export const EditAlojamientoServicioForm = () => {
     useEffect(() => {
         const obtenerServicios = async () => {
             try {
-                const response = await fetch(BASE_URL + 'servicio/getAllServicios');
-                const jsonData = await response.json();
+                const jsonData = await getAllServicios();
                 setDataServicios(jsonData);
             } catch (err) {
                 console.error(err);
@@ -72,20 +71,10 @@ export const EditAlojamientoServicioForm = () => {
         };
 
         try {
-            const response = await fetch(BASE_URL + 'alojamientosServicios/updateAlojamientoServicio/' + id,{
-                method: 'PUT',
-                headers: { 'Content-Type' : 'application/json' },
-                body: JSON.stringify(json)
-            });
-            if (response.ok) {
-                setModalMsg('Editado con éxito.');
-                setModalType('success')
-                setShowModal(true);
-            } else {
-                setModalMsg('Se produjo un error.');
-                setModalType('error');
-                setShowModal(true);
-            }
+            const response = await updateAlojamientoServicio(id, json);
+            setModalMsg(response.message);
+            setModalType('success')
+            setShowModal(true);
         } catch (error) {
             setModalMsg('Se produjo un error.');
             setModalType('error');
@@ -95,7 +84,7 @@ export const EditAlojamientoServicioForm = () => {
 
     const navigate = useNavigate();
     const volver = () => {
-        navigate(-1);
+        navigate('/admin/servicios');
     }
 
     return (

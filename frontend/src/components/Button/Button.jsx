@@ -8,7 +8,7 @@ import './button.css';
  * @param {boolean} rounded - Bordes redondeados.
  * @param {boolean} grow - Grow flex 1 adaptable si la clase padre es flex.
  * @param {boolean} shadowed - Botón con sombra.
- * @param {string} icon - Icono a mostrar: edit, delete, add, send, search, cancel, login, link
+ * @param {string} icon - Icono a mostrar: edit, delete, add, send, search, cancel, login, link, download
  * @param onClick - funcion onClick
  * --- Para Link usar 'to', para anchor usar 'href'
  */
@@ -22,7 +22,8 @@ export const Button = ({type, color, onClick, children, icon, rounded, extraroun
         search: 'fa-solid fa-magnifying-glass',
         cancel: 'fa-solid fa-xmark',
         login: 'fa-solid fa-right-to-bracket',
-        link: 'fa-solid fa-arrow-up-right-from-square'
+        link: 'fa-solid fa-arrow-up-right-from-square',
+        download: 'fa-solid fa-download'
     };
       
     const iconClass = iconMappings[icon] || '';

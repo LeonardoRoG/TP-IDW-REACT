@@ -2,15 +2,19 @@ import { useEffect, useState } from "react";
 import { ListaTipoAlojamientos } from "../../lists/ListaTipoAlojamientos";
 import './adminPages.css';
 import { Button } from "../../components/Button/Button";
+import { eliminarTipoAlojamiento, getAllTiposAlojamientos } from "../../services/tipoAlojamientoService";
+import { Modal } from "../../components/Modal";
 
 export const TipoAlojamiento = () => {
 
     const [data, setData] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [modalMsg, setModalMsg] = useState('');
+    const [modalType, setModalType] = useState('');
 
     const obtenerTodos = async () => {
         try{
-            const response = await fetch('http://localhost:3001/tiposAlojamiento/getTiposAlojamiento');
-            const jsonData = await response.json();
+            const jsonData = await getAllTiposAlojamientos();
             setData(jsonData);
         } catch(err){
             console.error(err);
@@ -23,18 +27,15 @@ export const TipoAlojamiento = () => {
 
     const eliminar = async (idTipo) =>{
         try {
-            const response = await fetch(`http://localhost:3001/tiposAlojamiento/deleteTipoAlojamiento/${idTipo}`,{
-                method: 'DELETE',
-                headers: { 'Content-Type' : 'application/json' },
-            });
-            if (response.ok) {
-                console.log('Eliminado');
-                obtenerTodos();
-            } else {
-                console.log('No se pudo eliminar.');
-            }
+            const response = await eliminarTipoAlojamiento(idTipo);
+            setModalMsg(response.message);
+            setModalType('success');
+            setShowModal(true);
+            obtenerTodos();
         } catch (error) {
-            console.error(error);
+            setModalMsg('Ocurrió un error.');
+            setModalType('error');
+            setShowModal(true);
         }
     };
 
@@ -45,6 +46,7 @@ export const TipoAlojamiento = () => {
                 <Button to={`agregar`} color='primary' rounded shadowed icon='add'>Agregar nuevo</Button>
             </div>
             <ListaTipoAlojamientos data={data} eliminar={eliminar}></ListaTipoAlojamientos>
+            <Modal action={modalType} show={showModal} onClose={() => setShowModal(false)}>{modalMsg}</Modal>
         </>
     )
 }
