@@ -59,6 +59,8 @@ La aplicación incluye las siguientes funcionalidades:
   - HTML5
   - CSS3
   - JavaScript
+  - React
+  - ReactDOM
   - Framework/Librería de CSS 
 - **Backend**:
   - Node.js 
