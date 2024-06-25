@@ -136,6 +136,14 @@
     font-style: italic;
 }
 
+.detalle-mapa{
+    width: 100%;
+    height: 300px;
+    border-radius: 0.5rem;
+    box-shadow: 2px 2px 8px var(--color-sombra);
+    padding: 1rem;
+}
+
 @media (max-width: 900px) {
     .main-detalle{
         flex-direction: column-reverse

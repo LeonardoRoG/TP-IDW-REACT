@@ -9,8 +9,9 @@ import { Button } from "./Button/Button";
  * @param {boolean} show - usado para la logica de mostrar o no el modal
  * @param {function} onClose - lógica para botón "cerrar"
  * @param {function} onDelete - opcional: lógica para botón "Si", puede ser de eliminar u otra cosa
+ * @param {function} onDelete - opcional: lógica para botón "Si", puede ser de eliminar u otra cosa
  */
-export const Modal = ({action, children, show, onClose, onDelete}) => {
+export const Modal = ({action, children, show, onClose, onDelete, onAccept}) => {
     if (!show) return null;
     let icon = '';
 
@@ -36,6 +37,7 @@ export const Modal = ({action, children, show, onClose, onDelete}) => {
                 <h3>{children}</h3>
             </div>
             <div className="columna-botones">
+                {onAccept? <Button onClick={onAccept} color='secondary' grow rounded shadowed>Aceptar</Button> : ''}
                 {onDelete? <Button onClick={onDelete} color='danger' grow rounded shadowed>Si</Button> : ''}
                 <Button onClick={onClose} color='primary' grow rounded shadowed>Cerrar</Button>
             </div>

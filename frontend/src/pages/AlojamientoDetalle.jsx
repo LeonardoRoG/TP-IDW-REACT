@@ -5,28 +5,30 @@ import './alojamientoDetalle.css';
 import { TypePill } from "../components/Cards/CardsAlojamientos/TypePill";
 import { StatusPill } from "../components/Cards/CardsAlojamientos/StatusPill";
 import { Button } from "../components/Button/Button";
-import { getAlojamiento } from "../services/alojamientoService";
+import { getAlojamiento, putAlojamiento } from "../services/alojamientoService";
 import { getAllTiposAlojamientos } from "../services/tipoAlojamientoService";
 import { getAllServicios } from "../services/servicioService";
 import { getAlojamientoServicios } from "../services/alojamientoServicioService";
 import { getAllImagenes } from "../services/imagenService";
+import { Modal } from "../components/Modal";
 
 export const AlojamientoDetalle = () => {
 
     const {id} = useParams();
     const [data, setData] = useState({});
 
+    const obtenerDatos = async (idAloj) => {
+        try {
+            const jsonData = await getAlojamiento(idAloj);
+            setData(jsonData);
+            console.log(jsonData);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const jsonData = await getAlojamiento(id);
-                setData(jsonData);
-                console.log(jsonData);
-            } catch (error) {
-                console.error(error);
-            }
-        };
-        fetchData();
+        obtenerDatos(id);
     }, [id]);
 
     const [dataImagenes, setDataImagenes] = useState([]);
@@ -98,6 +100,30 @@ export const AlojamientoDetalle = () => {
         }
     };
 
+    const [showModal, setShowModal] = useState(false);
+    const [modalMsg, setModalMsg] = useState('');
+    const [modalType, setModalType] = useState('');
+
+    const reservar = () => {
+        setModalMsg('¿Reservar alojamiento?');
+        setModalType('success')
+        setShowModal(true);
+    }
+
+    const confirmarReserva = async () => {
+        const json = {...data, Estado:'Reservado' };
+
+        try {
+            await putAlojamiento(id, json);
+            setShowModal(false);
+            obtenerDatos(id);
+        } catch (error) {
+            setModalMsg('No se pudo reservar.');
+            setModalType('error');
+            setShowModal(true);
+        }
+    }
+
     return(
         <>
             <Hero title={data.Titulo} urlImage={obtenerUrl(dataImagenes)} heigth={'30vh'} position={'center'}></Hero>
@@ -149,6 +175,9 @@ export const AlojamientoDetalle = () => {
                             <p>12 años de experiencia como anfitrion. Tiene 14 alojamientos publicados. Sus huéspedes lo recomiendan</p>
                         </div>
                     </div>
+                    <div className="detalle-mapa">
+                        <h3>Ubicación en el mapa</h3>
+                    </div>
                 </section>
             </main>
             <div className="detalle-footer">
@@ -157,10 +186,10 @@ export const AlojamientoDetalle = () => {
                     <p>{new Intl.NumberFormat("es-AR",  { style: 'currency', currency: 'ARS' }).format(data.PrecioPorDia)}</p>
                 </div>
                 <div>
-                    <Button icon='add' extrarounded shadowed color='primary' disabled={data.Estado === 'Reservado'}>Reservar</Button>
+                    <Button icon='add' onClick={reservar} extrarounded shadowed color='primary' disabled={data.Estado === 'Reservado'}>Reservar</Button>
                 </div>
             </div>
-
+            <Modal action={modalType} show={showModal} onAccept={() => confirmarReserva()} onClose={() => setShowModal(false)}>{modalMsg}</Modal>
         </>
     )
 }
