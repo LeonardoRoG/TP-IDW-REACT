@@ -8,11 +8,13 @@ import { Contacto } from './pages/Contacto';
 import { Admin } from './pages/Admin';
 import { AlojamientoDetalle } from './pages/AlojamientoDetalle';
 import { Formulario } from './pages/Formulario';
+import { ScrollToTop } from './components/ScrollToTop';
 
 function App() {
   return (
     <>
       <Router>
+        <ScrollToTop>
         <Header></Header>
         <Routes>
           <Route path='/' element={<Inicio/>}></Route>
@@ -24,6 +26,7 @@ function App() {
           <Route path='/formulario' element={<Formulario></Formulario>}></Route>
         </Routes>
         <Footer></Footer>
+        </ScrollToTop>
       </Router>
     </>
   );
