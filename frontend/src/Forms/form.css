@@ -13,6 +13,7 @@
     border-radius: 4px 4px 0px 0px;
     transition: all 0.4s ease-in-out;
     border-bottom: 3px solid var(--color-sombra);
+    color: var(--color-fuente);
 }
 
 .form-input:hover{
@@ -23,6 +24,10 @@
     outline: none;
     background-color: rgb(231, 231, 231);
     border-bottom: 3px solid var(--color-primero);
+}
+
+.form-input:focus:invalid{
+    border-bottom: 3px solid crimson;
 }
 
 .ff-icon{
@@ -40,13 +45,15 @@
     flex-direction: column;
     justify-content: center;
     gap: 0.5rem;
+    align-items: center;
+    min-width: 70px;
 }
 
 .form-field-checkbox{
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
-    gap: 1.5rem;
+    gap: 1rem;
 }
 
 .form-label{

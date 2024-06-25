@@ -14,7 +14,7 @@ export const Formulario = () => {
                     </div>
                     <div className="form-field">
                         <label htmlFor="username" className="form-label">Usuario:</label>
-                        <input type="text" id="username" name="username" className="form-input" placeholder="Ingrese su usuario" required />
+                        <input type="email" id="username" name="username" className="form-input" placeholder="Ingrese su usuario" required />
                     </div>
                     <div className="form-field">
                         <label htmlFor="password" className="form-label">Contraseña:</label>

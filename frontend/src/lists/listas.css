@@ -1,6 +1,6 @@
 table{
     border-collapse: collapse;
-    width: calc(100% - 20px);
+    width: 100%;
     border-radius: 8px;
     box-shadow: 2px 2px 8px var(--color-sombra);
     margin-bottom: 1rem;
@@ -13,6 +13,8 @@ table{
     flex-wrap: nowrap;
     padding: 0.5rem 1rem ;
     overflow-x: auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 table th,

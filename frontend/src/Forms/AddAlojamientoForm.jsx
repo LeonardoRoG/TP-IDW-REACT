@@ -161,7 +161,7 @@ export const AddAlojamientoForm = () => {
                         </select>
                     </div>
                     <div className="flex-left">
-                        <h3>Seleccione los datos para la relación alojamiento-servicio</h3>
+                        <h3>Seleccione los servicios que va a ofrecer:</h3>
                     </div>
                     <div className="form-field-checkbox">
                         {dataServicios.map((item) => (
