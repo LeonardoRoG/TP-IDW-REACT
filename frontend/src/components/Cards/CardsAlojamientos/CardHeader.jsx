@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StatusPill } from './StatusPill';
 
 export const CardHeader = ({data, dataImagenes}) => {
@@ -13,11 +13,16 @@ export const CardHeader = ({data, dataImagenes}) => {
         }
     };
 
+    const [clicked, setClicked] = useState(false);
+    const addFav = () => {
+        setClicked(!clicked);
+    }
+
     return (
     <div className='card-header'>
         <div className="card-imagen" style={{backgroundImage: `url("${obtenerUrl(dataImagenes)}")`}}>
             <div className='top-header'>
-                <div className='fav'>
+                <div onClick={addFav} className={`fav ${clicked? 'added' : ''}`}>
                     <i className="fa-solid fa-heart"></i>
                 </div>
                 <StatusPill data={data}></StatusPill>

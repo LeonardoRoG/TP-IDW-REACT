@@ -131,6 +131,10 @@ hr{
     transition: all 0.2s;
 }
 
+.added{
+    color: crimson;
+}
+
 .fav:hover i{
     color:crimson;
 }
