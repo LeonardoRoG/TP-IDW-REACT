@@ -39,31 +39,6 @@
     margin-bottom: 10px;
 }
 
-textarea {
-    width: 100%;
-    height: 100px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    padding: 10px;
-    resize: none;
-}
-
-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    display: block;
-    width: 100%;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
 .comentarios {
     margin-top: 20px;
 }

@@ -38,13 +38,13 @@ const Valoracion = () => {
                     <span>{valoracion === 4 ? 'Buena' : ''}</span>
                     <span>{valoracion === 5 ? 'Excelente' : ''}</span>
                 </div>
-                <textarea
+                <textarea className='textarea-nosotros'
                     value={comentario}
                     onChange={(e) => setComentario(e.target.value)}
                     placeholder="Escribe tu comentario aquí..."
                     required
                 />
-                <button type="submit">Enviar</button>
+                <button className='button-nosotros' type="submit">Enviar</button>
             </form>
             <div className="comentarios">
                 {comentarios.map((com, index) => (
