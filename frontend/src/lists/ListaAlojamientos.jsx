@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Modal } from "../components/Modal";
 import { Button } from "../components/Button/Button";
 import { getAllTiposAlojamientos } from "../services/tipoAlojamientoService";
+import { StatusPill } from "../components/Cards/CardsAlojamientos/StatusPill";
 
 export const ListaAlojamientos = ({ data, eliminar}) => {
 
@@ -63,7 +64,7 @@ export const ListaAlojamientos = ({ data, eliminar}) => {
                                 <td className="num-column">{new Intl.NumberFormat("es-AR",  { style: 'currency', currency: 'ARS' }).format(item.PrecioPorDia)}</td>
                                 <td>{item.CantidadDormitorios}</td>
                                 <td>{item.CantidadBanios}</td>
-                                <td>{item.Estado}</td>
+                                <td><StatusPill data={item} on></StatusPill></td>
                                 <td className="columna-botones">
                                     <Button to={`/alojamiento/${item.idAlojamiento}`} target='blank_' color='secondary' rounded shadowed icon='link'></Button>
                                     <Button to={`/admin/alojamiento/${item.idAlojamiento}/edit`} icon='edit' color='warning' rounded shadowed></Button>

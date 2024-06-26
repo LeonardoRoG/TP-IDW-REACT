@@ -40,7 +40,7 @@ export const Header = () => {
         <header className={'header ' + headerClass}>
             <Logo>IDW - CheckIn</Logo>
             <Nav actualWidth={actualWidth}></Nav>
-            {actualWidth > 920 && <Button to="/formulario" color='warning' rounded shadowed icon={'login'}>Registrarse</Button>}
+            {actualWidth > 840 && <Button to="/formulario" color='warning' rounded shadowed icon={'login'}>Registrarse</Button>}
         </header>
     );
 }

@@ -112,3 +112,9 @@
     display: flex;
     gap: 0.5rem;
 }
+
+@media (max-width: 640px) {
+    .columna-botones-buscador button{
+        flex-grow: 1;
+    }
+}

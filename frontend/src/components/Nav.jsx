@@ -24,7 +24,7 @@ export const Nav = ({actualWidth}) => {
     }, []);
 
     // Si el ancho de la página es mayor al nro mostramos el nav completo, sino el menu hamburguesa
-    if (actualWidth > 920) {
+    if (actualWidth > 840) {
             return <nav className='nav nav stroke'>
             <ul className='nav-links'>
                 <li><NavLink to="/">INICIO</NavLink></li>

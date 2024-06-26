@@ -6,10 +6,6 @@ import { Button } from '../components/Button/Button';
 
 export const Contacto = () => {
 
-    const [nombre, setNombre] = useState('');
-    const [email, setEmail] = useState('');
-    const [telefono, setTelefono] = useState('');
-    const [mensaje, setMensaje] = useState('');
     const form = useRef();
     const [showModal, setShowModal] = useState(false);
 
@@ -29,26 +25,32 @@ export const Contacto = () => {
         <div className='inicio-section'>
             <Hero title={'¡Contactanos!'} urlImage={"https://cdn.pixabay.com/photo/2018/03/14/18/05/alpine-hut-3225908_1280.jpg"} position={'bottom'}></Hero>
             
-            <h2 className='titulo-form'>Formulario de Contacto</h2>
+            <div className='titulo-form'>
+                <h2>Formulario de Contacto</h2>
+                <p>Dejanos un mensaje y te responderemos a la brevedad.</p>
+            </div>
             
             <main className="section-flex-contacto">
                 <section className="flex-container-center limit">
                     <form onSubmit={contactar} ref={form} className='form-contacto'>
+                        <div>
+                            <h3>Completa los datos:</h3>
+                        </div>
                         <div className="form-field">
                             <label htmlFor="nombre" className="form-label">Nombre:</label>
-                            <input required type="text" id="nombre" name="nombre" onChange={e => setNombre(e.target.value)} className="form-input" placeholder=""/>
+                            <input required type="text" id="nombre" name="nombre" className="form-input" placeholder=""/>
                         </div>
                         <div className="form-field">
                             <label htmlFor="email" className="form-label">Email:</label>
-                            <input required type="email" id="email" name="email" onChange={e => setEmail(e.target.value)} className="form-input" placeholder=""/>
+                            <input required type="email" id="email" name="email" className="form-input" placeholder=""/>
                         </div>
                         <div className="form-field">
                             <label htmlFor="telefono" className="form-label">Núm. telefono:</label>
-                            <input type="number" id='telefono' name="telefono" onChange={e => setTelefono(e.target.value)} className="form-input" placeholder=""/>
+                            <input type="number" id='telefono' name="telefono" className="form-input" placeholder=""/>
                         </div>
                         <div className="form-field">
                             <label htmlFor="mensaje" className="form-label">Mensaje:</label>
-                            <textarea required type="text" id="mensaje" name="mensaje" rows="4" onChange={e => setMensaje(e.target.value)} className="form-input textarea" placeholder=""/>
+                            <textarea required type="text" id="mensaje" name="mensaje" rows="4" className="form-input textarea" placeholder=""/>
                         </div>
                         <div className="form-field">
                             <Button type="submit" color='primary' rounded shadowed icon='send'>Enviar</Button>

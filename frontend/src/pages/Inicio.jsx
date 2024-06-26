@@ -166,12 +166,12 @@ export const Inicio = () =>{
 
     return (
         <div className='inicio-section'>
-            <Hero urlImage={'./img/lago-home.jpg'} position={'center'} heigth={'80vh'}>
+            <Hero urlImage={'./img/GettyImages-178737180.webp'} position={'top'} height={'80vh'}>
                 <div className='hero-inicio'>
                     <h1>Viajá por toda la Argentina.</h1>
                     <p>Las mejores experiencias te esperan.</p>
                     <div className='boton-comenzar'>
-                        <Button onClick={scrollAction} icon='send' extrarounded shadowed>Comenzar</Button>
+                        <Button onClick={scrollAction} icon='send' extrarounded shadowed grow>Comenzar</Button>
                     </div>
                 </div>
             </Hero>

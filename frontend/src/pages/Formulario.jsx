@@ -6,7 +6,7 @@ import { Button } from "../components/Button/Button";
 export const Formulario = () => {
     return (
         <div className="container-todo">
-            <Hero title={''} urlImage={'https://cdn.pixabay.com/photo/2017/04/11/03/33/dinant-2220459_1280.jpg'} heigth={'80vh'}>
+            <Hero title={''} urlImage={'https://cdn.pixabay.com/photo/2017/04/11/03/33/dinant-2220459_1280.jpg'} height={'80vh'}>
             <section className="container">
                 <form className="formulario">
                     <div>
