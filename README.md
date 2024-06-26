@@ -1,10 +1,5 @@
+# TRABAJO INTEGRADOR INTRODUCCION DESARROLLO WEB 
 # IDW - Check In
-
-## Descripción del Proyecto
-
-IDW - Check In es una aplicación web diseñada para gestionar reservas de alojamientos, desarrollada como proyecto final para la materia Introducción al Desarrollo Web, en el primer semestre de 2024, perteneciente a la Tecnicatura Universitaria en Desarrollo Web de la Facultad de Ciencias de la Administración – UNER.
-
-La aplicación permite a los usuarios explorar un catálogo de alojamientos que incluye casas, departamentos, hostels, entre otros, con funcionalidades de búsqueda y filtrado por tipo de alojamiento, disponibilidad, rango de precios, cantidad de dormitorios y baños. Además, ofrece opciones de administración para agregar, editar y eliminar alojamientos, imágenes, servicios y relaciones entre estos.
 
 ## Integrantes del Grupo
 
@@ -12,6 +7,12 @@ La aplicación permite a los usuarios explorar un catálogo de alojamientos que 
 - **Coquet, Lucas Mateo**
 - **Barzotti, Natalia**
 - **Rocha, Jose Maria**
+
+## Descripción del Proyecto
+
+IDW - Check In es una aplicación web diseñada para gestionar reservas de alojamientos, desarrollada como proyecto final para la materia Introducción al Desarrollo Web, en el primer semestre de 2024, perteneciente a la Tecnicatura Universitaria en Desarrollo Web de la Facultad de Ciencias de la Administración – UNER.
+
+La aplicación permite a los usuarios explorar un catálogo de alojamientos que incluye casas, departamentos, hostels, entre otros, con funcionalidades de búsqueda y filtrado por tipo de alojamiento, disponibilidad, rango de precios, cantidad de dormitorios y baños. Además, ofrece opciones de administración para agregar, editar y eliminar alojamientos, imágenes, servicios y relaciones entre estos.
 
 ## Objetivos del Proyecto
 
@@ -74,7 +75,7 @@ La aplicación incluye las siguientes funcionalidades:
 
 1. **Clonar el repositorio**:
    ```bash
-   git clone (enlace)
+   git clone (https://github.com/LeonardoRoG/TP-IDW.git)
 2. **Navegar al directorio del proyecto**:
    cd tu-repositorio
 3. **Instalar dependencias**:

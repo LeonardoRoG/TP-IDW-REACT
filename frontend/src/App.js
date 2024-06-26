@@ -3,7 +3,7 @@ import { Header } from './components/Header'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import { Inicio } from './pages/Inicio';
 import { Footer } from './components/Footer';
-import { Nosotros } from './pages/Nosotros';
+import  Nosotros  from './pages/Nosotros';
 import { Contacto } from './pages/Contacto';
 import { Admin } from './pages/Admin';
 import { AlojamientoDetalle } from './pages/AlojamientoDetalle';

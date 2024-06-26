@@ -1,0 +1,20 @@
+
+.imagen-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+}
+
+.imagen-container img {
+    width: 300%;
+    height: 200%;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s;
+}
+
+.imagen-container img:hover {
+    transform: scale(1.05);
+}
+
+
