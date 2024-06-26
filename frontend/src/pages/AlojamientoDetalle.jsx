@@ -11,17 +11,24 @@ import { getAllServicios } from "../services/servicioService";
 import { getAlojamientoServicios } from "../services/alojamientoServicioService";
 import { getAllImagenes } from "../services/imagenService";
 import { Modal } from "../components/Modal";
+import { Ubicacion } from "../components/Ubicacion";
+import { Mapa } from "../components/Mapa";
+import { obtenerUbicacion } from "../services/ubicacionService";
 
 export const AlojamientoDetalle = () => {
 
     const {id} = useParams();
     const [data, setData] = useState({});
+    const [dataImagenes, setDataImagenes] = useState([]);
+    const [dataTipo, setDataTipo] = useState([]);
+    const [dataServicios, setDataServicios] = useState([]);
+    const [dataServiciosAloj, setDataServiciosAloj] = useState([]);
+
 
     const obtenerDatos = async (idAloj) => {
         try {
             const jsonData = await getAlojamiento(idAloj);
             setData(jsonData);
-            console.log(jsonData);
         } catch (error) {
             console.error(error);
         }
@@ -29,11 +36,6 @@ export const AlojamientoDetalle = () => {
 
     useEffect(() => {
         obtenerDatos(id);
-    }, [id]);
-
-    const [dataImagenes, setDataImagenes] = useState([]);
-
-    useEffect(() => {
         const obtenerImagenes = async () => {
             try {
                 const jsonData = await getAllImagenes();
@@ -43,26 +45,15 @@ export const AlojamientoDetalle = () => {
             }
         };
         obtenerImagenes();
-    }, []);
-
-    const [dataTipo, setDataTipo] = useState([]);
-
-    useEffect(() => {
         const fetchData = async () => {
             try {
                 const jsonData = await getAllTiposAlojamientos();
                 setDataTipo(jsonData);
-                console.log(jsonData);
             } catch (error) {
                 console.error(error);
             }
         };
         fetchData();
-    }, []);
-
-    const [dataServicios, setDataServicios] = useState([]);
-
-    useEffect(() => {
         const obtenerServicios = async () => {
             try {
                 const jsonData = await getAllServicios();
@@ -72,23 +63,16 @@ export const AlojamientoDetalle = () => {
             }
         };
         obtenerServicios();
-    }, []);
-
-    const [dataServiciosAloj, setDataServiciosAloj] = useState([]);
-
-    useEffect(() => {
         const obtenerDatosServAloj = async () => {
             try {
                 const jsonData = await getAlojamientoServicios(id);
                 setDataServiciosAloj(jsonData);
-                console.log(jsonData);
             } catch (error) {
                 console.error(error);
             }
         };
         obtenerDatosServAloj();
     }, [id]);
-
 
     const obtenerUrl = (imagenes) => {
         const imagenEncontrada = imagenes.find((imagen) =>
@@ -105,8 +89,7 @@ export const AlojamientoDetalle = () => {
     const [modalType, setModalType] = useState('');
 
     const reservar = () => {
-        setModalMsg('¿Reservar alojamiento?');
-        setModalType('success')
+        setModalMsg(null);
         setShowModal(true);
     }
 
@@ -123,10 +106,35 @@ export const AlojamientoDetalle = () => {
             setShowModal(true);
         }
     }
+    
+    const [mostrarMapa, setMostrarMapa] = useState(false);
+    const [provincia, setProvincia] = useState('');
+    
+    useEffect(() => {
+        let segundos = 1;
+        const obtenerProvincia = async () => {
+            try {
+                const ubicacion = await obtenerUbicacion(Number(data.Latitud), Number(data.Longitud));
+                setProvincia(ubicacion.ubicacion.provincia_nombre);
+            } catch (error) {
+                
+            }
+        };
+        const interval = setInterval(() => {
+            if (segundos > 0) {
+                segundos = segundos - 1;
+            } else {
+                clearInterval(interval);
+                setMostrarMapa(true)
+                obtenerProvincia();
+            }
+        }, 1000);
+    }, [data.Latitud, data.Longitud]);
+
 
     return(
         <>
-            <Hero title={data.Titulo} urlImage={obtenerUrl(dataImagenes)} heigth={'30vh'} position={'center'}></Hero>
+            <Hero title={provincia && 'Provincia de ' + provincia} urlImage={obtenerUrl(dataImagenes)} height={'30vh'} position={'center'}></Hero>
             <main className="main-detalle">
                 <section className="detalle-section-carrusel">
                     <h3>Galería de imágenes</h3>
@@ -141,7 +149,9 @@ export const AlojamientoDetalle = () => {
                         <TypePill item={data} dataTipos={dataTipo}></TypePill>
                         <StatusPill data={data} on></StatusPill>
                     </div>
-                    <p className='location'>Ubicación</p>
+                    <div className="location">
+                        <Ubicacion data={data} prov ciud></Ubicacion>
+                    </div>
                     <h2>{data.Titulo}</h2>
                     <p>{data.Descripcion}</p>
                     <div className="detalle-servicios">
@@ -177,6 +187,7 @@ export const AlojamientoDetalle = () => {
                     </div>
                     <div className="detalle-mapa">
                         <h3>Ubicación en el mapa</h3>
+                        {mostrarMapa? <Mapa data={data}></Mapa> : 'Cargando...'}
                     </div>
                 </section>
             </main>
@@ -189,7 +200,22 @@ export const AlojamientoDetalle = () => {
                     <Button icon='add' onClick={reservar} extrarounded shadowed color='primary' disabled={data.Estado === 'Reservado'}>Reservar</Button>
                 </div>
             </div>
-            <Modal action={modalType} show={showModal} onAccept={() => confirmarReserva()} onClose={() => setShowModal(false)}>{modalMsg}</Modal>
+            <Modal action={modalType} show={showModal} onAccept={() => confirmarReserva()} onClose={() => setShowModal(false)}>
+                {modalMsg? modalMsg : 
+                <>
+                    <div>
+                        <h3>Realizar reserva:</h3>
+                    </div>
+                    <div className="form-field">
+                        <label htmlFor="nombre" className="form-label">Nombre:</label>
+                        <input required type="text" id="nombre" name="nombre" className="form-input" placeholder=""/>
+                    </div>
+                    <div className="form-field">
+                        <label htmlFor="email" className="form-label">Email:</label>
+                        <input required type="email" id="email" name="email" className="form-input" placeholder=""/>
+                    </div>
+                </>}
+            </Modal>
         </>
     )
 }

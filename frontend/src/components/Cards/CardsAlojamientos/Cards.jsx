@@ -2,6 +2,7 @@ import { CardHeader } from './CardHeader';
 import './cards.css';
 import { Button } from '../../Button/Button';
 import { TypePill } from './TypePill';
+import { Ubicacion } from '../../Ubicacion';
 
 export const Cards = ({dataCards, dataTipos, dataImagenes, dataServicios, dataAsociados}) => {
 
@@ -15,7 +16,7 @@ export const Cards = ({dataCards, dataTipos, dataImagenes, dataServicios, dataAs
 
                 <div className='card-principal'>
                     <div className='card-title'>
-                        <p className='location'>Ubicación</p>
+                        <Ubicacion data={item}></Ubicacion>
                         <h3>{item.Titulo}</h3>
                         <p>Precio: {new Intl.NumberFormat("es-AR",  { style: 'currency', currency: 'ARS' }).format(item.PrecioPorDia)}<i> /día</i></p>
                     </div>
