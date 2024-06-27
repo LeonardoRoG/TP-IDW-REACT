@@ -88,4 +88,4 @@ La aplicación incluye las siguientes funcionalidades:
    http://localhost:3000
    
 ## Enlace al vídeo de exposición
-   [(YouTube)](https://youtu.be/GWOh7m9sHEw)
+   [YouTube](https://youtu.be/SxU0-QHI9d0)
