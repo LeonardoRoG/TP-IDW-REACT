@@ -43,6 +43,13 @@ export const Servicio = () => {
     }, []);
 
     const eliminarServicio = async (idServicio) => {
+        const servicioAEliminar = dataAsociados.find(item => item.idServicio === idServicio);
+        if (servicioAEliminar) {
+            setModalMsg('No se puede eliminar. Hay alojamientos ofreciendo este servicio.');
+            setModalType('error');
+            setShowModal(true);
+            return false;
+        }
         try{
             const response = await deleteServicio(idServicio);
             setModalMsg(response.message);
