@@ -61,8 +61,6 @@ La aplicación incluye las siguientes funcionalidades:
   - CSS3
   - JavaScript
   - React
-  - ReactDOM
-  - Framework/Librería de CSS 
 - **Backend**:
   - Node.js 
   - API Rest
@@ -75,17 +73,19 @@ La aplicación incluye las siguientes funcionalidades:
 
 1. **Clonar el repositorio**:
    ```bash
-   git clone (https://github.com/LeonardoRoG/TP-IDW.git)
-2. **Navegar al directorio del proyecto**:
-   cd tu-repositorio
-3. **Instalar dependencias**:
+   git clone (https://github.com/LeonardoRoG/TP-IDW-REACT.git)
+2. **Navegar al directorio backend del proyecto, instalar dependencias e iniciar:**
+   ```bash
+   cd .\backend
    npm install
-4. **Iniciar el servidor**
-   npm start
-5. **Abrir la aplicación en el navegador**
+   npm run dev
+3. **En otra consola, navegar al directorio frontend del proyecto, instalar dependencias e iniciar:**
+	```bash
+	cd .\frontend
+	npm install
+	npm start
+4. **Abrir la aplicación en el navegador**
    http://localhost:3000
    
 ## Enlace al vídeo de exposición
-   (enlace)
-
-
+   [(YouTube)](https://youtu.be/GWOh7m9sHEw)
