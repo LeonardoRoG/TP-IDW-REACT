@@ -1,3 +1,5 @@
+import { deleteAlojamientoServiciosAsociados } from "./alojamientoServicioService";
+import { deleteImagenesAsociadas } from "./imagenService";
 import { BASE_URL } from "./urlApi";
 
 const url = BASE_URL + 'alojamiento/';
@@ -60,7 +62,10 @@ export const putAlojamiento = async (id, itemData) => {
 };
 
 export const eliminarAlojamiento = async (id) => {
+    
     try {
+        await deleteAlojamientoServiciosAsociados(id);
+        await deleteImagenesAsociadas(id);
         const response = await fetch(url + 'deleteAlojamiento/' + id,{
             method: 'DELETE',
             headers: headers

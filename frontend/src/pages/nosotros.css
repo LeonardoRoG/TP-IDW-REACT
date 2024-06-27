@@ -13,21 +13,23 @@
     display: flex;
     justify-content: space-between;
     gap: 20px;
+    flex-wrap: wrap;
 }
 
 .nosotros-text {
-    flex: 1;
+    flex: 1 1 300px;
     text-align: justify;
 }
 
 .nosotros-imagenes {
-    flex: 1;
+    flex: 1 1 300px;
 }
 
 .imagen-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 60px;
+    gap: 40px;
+    justify-items: center;
 }
 
 .imagen-container img {

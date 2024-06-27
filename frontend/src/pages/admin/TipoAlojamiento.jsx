@@ -4,6 +4,7 @@ import './adminPages.css';
 import { Button } from "../../components/Button/Button";
 import { eliminarTipoAlojamiento, getAllTiposAlojamientos } from "../../services/tipoAlojamientoService";
 import { Modal } from "../../components/Modal";
+import { getAllAlojamientos } from "../../services/alojamientoService";
 
 export const TipoAlojamiento = () => {
 
@@ -21,11 +22,29 @@ export const TipoAlojamiento = () => {
         }
     };
 
+    const [dataAlojamientos, setDataAlojamientos] = useState([])
+    const obtenerAlojamientos = async () => {
+        try {
+            const jsonData = await getAllAlojamientos();
+            setDataAlojamientos(jsonData);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     useEffect(() => {
         obtenerTodos();
+        obtenerAlojamientos();
     }, []);
 
     const eliminar = async (idTipo) =>{
+        const tipoAEliminar = dataAlojamientos.find(item => item.idTipoAlojamiento === idTipo);
+        if (tipoAEliminar) {
+            setModalMsg('No se puede eliminar. Hay alojamientos de ese tipo.');
+            setModalType('error');
+            setShowModal(true);
+            return false;
+        }
         try {
             const response = await eliminarTipoAlojamiento(idTipo);
             setModalMsg(response.message);

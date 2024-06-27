@@ -25,9 +25,9 @@ export const Alojamiento = () => {
         obtenerDatos();
     }, []);
 
-    const eliminar = async (idAlojamiento) => {
+    const eliminar = async (id) => {
         try {
-            const response = await eliminarAlojamiento(idAlojamiento);
+            const response = await eliminarAlojamiento(id);
             setModalMsg(response.message);
             setModalType('success');
             setShowModal(true);
@@ -36,6 +36,7 @@ export const Alojamiento = () => {
             setModalMsg('Ocurrió un error.');
             setModalType('error');
             setShowModal(true);
+            console.log(error);
         }
     };
 

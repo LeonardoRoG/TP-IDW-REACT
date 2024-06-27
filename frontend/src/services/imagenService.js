@@ -73,3 +73,32 @@ export const deleteImagen = async (id) => {
         throw error;
     }
 };
+
+export const deleteImagenesAsociadas = async (idAlojamiento) => {
+    try {
+        const response = await fetch(`${url}getAllImagenes`);
+
+        if (!response.ok) {
+            throw new Error('Error al obtener las imágenes');
+        }
+
+        const imagenes = await response.json();
+
+        const idAlojamientoNumber = Number(idAlojamiento);
+        const imagenesFiltradas = imagenes.filter(imagen => {
+            return imagen.idAlojamiento === idAlojamientoNumber;
+        });
+        
+        for (const imagen of imagenesFiltradas) {
+            const eliminarImagen = await fetch(url + 'deleteImagen/' + imagen.idImagen,{
+                method: 'DELETE',
+                headers: headers
+            });
+            if (!eliminarImagen.ok){
+                throw new Error('Error al eliminar imagenes')
+            }
+        }
+    } catch (error) {
+        throw error;
+    }
+};

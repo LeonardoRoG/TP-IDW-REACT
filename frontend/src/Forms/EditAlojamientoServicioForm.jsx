@@ -3,14 +3,13 @@ import './form.css';
 import { Button } from "../components/Button/Button";
 import { useNavigate, useParams } from "react-router-dom";
 import { Modal } from "../components/Modal";
-import { addAlojamientoServicio, deleteAlojamientoServicio, getAlojamientoServicios } from "../services/alojamientoServicioService";
+import { addAlojamientoServicio, deleteAlojamientoServiciosAsociados, getAlojamientoServicios } from "../services/alojamientoServicioService";
 import { getAlojamiento } from "../services/alojamientoService";
 import { getAllServicios } from "../services/servicioService";
 
 export const EditAlojamientoServicioForm = () => {
 
     const [alojamiento, setAlojamiento] = useState({});
-    const [alojamientoServiciosObtenidos, setAlojamientoServiciosObtenidos] = useState([]);
     const [serviciosElegidos, setServiciosElegidos] = useState([]);
 
     const {id} = useParams();
@@ -24,7 +23,6 @@ export const EditAlojamientoServicioForm = () => {
             try {
                 const jsonData = await getAlojamientoServicios(id);
                 setServiciosElegidos(jsonData.map(servicio => servicio.idServicio));
-                setAlojamientoServiciosObtenidos(jsonData.map(servicio => servicio.idAlojamientoServicio));
                 console.log(jsonData);
             } catch (error) {
                 console.error(error);
@@ -64,17 +62,17 @@ export const EditAlojamientoServicioForm = () => {
         e.preventDefault();
 
         try {
-            for (const item of alojamientoServiciosObtenidos) {
-                await deleteAlojamientoServicio(item);
-            }
+            await deleteAlojamientoServiciosAsociados(id);
+            setModalMsg('Servicios modificados correctamente.');
+            setModalType('success');
             try {
                 for (const item of serviciosElegidos) {
                     const json = {
                         idAlojamiento : id,
                         idServicio : item
                     };
-                    const response = await addAlojamientoServicio(json);
-                    setModalMsg(response.message);
+                    await addAlojamientoServicio(json);
+                    setModalMsg('Servicios modificados correctamente.');
                     setModalType('success');
                 }
             } catch (error) {

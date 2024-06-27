@@ -85,3 +85,30 @@ export const deleteAlojamientoServicio = async (id) => {
         throw error;
     }
 };
+
+export const deleteAlojamientoServiciosAsociados = async (id) => {
+    try {
+        const response = await fetch(url + 'getAlojamientoServicios/' + id);
+        if (!response.ok) {
+            throw new Error('Error al obtener servicios asociados.')
+        }
+        const serviciosAsociados = await response.json();
+
+        if(!Array.isArray(serviciosAsociados)){
+            throw new Error('Error en los datos obtenidos.');
+        }
+
+        for(const servicio of serviciosAsociados){
+            const eliminar = await fetch(url + 'deleteAlojamientoServicio/' + servicio.idAlojamientoServicio,{
+                method: 'DELETE',
+                headers: headers
+            });
+            if(!eliminar.ok){
+                throw new Error('Error al eliminar servicios asociados.')
+            }
+        }
+        console.log('Eliminados');
+    } catch (error) {
+        throw error;
+    }
+}
