@@ -5,7 +5,10 @@ const headers = { 'Content-Type' : 'application/json' };
 
 export const getAllTiposAlojamientos = async () => {
     try {
-        const response = await fetch(url + 'getTiposAlojamiento');
+        const response = await fetch(url + 'getTiposAlojamiento', {
+            method: 'GET',
+            headers: headers
+        });
         if (!response.ok) {
             throw new Error('Error al obtener la información.');
         }
@@ -33,7 +36,10 @@ export const addTipoAlojamiento = async (itemData) => {
 
 export const getTipoAlojamiento = async (id) => {
     try {
-        const response = await fetch(url + 'getTipoAlojamiento/' + id);
+        const response = await fetch(url + 'getTipoAlojamiento/' + id, {
+            method: 'GET',
+            headers: headers
+        });
         if (!response.ok) {
             throw new Error('Error al obtener los datos.');
         }

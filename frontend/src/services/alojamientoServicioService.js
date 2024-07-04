@@ -5,7 +5,10 @@ const headers = { 'Content-Type' : 'application/json' };
 
 export const getAllAlojamientoServicios = async () => {
     try {
-        const response = await fetch(url + 'getAllAlojamientoServicios');
+        const response = await fetch(url + 'getAllAlojamientoServicios', {
+            method: 'GET',
+            headers: headers
+        });
         if (!response.ok) {
             throw new Error('Error al obtener la información.');
         }
@@ -33,7 +36,10 @@ export const addAlojamientoServicio = async (itemData) => {
 
 export const getAlojamientoServicio = async (id) => {
     try {
-        const response = await fetch(url + 'getAlojamientoServicio/' + id);
+        const response = await fetch(url + 'getAlojamientoServicio/' + id, {
+            method: 'GET',
+            headers: headers
+        });
         if (!response.ok) {
             throw new Error('Error al obtener los datos.');
         }
@@ -45,7 +51,10 @@ export const getAlojamientoServicio = async (id) => {
 
 export const getAlojamientoServicios = async (idAlojamiento) => {
     try {
-        const response = await fetch(url + 'getAlojamientoServicios/' + idAlojamiento);
+        const response = await fetch(url + 'getAlojamientoServicios/' + idAlojamiento, {
+            method: 'GET',
+            headers: headers
+        });
         if (!response.ok) {
             throw new Error('Error al obtener los datos.');
         }

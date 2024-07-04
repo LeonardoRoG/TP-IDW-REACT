@@ -5,7 +5,10 @@ const headers = { 'Content-Type' : 'application/json' };
 
 export const getAllImagenes = async () => {
     try {
-        const response = await fetch(url + 'getAllImagenes');
+        const response = await fetch(url + 'getAllImagenes', {
+            method: 'GET',
+            headers: headers
+        });
         if (!response.ok) {
             throw new Error('Error al obtener la información.');
         }
@@ -33,7 +36,10 @@ export const addImagen = async (itemData) => {
 
 export const getImagen = async (id) => {
     try {
-        const response = await fetch(url + 'getImagen/' + id);
+        const response = await fetch(url + 'getImagen/' + id, {
+            method: 'GET',
+            headers: headers
+        });
         if (!response.ok) {
             throw new Error('Error al obtener los datos.');
         }
