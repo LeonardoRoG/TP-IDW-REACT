@@ -17,11 +17,11 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 // Rutas
-const routerAlojamiento = require('./routes/alojamientos');
-const routerTiposAlojamiento = require('./routes/tiposAlojamiento');
-const routerAlojamientosServicios = require('./routes/alojamientosServicios');
-const routerServicio = require('./routes/servicios');
-const routerImagen = require('./routes/imagenes');
+const routerAlojamiento = require('./src/routes/alojamientos');
+const routerTiposAlojamiento = require('./src/routes/tiposAlojamiento');
+const routerAlojamientosServicios = require('./src/routes/alojamientosServicios');
+const routerServicio = require('./src/routes/servicios');
+const routerImagen = require('./src/routes/imagenes');
 
 app.use('/alojamiento', routerAlojamiento);
 app.use('/tiposAlojamiento', routerTiposAlojamiento);
