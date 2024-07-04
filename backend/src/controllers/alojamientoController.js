@@ -4,7 +4,7 @@ const dbConnection = require('../config/dbConfig');
 exports.getAllAlojamientos = async (req, res) => {
   try {
     const connection = await dbConnection.getConnection();
-    const [rows] = await connection.query('SELECT * FROM Alojamientos');
+    const [rows] = await connection.query('SELECT * FROM alojamientos');
     connection.release();
     res.json(rows);
   } catch (error) {
@@ -17,7 +17,7 @@ exports.getAlojamientoById = async (req, res) => {
   try {
     const { id } = req.params;
     const connection = await dbConnection.getConnection();
-    const [rows] = await connection.query('SELECT * FROM Alojamientos WHERE idAlojamiento = ?', [id]);
+    const [rows] = await connection.query('SELECT * FROM alojamientos WHERE idAlojamiento = ?', [id]);
     connection.release();
     res.json(rows[0]);
   } catch (error) {
@@ -31,7 +31,7 @@ exports.createAlojamiento = async (req, res) => {
   try {
     const nuevoAlojamiento = req.body;
     const connection = await dbConnection.getConnection();
-    const [results] = await connection.query('INSERT INTO Alojamientos SET ?', nuevoAlojamiento);
+    const [results] = await connection.query('INSERT INTO alojamientos SET ?', nuevoAlojamiento);
     connection.release();
     res.json({ message: 'Alojamiento creado correctamente', id: results.insertId });
   } catch (error) {
@@ -46,7 +46,7 @@ exports.updateAlojamiento = async (req, res) => {
     const { id } = req.params;
     const datosAActualizar = req.body;
     const connection = await dbConnection.getConnection();
-    await connection.query('UPDATE Alojamientos SET ? WHERE idAlojamiento = ?', [datosAActualizar, id]);
+    await connection.query('UPDATE alojamientos SET ? WHERE idAlojamiento = ?', [datosAActualizar, id]);
     connection.release();
     res.json({ message: 'Alojamiento actualizado correctamente' });
   } catch (error) {
@@ -59,7 +59,7 @@ exports.deleteAlojamiento = async (req, res) => {
   try {
     const { id } = req.params;
     const connection = await dbConnection.getConnection();
-    await connection.query('DELETE FROM Alojamientos WHERE idAlojamiento = ?', [id]);
+    await connection.query('DELETE FROM alojamientos WHERE idAlojamiento = ?', [id]);
     connection.release();
     res.json({ message: 'Alojamiento eliminado correctamente' });
   } catch (error) {
