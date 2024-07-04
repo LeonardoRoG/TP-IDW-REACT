@@ -10,6 +10,9 @@ const PORT = process.env.PORT || 3001;
 
 app.use(cors({
   origin: 'http://localhost:3000', // Permite solicitudes desde este origen
+},
+{
+  origin: 'https://idw-checkin.vercel.app'
 }));
 
 //middlewares
