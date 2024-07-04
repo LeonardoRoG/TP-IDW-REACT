@@ -5,7 +5,10 @@ const headers = { 'Content-Type' : 'application/json' };
 
 export const getAllServicios = async () => {
     try {
-        const response = await fetch(url + 'getAllServicios');
+        const response = await fetch(url + 'getAllServicios', {
+            method: 'GET',
+            headers: headers
+        });
         if (!response.ok) {
             throw new Error('Error al obtener la información.');
         }
@@ -33,7 +36,10 @@ export const addServicio = async (itemData) => {
 
 export const getServicio = async (id) => {
     try {
-        const response = await fetch(url + 'getServicio/' + id);
+        const response = await fetch(url + 'getServicio/' + id, {
+            method: 'GET',
+            headers: headers
+        });
         if (!response.ok) {
             throw new Error('Error al obtener los datos.');
         }
