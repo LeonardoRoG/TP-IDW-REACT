@@ -16,7 +16,9 @@ export const Cards = ({dataCards, dataTipos, dataImagenes, dataServicios, dataAs
 
                 <div className='card-principal'>
                     <div className='card-title'>
-                        <Ubicacion data={item}></Ubicacion>
+                        <div className='location'>
+                            <Ubicacion data={item}></Ubicacion>
+                        </div>
                         <h3>{item.Titulo}</h3>
                         <p>Precio: {new Intl.NumberFormat("es-AR",  { style: 'currency', currency: 'ARS' }).format(item.PrecioPorDia)}<i> /día</i></p>
                     </div>
